@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="navi_bar">
+        <item>Box 소개</item>
+        <item>공지사항</item>
+        <item>내 정보</item>
+        <item>환경설정</item>
+    </string-array>
+</resources>

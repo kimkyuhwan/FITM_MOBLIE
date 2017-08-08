@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navi_my_profile"
+            android:icon="@drawable/icon_red"
+            android:title="내 정보" />
+        <item
+            android:id="@+id/navi_notice"
+            android:icon="@drawable/icon_blue"
+            android:title="공지사항" />
+        <item
+            android:id="@+id/navi_inquiry"
+            android:icon="@drawable/icon_green"
+            android:title="1:1 문의" />
+        <item
+            android:id="@+id/navi_about"
+            android:icon="@drawable/icon_yellow"
+            android:title="About 주안" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/navi_naver_cafe"
+                android:icon="@drawable/icon_brown"
+                android:title="네이버 카페" />
+            <item
+                android:id="@+id/navi_facebook_page"
+                android:icon="@drawable/icon_gray"
+                android:title="페이스북 페이지" />
+            <item
+                android:id="@+id/navi_instagram"
+                android:icon="@drawable/icon_puple"
+                android:title="인스타그램" />
+        </menu>
+    </item>
+
+</menu>
