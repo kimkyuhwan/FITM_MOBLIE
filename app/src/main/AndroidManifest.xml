@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.team_fitm.myown.fitm_mobile">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,16 +14,25 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity android:name=".MyProfileActivity"/>
+        <activity android:name=".NoticeActivity"/>
+        <activity android:name=".InquiryActivity"/>
+        <activity android:name=".AboutActivity"/>
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyProfileActivity"/>
-        <activity android:name=".NoticeActivity"/>
-        <activity android:name=".InquiryActivity"/>
-        <activity android:name=".AboutActivity"/>
+        <!-- 네이버를 이용한 로그인에 사용되는 액티비티 -->
+        <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
+            android:label="OAuth2.0 In-app"/>
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>
