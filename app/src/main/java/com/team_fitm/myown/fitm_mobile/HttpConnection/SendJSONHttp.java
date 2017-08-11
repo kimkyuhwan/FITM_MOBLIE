@@ -33,6 +33,7 @@ public class SendJSONHttp {
 
             httpConn.setRequestProperty("Accept", "application/json");
             httpConn.setRequestProperty("Content-type", "application/json");
+            httpConn.setRequestProperty("charset","utf-8");
 
             httpConn.setDoOutput(true);
             httpConn.setDoInput(true);

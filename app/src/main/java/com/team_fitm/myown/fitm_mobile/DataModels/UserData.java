@@ -6,6 +6,7 @@ package com.team_fitm.myown.fitm_mobile.DataModels;
 
 public class UserData {
 
+    private String user_access_key;
     private String user_email;
     private String user_name;
     private String user_gender;
@@ -55,5 +56,17 @@ public class UserData {
 
     public void setUser_phone_number(String user_phone_number) {
         this.user_phone_number = user_phone_number;
+    }
+
+    public String getUser_access_key() {
+        return user_access_key;
+    }
+
+    public void setUser_access_key(String user_access_key) {
+        this.user_access_key = user_access_key;
+    }
+
+    public String getDataForLog(){
+        return getUser_access_key() + " , " + getUser_email() + " , " + getUser_name() + " , " + getUser_gender();
     }
 }

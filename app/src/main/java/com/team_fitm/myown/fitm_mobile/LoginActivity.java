@@ -17,7 +17,7 @@ import com.nhn.android.naverlogin.OAuthLoginHandler;
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
 import com.team_fitm.myown.fitm_mobile.Common.Constants;
 import com.team_fitm.myown.fitm_mobile.DataModels.UserData;
-import com.team_fitm.myown.fitm_mobile.HttpConnection.CustomThread.ReqFirstLoginThread;
+import com.team_fitm.myown.fitm_mobile.HttpConnection.CustomThread.ReqHTTPJSONThread;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -94,7 +94,7 @@ public class LoginActivity extends Activity {
                 }catch (JSONException jsonex){
                     jsonex.printStackTrace();
                 }
-                ReqFirstLoginThread thread = new ReqFirstLoginThread(Constants.REQ_LOGIN_URL, send_data);
+                ReqHTTPJSONThread thread = new ReqHTTPJSONThread(Constants.REQ_LOGIN_URL, send_data);
                 thread.start();
                 try{
                     thread.join();
@@ -110,22 +110,34 @@ public class LoginActivity extends Activity {
                     result_code = result_data.getInt("code");
                     JSONObject response = result_data.getJSONObject("response");
                     user_access_key = response.getString("access_key");
+                    user_data.setUser_access_key(user_access_key);
                 }catch (JSONException jsonex){
                     jsonex.printStackTrace();
                 }
-                Log.e("FITM_LOGIN", user_access_key + Integer.toString(result_code));
+                Log.e("FITM_LOGIN", user_data.getDataForLog());
                 if(result_code == 1100){
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("access_key", user_data.getUser_access_key());
+                    intent.putExtra("id_email", user_data.getUser_email());
+                    intent.putExtra("name", user_data.getUser_name());
+                    intent.putExtra("gender", user_data.getUser_gender());
+                    intent.putExtra("phone_number", "");
                     startActivity(intent);
+                    finish();
                 }
                 else if(result_code == 1101){
                     Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                    intent.putExtra("access_key", user_data.getUser_access_key());
+                    intent.putExtra("id_email", user_data.getUser_email());
+                    intent.putExtra("name", user_data.getUser_name());
+                    intent.putExtra("gender", user_data.getUser_gender());
                     startActivity(intent);
                 }
             }
         });
     }
 
+    // 네이버 아이디로 로그인 모듈인데 지금 딱히 호출할 부분이 없음(이미 대체한 방법)
     public void initData(){
         my_oauth_login_instance = OAuthLogin.getInstance();
         my_oauth_login_instance.init(my_context, OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, OAUTH_CLIENT_NAME);
@@ -184,10 +196,12 @@ public class LoginActivity extends Activity {
                 JSONObject response_obj = obj.getJSONObject("response");
                 String nick = response_obj.getString("nickname");
                 String email = response_obj.getString("email");
+                String gender = response_obj.getString("gender");
                 //final String username = unicodeToString(nick);
                 UserData tmp_user_data = new UserData();
                 tmp_user_data.setUser_name(nick);
                 tmp_user_data.setUser_email(email);
+                tmp_user_data.setUser_gender(gender);
                 Message msg = Message.obtain();
                 msg.obj = tmp_user_data;
                 my_handler.handleMessage(msg);
@@ -210,6 +224,7 @@ public class LoginActivity extends Activity {
             UserData tmp = (UserData)msg.obj;
             user_data.setUser_name(tmp.getUser_name());
             user_data.setUser_email(tmp.getUser_email());
+            user_data.setUser_gender(tmp.getUser_gender());
         }
     }
 

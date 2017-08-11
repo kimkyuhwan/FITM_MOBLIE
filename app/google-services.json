@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "833198006111",
+    "firebase_url": "https://fitm-f8c1e.firebaseio.com",
+    "project_id": "fitm-f8c1e",
+    "storage_bucket": "fitm-f8c1e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833198006111:android:b6f9c582623e48ba",
+        "android_client_info": {
+          "package_name": "com.team_fitm.myown.fitm_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "833198006111-43m3v9jst4on9cfteqc2dgp5hu3g3ae0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.team_fitm.myown.fitm_mobile",
+            "certificate_hash": "bd153cfd395fc680c9f0892e017b309ca86aa13f"
+          }
+        },
+        {
+          "client_id": "833198006111-6iu319sqtocoq16vvld4217739b041b3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4YKlnbdJzIHSxgnqmwQUkJ0dI9b6wOWo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "833198006111-6iu319sqtocoq16vvld4217739b041b3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

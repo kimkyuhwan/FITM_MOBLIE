@@ -11,7 +11,7 @@ import org.json.JSONObject;
  * Created by Myown on 2017-08-09.
  */
 
-public class ReqFirstLoginThread  extends Thread{
+public class ReqHTTPJSONThread extends Thread{
 
     private JSONObject json_data;
     private String send_url;
@@ -19,7 +19,7 @@ public class ReqFirstLoginThread  extends Thread{
 
     public CustomHandler handler;
 
-    public ReqFirstLoginThread(String send_url, JSONObject json_data){
+    public ReqHTTPJSONThread(String send_url, JSONObject json_data){
         this.json_data = json_data;
         this.send_url = send_url;
         this.conn_result = null;

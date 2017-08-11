@@ -2,13 +2,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:background="#000000"
+    android:gravity="center"
     android:layout_height="match_parent">
 
     <TextView
-        android:text="REGISTER"
-        android:textColor="#ffffff"
-        android:textSize="30dp"
+        android:layout_weight="4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp" />
+
+    <LinearLayout
+        android:layout_weight="1.5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <EditText
+            android:textColor="#ffffff"
+            android:id="@+id/edttxt_register_yyyy"
+            android:textColorHint="#ffffff"
+            android:backgroundTint="#ffffff"
+            android:hint="YYYY"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:layout_height="match_parent" />
+
+        <EditText
+            android:textColor="#ffffff"
+            android:id="@+id/edttxt_register_mm"
+            android:textColorHint="#ffffff"
+            android:backgroundTint="#ffffff"
+            android:hint="MM"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:layout_height="match_parent" />
+
+        <EditText
+            android:textColor="#ffffff"
+            android:id="@+id/edttxt_register_dd"
+            android:textColorHint="#ffffff"
+            android:backgroundTint="#ffffff"
+            android:hint="DD"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <EditText
+        android:textColor="#ffffff"
+        android:id="@+id/edttxt_register_phone_number"
+        android:textColorHint="#ffffff"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:backgroundTint="#ffffff"
+        android:hint="Phone Number"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <TextView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <Button
+        android:id="@+id/btn_register_req_register"
+        android:background="#ffffff"
+        android:text="등록하기"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <TextView
+        android:layout_weight="4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
 
 </LinearLayout>

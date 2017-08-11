@@ -10,12 +10,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.team_fitm.myown.fitm_mobile.DataModels.UserData;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Menu menu;
+    private UserData user_data;
+
+    private TextView navi_header_name;
+    private TextView navi_header_id_email;
+
+    private Button btn_enroll;
+    private Button btn_record;
+    private Button btn_etc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +36,50 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        user_data = new UserData();
+        Intent intent = getIntent();
+
+        user_data.setUser_access_key(intent.getExtras().getString("access_key"));
+        user_data.setUser_name(intent.getExtras().getString("name"));
+        user_data.setUser_email(intent.getExtras().getString("id_email"));
+        user_data.setUser_gender(intent.getExtras().getString("gender"));
+        user_data.setUser_phone_number(intent.getExtras().getString("phone_number"));
+
+        // 메인 화면 버튼 초기화, 이벤트 리스너 등록
+        btn_enroll = (Button)findViewById(R.id.btn_main_enroll);
+        btn_enroll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, EnrollActivity.class);
+                intent.putExtra("access_key", user_data.getUser_access_key());
+                intent.putExtra("name", user_data.getUser_name());
+                intent.putExtra("id_email", user_data.getUser_email());
+                startActivity(intent);
+            }
+        });
+        btn_record = (Button)findViewById(R.id.btn_main_record);
+        btn_record.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RecordActivity.class);
+                intent.putExtra("access_key", user_data.getUser_access_key());
+                intent.putExtra("name", user_data.getUser_name());
+                intent.putExtra("id_email", user_data.getUser_email());
+                startActivity(intent);
+            }
+        });
+        btn_etc = (Button)findViewById(R.id.btn_main_etc);
+        btn_etc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, EtcActivity.class);
+                intent.putExtra("access_key", user_data.getUser_access_key());
+                intent.putExtra("name", user_data.getUser_name());
+                intent.putExtra("id_email", user_data.getUser_email());
+                startActivity(intent);
+            }
+        });
 
         // 플로팅 액션 버튼은
         /*
@@ -63,6 +120,10 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        navi_header_name = (TextView)findViewById(R.id.navi_header_name);
+        navi_header_id_email = (TextView)findViewById(R.id.navi_header_id_email);
+        navi_header_name.setText(user_data.getUser_name());
+        navi_header_id_email.setText(user_data.getUser_email());
         ImageView header_profile_pic = (ImageView)findViewById(R.id.navi_header_profile_imgv);
         header_profile_pic.setBackground(getDrawable(R.drawable.koko));
         return true;
@@ -98,6 +159,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.navi_my_profile) {
             // Handle the camera action
             Intent intent = new Intent(MainActivity.this, MyProfileActivity.class);
+            intent.putExtra("access_key", user_data.getUser_access_key());
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         } else if (id == R.id.navi_notice) {
