@@ -11,6 +11,8 @@ import java.util.TimeZone;
 
 public class DateModule {
 
+    // 현재 시간 확인용 클래스 & 메소드
+
     private String UTC;
     private String KST;
     private String KST_YYYY;

@@ -17,6 +17,10 @@ import java.net.URL;
 
 public class SendJSONHttp {
 
+    // JSON 데이터를 Http를 통해서 Url로 전송하는 메소드를 구현한 클래스
+    // sendJSONObj 함수를 이용해서 JSON 객체를 해당 URL로 전송 가능
+    // sendJSONObj 함수의 리턴 값으로 전송 결과 String 을 받음
+
     public SendJSONHttp(){
         // default constructor
     }

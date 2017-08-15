@@ -18,6 +18,9 @@ import java.util.ArrayList;
 
 public class EnrollListViewAdapter extends BaseAdapter {
 
+    // 리스트뷰의 어댑터
+    // 수강신청에서 사용됨 (Enroll Activity)
+
     private ArrayList<EnrollListViewItem> listViewItems = new ArrayList<EnrollListViewItem>();
 
     public EnrollListViewAdapter(){

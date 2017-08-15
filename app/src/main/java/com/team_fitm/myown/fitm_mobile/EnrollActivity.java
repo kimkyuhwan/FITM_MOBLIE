@@ -22,6 +22,8 @@ import org.json.JSONObject;
 
 public class EnrollActivity extends Activity {
 
+    // 수강 신청을 보여주는 화면
+
     private final String TAG = "ENROLL";
 
     private DateModule date;

@@ -5,6 +5,15 @@ package com.team_fitm.myown.fitm_mobile.DataModels;
  */
 
 public class EnrollListViewItem {
+
+    // 리스트뷰의 아이템을 정리한 클래스
+    // class_num : 수업의 번호 (index 용도)
+    // start_time : 해당 수업의 시작 시간 HHMM (리스트뷰에 표시되지 않음)
+    // finish_time : 해당 수업의 종료 시간 HHMM (리스트뷰에 표시되지 않음)
+    // time : start_time ~ finish_time
+    // max_participant : 수업의 최대 인원 수
+    // cur_participant : 수업의 현재 등록된 인원 수
+
     private String class_num;
     private String start_time;
     private String finish_time;

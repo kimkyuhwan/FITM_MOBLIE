@@ -9,6 +9,9 @@ import android.os.Message;
 
 public class CustomHandler extends Handler {
 
+    // 데이터 통신용 핸들러
+    // String 값 으로 쓰레드간의 메시지를 전달한다.
+
     private String msg;
 
     public CustomHandler(){

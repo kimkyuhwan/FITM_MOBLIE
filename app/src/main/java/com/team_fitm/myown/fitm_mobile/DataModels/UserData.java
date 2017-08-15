@@ -6,6 +6,13 @@ package com.team_fitm.myown.fitm_mobile.DataModels;
 
 public class UserData {
 
+    // 어플리케이션의 User의 정보를 저장
+    // user_access_key : DB 내에 저장된 document에 대한 접근용 key
+    // user_email : 사용자의 이메일
+    // user_name : 사용자의 이름
+    // user_gender : 사용자의 성별 (M/F)
+    // user_phone_number : 사용자의 폰 번호
+
     private String user_access_key;
     private String user_email;
     private String user_name;

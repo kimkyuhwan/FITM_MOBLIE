@@ -20,6 +20,11 @@ import com.team_fitm.myown.fitm_mobile.DataModels.UserData;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    // 메인 화면
+    // 네비게이션 드로어(햄버거 메뉴) : 내 정보, 1:1 문의, 공지사항, About 주안, 페이스북, 네이버 카페, 인스타그램
+    // 메인 메뉴 : 수강신청, 레코드, etc
+    // 액션바 메뉴 : Settings
+
     private Menu menu;
     private UserData user_data;
 

@@ -9,6 +9,9 @@ import android.support.annotation.Nullable;
  */
 
 public class NoticeActivity extends Activity {
+
+    // 주안 - 크로스핏에 대한 공지사항을 전달하는 화면
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

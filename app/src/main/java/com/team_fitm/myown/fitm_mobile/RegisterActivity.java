@@ -24,6 +24,13 @@ import org.json.JSONObject;
 
 public class RegisterActivity extends Activity {
 
+    // 회원 등록화면
+    // user_data : 사용자의 정보를 저장하는 객체
+
+    // 네이버 아이디로 로그인 Api를 이용해서
+    // 사용자의 email과 이름, 성별을 받아오고
+    // 나머지 정보(생년월일, 폰 번호)는 사용자에게 직접 입력받아 서버로 전송함
+
     private UserData user_data;
 
     private EditText edt_yyyy;

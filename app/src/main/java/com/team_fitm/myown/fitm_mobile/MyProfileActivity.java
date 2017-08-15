@@ -13,6 +13,8 @@ import com.team_fitm.myown.fitm_mobile.DataModels.UserData;
 
 public class MyProfileActivity extends Activity {
 
+    // 사용자의 정보 조회 화면
+
     private UserData user_data;
 
     @Override

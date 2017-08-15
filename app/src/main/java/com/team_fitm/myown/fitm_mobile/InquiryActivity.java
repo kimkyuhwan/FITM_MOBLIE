@@ -9,6 +9,9 @@ import android.support.annotation.Nullable;
  */
 
 public class InquiryActivity extends Activity {
+
+    // 1:1 문의 기능(Socket.io를 바탕으로 실시간 채팅) 화면
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

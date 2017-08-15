@@ -36,6 +36,15 @@ import java.net.URL;
 
 public class LoginActivity extends Activity {
 
+    // 로그인 화면
+    // 네이버 아이디로 로그인 Api 를 사용하여
+    // 사용자의 확인 + 프로필 정보의 일부를 받아와서 사용함
+
+    // 앱 실행 초기에 사용자는 네이버 아이디로 로그인을 시도
+    // 네이버 Api를 통해서 정보를 받으면 사용자의 email 을 서버로 전송하여 조회
+    // 해당 사용자의 정보가 없으면 회원가입절차로 진행 -> Register Activity
+    // 해당 사용자의 정보가 있으면 메인 화면으로 진행 -> Main Activity
+
     private final static String TAG = "LoginActivity";
 
     // 로그인 인스턴스

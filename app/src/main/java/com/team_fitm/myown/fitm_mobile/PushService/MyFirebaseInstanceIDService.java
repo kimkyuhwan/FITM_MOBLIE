@@ -22,6 +22,8 @@ import okhttp3.RequestBody;
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
+    // 푸시 서비스 구현용
+    // 현재 예제를 따라 테스트하는 단계
 
     private static final String TAG = "MyFirebaseIIDService";
 

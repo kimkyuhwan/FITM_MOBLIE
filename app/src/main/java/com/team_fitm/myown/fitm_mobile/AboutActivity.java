@@ -9,6 +9,9 @@ import android.support.annotation.Nullable;
  */
 
 public class AboutActivity extends Activity {
+
+    // 주안 - 크로스핏에 대한 소개 콘텐츠를 보여주는 화면
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

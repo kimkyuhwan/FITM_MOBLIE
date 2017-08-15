@@ -9,6 +9,10 @@ import android.support.annotation.Nullable;
  */
 
 public class RecordActivity extends Activity {
+
+    // 앱 자체에서 사용할 수 있는 레코드 기능
+    // 디테일한 디자인 및 기능은 아직 정해지지 않음
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

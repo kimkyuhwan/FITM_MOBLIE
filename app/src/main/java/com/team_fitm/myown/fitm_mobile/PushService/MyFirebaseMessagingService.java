@@ -20,6 +20,10 @@ import com.team_fitm.myown.fitm_mobile.R;
  */
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+
+    // 푸시 서비스 구현용
+    // 현재 예제를 따라 테스트하는 단계
+
     private static final String TAG = "FirebaseMsgService";
 
     // [START receive_message]

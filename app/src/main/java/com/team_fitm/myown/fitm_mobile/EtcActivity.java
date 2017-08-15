@@ -9,6 +9,9 @@ import android.support.annotation.Nullable;
  */
 
 public class EtcActivity extends Activity {
+
+    // 기타 기능, 현재는 내용 미정
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
