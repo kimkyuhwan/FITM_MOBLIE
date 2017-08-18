@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="end"
     android:background="#000000"
-    tools:context="crossfit_juan.chk.com.crossfitjuan.MainActivity">
+    tools:context="crossfit_juan.chk.com.crossfitjuan.Activity.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

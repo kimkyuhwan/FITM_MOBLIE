@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,11 +26,11 @@
         <activity
             android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
             android:label="OAuth2.0 In-app" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".NoticeActivity" />
-        <activity android:name=".ReservationActivity" />
-        <activity android:name=".RecordActivity" />
+        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.NoticeActivity" />
+        <activity android:name=".Activity.ReservationActivity" />
+        <activity android:name=".Activity.RecordActivity" />
     </application>
 
 </manifest>

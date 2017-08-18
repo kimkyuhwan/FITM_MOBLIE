@@ -1,4 +1,4 @@
-package crossfit_juan.chk.com.crossfitjuan;
+package crossfit_juan.chk.com.crossfitjuan.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +28,7 @@ import crossfit_juan.chk.com.crossfitjuan.Common.Constants;
 import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.UserData;
 import crossfit_juan.chk.com.crossfitjuan.HttpConnection.CustomThread.ReqHTTPJSONThread;
+import crossfit_juan.chk.com.crossfitjuan.R;
 
 public class LoginActivity extends AppCompatActivity {
     private OAuthLogin mOAuthLoginModule;

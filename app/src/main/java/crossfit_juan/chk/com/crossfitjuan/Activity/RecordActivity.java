@@ -1,7 +1,9 @@
-package crossfit_juan.chk.com.crossfitjuan;
+package crossfit_juan.chk.com.crossfitjuan.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import crossfit_juan.chk.com.crossfitjuan.R;
 
 public class RecordActivity extends AppCompatActivity {
 

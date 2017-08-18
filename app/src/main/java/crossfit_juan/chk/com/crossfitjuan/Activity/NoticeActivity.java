@@ -1,8 +1,10 @@
-package crossfit_juan.chk.com.crossfitjuan;
+package crossfit_juan.chk.com.crossfitjuan.Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
+import crossfit_juan.chk.com.crossfitjuan.R;
 
 /**
  * Created by Myown on 2017-08-08.

@@ -1,7 +1,6 @@
-package crossfit_juan.chk.com.crossfitjuan;
+package crossfit_juan.chk.com.crossfitjuan.Activity;
 
 import android.app.Dialog;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -10,7 +9,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -34,6 +32,7 @@ import crossfit_juan.chk.com.crossfitjuan.DataModel.Classinfo;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.Participant;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.Time_Table;
 import crossfit_juan.chk.com.crossfitjuan.HttpConnection.CustomThread.ReqHTTPJSONThread;
+import crossfit_juan.chk.com.crossfitjuan.R;
 import crossfit_juan.chk.com.crossfitjuan.tool.ParticipantViewAdapter;
 
 public class ReservationActivity extends AppCompatActivity {

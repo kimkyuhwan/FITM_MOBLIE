@@ -1,4 +1,4 @@
-package crossfit_juan.chk.com.crossfitjuan;
+package crossfit_juan.chk.com.crossfitjuan.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import crossfit_juan.chk.com.crossfitjuan.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Intent it;

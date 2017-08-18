@@ -1,4 +1,4 @@
-package crossfit_juan.chk.com.crossfitjuan;
+package crossfit_juan.chk.com.crossfitjuan.Activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import crossfit_juan.chk.com.crossfitjuan.Common.Constants;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.UserData;
 import crossfit_juan.chk.com.crossfitjuan.HttpConnection.CustomThread.ReqHTTPJSONThread;
+import crossfit_juan.chk.com.crossfitjuan.R;
 
 /**
  * Created by Myown on 2017-08-09.
