@@ -1,4 +1,4 @@
-package com.team_fitm.myown.fitm_mobile;
+package crossfit_juan.chk.com.crossfitjuan;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -21,6 +21,6 @@ public class NoticeActivity extends Activity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

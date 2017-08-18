@@ -1,4 +1,4 @@
-package com.team_fitm.myown.fitm_mobile.DataModels;
+package crossfit_juan.chk.com.crossfitjuan.DataModel;
 
 /**
  * Created by Myown on 2017-08-09.
@@ -12,7 +12,6 @@ public class UserData {
     // user_name : 사용자의 이름
     // user_gender : 사용자의 성별 (M/F)
     // user_phone_number : 사용자의 폰 번호
-
     private String user_access_key;
     private String user_email;
     private String user_name;

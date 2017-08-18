@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_item_my_Info"
+            android:checked="true"
+            android:icon="@drawable/p1"
+            android:title="@string/drawer_p1" />
+        <item
+            android:id="@+id/navigation_item_Notice"
+            android:checked="true"
+            android:icon="@drawable/p2"
+            android:title="@string/drawer_p2" />
+        <item
+            android:id="@+id/navigation_item_QnA"
+            android:checked="true"
+            android:icon="@drawable/p3"
+            android:title="@string/drawer_p3" />
+        <item
+            android:id="@+id/navigation_item_About"
+            android:checked="true"
+            android:icon="@drawable/p4"
+            android:title="@string/drawer_p4" />
+        <item
+            android:id="@+id/navigation_item_Cafe"
+            android:checked="true"
+            android:icon="@drawable/p5"
+            android:title="@string/drawer_p5" />
+        <item
+            android:id="@+id/navigation_item_Facebook"
+            android:checked="true"
+            android:icon="@drawable/p6"
+            android:title="@string/drawer_p6" />
+        <item
+            android:id="@+id/navigation_item_Instagram"
+            android:checked="true"
+            android:icon="@drawable/p7"
+            android:title="@string/drawer_p7" />
+
+    </group>
+
+</menu>

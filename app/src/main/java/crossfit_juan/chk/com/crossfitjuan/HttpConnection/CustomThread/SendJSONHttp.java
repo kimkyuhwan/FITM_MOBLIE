@@ -1,4 +1,4 @@
-package com.team_fitm.myown.fitm_mobile.HttpConnection;
+package crossfit_juan.chk.com.crossfitjuan.HttpConnection.CustomThread;
 
 import org.json.JSONObject;
 
@@ -43,7 +43,7 @@ public class SendJSONHttp {
             httpConn.setDoInput(true);
 
             OutputStream os = httpConn.getOutputStream();
-            os.write(json_data.getBytes("euc-kr"));
+            os.write(json_data.getBytes("UTF-8"));
             os.flush();
 
             try{
@@ -69,7 +69,7 @@ public class SendJSONHttp {
         return ret;
     }
 
-    private static String convertInputStreamToString(InputStream inputStream) throws IOException{
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException {
         BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
         String line = "";
         String result = "";

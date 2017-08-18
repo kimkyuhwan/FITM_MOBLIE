@@ -1,4 +1,4 @@
-package com.team_fitm.myown.fitm_mobile.HttpConnection;
+package crossfit_juan.chk.com.crossfitjuan.HttpConnection.CustomThread;
 
 import android.os.Handler;
 import android.os.Message;

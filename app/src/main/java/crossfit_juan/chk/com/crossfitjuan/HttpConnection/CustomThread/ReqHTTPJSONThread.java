@@ -1,9 +1,6 @@
-package com.team_fitm.myown.fitm_mobile.HttpConnection.CustomThread;
+package crossfit_juan.chk.com.crossfitjuan.HttpConnection.CustomThread;
 
 import android.os.Message;
-
-import com.team_fitm.myown.fitm_mobile.HttpConnection.CustomHandler;
-import com.team_fitm.myown.fitm_mobile.HttpConnection.SendJSONHttp;
 
 import org.json.JSONObject;
 
@@ -11,7 +8,7 @@ import org.json.JSONObject;
  * Created by Myown on 2017-08-09.
  */
 
-public class ReqHTTPJSONThread extends Thread{
+public class ReqHTTPJSONThread extends Thread {
 
     // Http 통신을 하는 쓰레드
     // 이 클래스의 객체를 생성할 때 생성자의 arg로 url과 JSON 객체를 전달하고
