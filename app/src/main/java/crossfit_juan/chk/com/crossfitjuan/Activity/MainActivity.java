@@ -82,7 +82,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.navigation_item_Notice) {
             Toast.makeText(getApplicationContext(), "준비중입니다 p2", Toast.LENGTH_LONG).show();
         } else if (id == R.id.navigation_item_QnA) {
-            Toast.makeText(getApplicationContext(), "준비중입니다 p3", Toast.LENGTH_LONG).show();
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.END);
+            Intent it=new Intent(MainActivity.this,QnaActivity.class);
+            startActivity(it);
         } else if (id == R.id.navigation_item_About) {
             Toast.makeText(getApplicationContext(), "준비중입니다 p4", Toast.LENGTH_LONG).show();
         } else if (id == R.id.navigation_item_Cafe) {
