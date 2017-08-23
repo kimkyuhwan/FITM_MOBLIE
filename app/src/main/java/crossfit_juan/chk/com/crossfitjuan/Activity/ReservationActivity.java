@@ -69,13 +69,10 @@ public class ReservationActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-    }
     public void getTodayWod() throws JSONException{
         JSONObject send_data = new JSONObject();
         try {
@@ -278,7 +275,11 @@ public class ReservationActivity extends AppCompatActivity {
 
 
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
 
     @OnClick({R.id.select_schedule_Btn, R.id.schedule_Register_Btn})
     public void onViewClicked(View view) {

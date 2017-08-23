@@ -51,6 +51,7 @@ dependencies {
         exclude group: 'org.json', module: 'json'
     }
 
+    compile 'com.github.nkzawa:socket.io-client:0.3.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
 }
