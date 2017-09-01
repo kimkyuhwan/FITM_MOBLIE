@@ -80,7 +80,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.navigation_item_my_Info) {
             Toast.makeText(getApplicationContext(), "준비중입니다 p1", Toast.LENGTH_LONG).show();
         } else if (id == R.id.navigation_item_Notice) {
-            Toast.makeText(getApplicationContext(), "준비중입니다 p2", Toast.LENGTH_LONG).show();
+            Intent it=new Intent(MainActivity.this,NoticeActivity.class);
+            startActivity(it);
         } else if (id == R.id.navigation_item_QnA) {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.END);

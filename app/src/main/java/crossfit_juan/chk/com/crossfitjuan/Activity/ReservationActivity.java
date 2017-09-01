@@ -21,6 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 import butterknife.BindView;
@@ -52,18 +54,24 @@ public class ReservationActivity extends AppCompatActivity {
     ListView participantsList;
 
     boolean isReserved=false;
+    boolean isPossibleToReserve=false;
     int selectedSchedule=-1;
 
     Time_Table timetable;
     Classinfo cinfo;
     ParticipantViewAdapter adapter;
+
+    String toDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
         ButterKnife.bind(this);
+        toDate=getToDate();
         adapter = new ParticipantViewAdapter();
         participantsList.setAdapter(adapter);
+
         try {
             getMyTodayWod();
         } catch (JSONException e) {
@@ -73,10 +81,17 @@ public class ReservationActivity extends AppCompatActivity {
 
     }
 
+    public String getToDate(){
+        Date from = new Date();
+        SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
+        String to = transFormat.format(from);
+        return to;
+    }
+
     public void getTodayWod() throws JSONException{
         JSONObject send_data = new JSONObject();
         try {
-            send_data.put("date", "20170817");
+            send_data.put("date", toDate);
         } catch (JSONException jsonex) {
             jsonex.printStackTrace();
         }
@@ -107,26 +122,37 @@ public class ReservationActivity extends AppCompatActivity {
                 timetable.addClasses(A.getJSONObject(i));
             }
             String date=timetable.getDate();
-            String dd=date.subSequence(0,4)+". "+date.subSequence(4,6)+". "+date.subSequence(6,8);
+            String dd=dataFormatGen(date);
             Log.d("DDDDDD",dd);
             textViewDate.setText(dd);
             textViewTitle.setText(timetable.getToday_wod_name());
             textViewContents.setText(timetable.getToday_wod_content());
+            isPossibleToReserve=true;
 
             Log.e("DEBUGYU", "success" + timetable.toString());
         } else if (result_code == 2170) { // 실패 시
             Log.e("DEBUGYU", "fail");
+            String dd=dataFormatGen(toDate);
+            textViewDate.setText(dd);
+            textViewTitle.setText("오늘은 쉽니다");
+            textViewContents.setText("");
+            isPossibleToReserve=false;
         }
         if(selectedSchedule!=-1){
             getParticipantsInfo(selectedSchedule);
         }
     }
 
+    public String dataFormatGen(String date){
+        String dd=date.subSequence(0,4)+". "+date.subSequence(4,6)+". "+date.subSequence(6,8);
+        return dd;
+    }
+
     public void getMyTodayWod() throws JSONException {
         JSONObject send_data = new JSONObject();
         try {
             send_data.put("access_key", User.getInstance().getData().getUser_access_key());
-            send_data.put("date", "20170817");
+            send_data.put("date", toDate);
         } catch (JSONException jsonex) {
             jsonex.printStackTrace();
         }
@@ -176,7 +202,7 @@ public class ReservationActivity extends AppCompatActivity {
         JSONObject send_data = new JSONObject();
         try {
             send_data.put("access_key", User.getInstance().getData().getUser_access_key());
-            send_data.put("date", "20170817");
+            send_data.put("date", toDate);
             send_data.put("class_num",selectedSchedule+1);
             send_data.put("name",User.getInstance().getData().getUser_name());
             send_data.put("comments",comment);
@@ -234,7 +260,7 @@ public class ReservationActivity extends AppCompatActivity {
         JSONObject send_data = new JSONObject();
         try {
             send_data.put("access_key", User.getInstance().getData().getUser_access_key());
-            send_data.put("date", "20170817");
+            send_data.put("date", toDate);
         } catch (JSONException jsonex) {
             jsonex.printStackTrace();
         }
@@ -285,44 +311,49 @@ public class ReservationActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.select_schedule_Btn:
-                // 시간 선택 기능
-                final Dialog d = new Dialog(ReservationActivity.this);
-                d.setContentView(R.layout.time_select_dialog);
-                Button cancelBtn=(Button)d.findViewById(R.id.dialog_cancel_btn);
-                Button doneBtn=(Button)d.findViewById(R.id.dialog_done_btn);
-                cancelBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        d.dismiss();
-                    }
-                });
-
-
-                final NumberPicker np=(NumberPicker)d.findViewById(R.id.schedule_picker);
-                String A[]=new String[timetable.getNum_of_classes()];
-                for(int i=0;i<A.length;i++){
-                    A[i]=timetable.getClasses().get(i).getStart_time()+" ~ "+timetable.getClasses().get(i).getFinish_time();
-                }
-                np.setMinValue(0);
-                np.setMaxValue(A.length-1);
-                np.setDisplayedValues(A);
-                np.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-                doneBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        selectedSchedule=np.getValue();
-                        selectScheduleBtn.setText(timetable.getClasses().get(np.getValue()).getStart_time()+" ~ "+timetable.getClasses().get(np.getValue()).getFinish_time());
-                        try {
-                            getTodayWod();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                if(isPossibleToReserve) {
+                    // 시간 선택 기능
+                    final Dialog d = new Dialog(ReservationActivity.this);
+                    d.setContentView(R.layout.time_select_dialog);
+                    Button cancelBtn = (Button) d.findViewById(R.id.dialog_cancel_btn);
+                    Button doneBtn = (Button) d.findViewById(R.id.dialog_done_btn);
+                    cancelBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            d.dismiss();
                         }
-                        d.dismiss();
+                    });
+
+
+                    final NumberPicker np = (NumberPicker) d.findViewById(R.id.schedule_picker);
+                    String A[] = new String[timetable.getNum_of_classes()];
+                    for (int i = 0; i < A.length; i++) {
+                        A[i] = timetable.getClasses().get(i).getStart_time() + " ~ " + timetable.getClasses().get(i).getFinish_time();
                     }
-                });
-                Window window=d.getWindow();
-                window.setGravity(Gravity.BOTTOM);
-                d.show();
+                    np.setMinValue(0);
+                    np.setMaxValue(A.length - 1);
+                    np.setDisplayedValues(A);
+                    np.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+                    doneBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            selectedSchedule = np.getValue();
+                            selectScheduleBtn.setText(timetable.getClasses().get(np.getValue()).getStart_time() + " ~ " + timetable.getClasses().get(np.getValue()).getFinish_time());
+                            try {
+                                getTodayWod();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            d.dismiss();
+                        }
+                    });
+                    Window window = d.getWindow();
+                    window.setGravity(Gravity.BOTTOM);
+                    d.show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"오늘은 예약이 불가능합니다",Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.schedule_Register_Btn:
                 if (isReserved) {

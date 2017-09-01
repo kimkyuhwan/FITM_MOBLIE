@@ -44,7 +44,6 @@ public class QnaActivity extends AppCompatActivity {
 
         updateChatLog();
 
-
          //소켓 연결
 
         try {
@@ -63,6 +62,7 @@ public class QnaActivity extends AppCompatActivity {
     void updateChatLog() {
         adapter = null;
         adapter = new ChatViewAdapter();
+        // 서버에서 채팅 가져오는 거 대신 dummy
         adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:00", "", true));
         adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:00", "테스트입니다", false));
         adapter.addItem(new ChatData("other", "2017. 08. 23", "11:02", "그렇습니까?", false));
@@ -73,6 +73,8 @@ public class QnaActivity extends AppCompatActivity {
         adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:00", "테스트입니다", false));
         adapter.addItem(new ChatData("other", "2017. 08. 23", "11:02", "그렇습니까?", false));
         adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:04", "Hello World!!!", false));
+
+        // 키보드 누르면 화면 올라가는거 item 개수가 10개 미만일때 절반보다 적으므로 올릴 필요 X 그 이상이면 올려줌.
         if (adapter.getCount() >= 10) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         }
@@ -111,15 +113,19 @@ public class QnaActivity extends AppCompatActivity {
         }
     };
 
+    // 액티비티 종료시 Socket 통신 종료
+
     @Override
     protected void onStop() {
         super.onStop();
- //       mSocket.off();
+//        mSocket.off();
+//        mSocket.close();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 //        mSocket.off();
+//        mSocket.close();
     }
 }
