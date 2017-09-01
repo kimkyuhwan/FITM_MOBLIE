@@ -44,6 +44,7 @@ public class ChatViewAdapter extends BaseAdapter {
         ChatData chatData = listViewItemList.get(position);
 
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
+        convertView=null;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             Log.e("Chat Adapter",chatData.toString());
