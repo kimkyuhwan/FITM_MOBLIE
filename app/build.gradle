@@ -30,7 +30,8 @@ dependencies {
 
     //retrofit : server connection
 
-//    compile files('libs/3rdparty_login_library_android_4.1.4/3rdparty_login_library_android_4.1.4.jar')
+    compile files(
+            'libs/3rdparty_login_library_android_4.1.4/3rdparty_login_library_android_4.1.4.jar')
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -50,9 +51,7 @@ dependencies {
         exclude group: 'org.json', module: 'json'
     }
 
-    compile ('com.github.nkzawa:socket.io-client:0.3.0') {
-        exclude group: 'org.json', module: 'json'
-    }
+    compile 'com.github.nkzawa:socket.io-client:0.3.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
 }

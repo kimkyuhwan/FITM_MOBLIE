@@ -79,17 +79,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (id == R.id.navigation_item_my_Info) {
-            Toast.makeText(getApplicationContext(), "준비중입니다 p1", Toast.LENGTH_LONG).show();
+            Intent it=new Intent(MainActivity.this,UserInfoActivity.class);
+            startActivity(it);
+            drawer.closeDrawer(GravityCompat.END);
         } else if (id == R.id.navigation_item_Notice) {
             Intent it=new Intent(MainActivity.this,NoticeActivity.class);
             startActivity(it);
-        } else if (id == R.id.navigation_item_QnA) {
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.END);
+        } else if (id == R.id.navigation_item_QnA) {
             Intent it=new Intent(MainActivity.this,QnaActivity.class);
             startActivity(it);
+            drawer.closeDrawer(GravityCompat.END);
         } else if (id == R.id.navigation_item_About) {
             Toast.makeText(getApplicationContext(), "준비중입니다 p4", Toast.LENGTH_LONG).show();
         } else if (id == R.id.navigation_item_Cafe) {
