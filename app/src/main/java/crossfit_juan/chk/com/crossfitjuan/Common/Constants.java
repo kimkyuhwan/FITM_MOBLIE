@@ -9,7 +9,7 @@ public class Constants {
     // 상수 변수, URL 등을 정리
 
     // 상수 변수
-    public static final String Master_Socket_Address = "";
+    public static final String Master_Socket_Address = "http://52.78.197.131:25478";
 
 
     // URL
@@ -20,4 +20,7 @@ public class Constants {
     public static final String REQ_USER_DATE_SCHEDULE_CHECK ="http://52.78.197.131:25478/res_check_class_by_key_m";
     public static final String REQ_CANCEL_RESERVATION="http://52.78.197.131:25478/res_cancel_classes_m";
     public static final String REQ_REGISTER_RESERVATION="http://52.78.197.131:25478/res_enroll_classes_m";
+
+    public static final String MAKE_ROOM_URL = "http://52.78.197.131:25478/sync_message_log";
+
 }
