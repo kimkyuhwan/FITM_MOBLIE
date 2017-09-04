@@ -48,6 +48,7 @@ public class UserInfoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         UserInfoTextEmail.setText(User.getInstance().getData().getUser_email());
         UserInfoTextName.setText(User.getInstance().getData().getUser_name());
+        //heello
     }
 
     @OnClick({R.id.imageButton, R.id.button})
