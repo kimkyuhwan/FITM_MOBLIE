@@ -94,10 +94,27 @@ public class QnaActivity extends AppCompatActivity {
         JSONObject response = result_data.getJSONObject("response");
 
         if (result_code == 3334) { // 성공 시
+            String msgLog = response.getString("message");
+            JSONArray msgArr = response.getJSONArray("message_list");
+            for(int i=0;i<msgArr.length();i++){
+                JSONObject hereMsg=msgArr.getJSONObject(i);
+                Log.d("DEBUGYU",hereMsg.toString());
+                ChatData newChat=new ChatData();
+                newChat.setSender(hereMsg.getString("sender"));
+                newChat.setContent(hereMsg.getString("message"));
+                String Time=hereMsg.getString("time");
+                newChat.setDateChangeSession(false);
+                String Date=Time.substring(0,10);
+                Time =Time.substring(11,16);
+                newChat.setDate(Date);
+                newChat.setTime(Time);
+                adapter.addItem(newChat);
 
-
-
-            Log.e("DEBUGYU", "success MakeRoom");
+            }
+            adapter.setDateSession();
+            chatMsgList.setAdapter(adapter);
+            chatMsgList.setSelection(adapter.getCount()-1);
+            Log.e("DEBUGYU", "success MakeRoom Log = "+msgLog);
         } else if (result_code == 5800) { // 실패 시
             Log.e("DEBUGYU", "fail MakeRoom");
         }
@@ -110,7 +127,7 @@ public class QnaActivity extends AppCompatActivity {
         adapter = null;
         adapter = new ChatViewAdapter();
         // 서버에서 채팅 가져오는 거 대신 dummy
-        adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:00", "", true));
+       /* adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:00", "", true));
         adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:00", "테스트입니다", false));
         adapter.addItem(new ChatData("other", "2017. 08. 23", "11:02", "그렇습니까?", false));
         adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:04", "Hello World!!!", false));
@@ -123,7 +140,7 @@ public class QnaActivity extends AppCompatActivity {
         adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:04", "Hello World!!!", false));
         adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:04", "Hello World!!!", false));
         adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:04", "Hello World!!!", false));
-
+           */
 
         // 키보드 누르면 화면 올라가는거 item 개수가 10개 미만일때 절반보다 적으므로 올릴 필요 X 그 이상이면 올려줌.
         if (adapter.getCount() >= 10) {
@@ -135,17 +152,22 @@ public class QnaActivity extends AppCompatActivity {
 
     @OnClick(R.id.chat_msg_send_Btn)
     public void onViewClicked() {
-        JSONObject obj = new JSONObject();
-    //    String
-        try {
-            obj.put("access_key", User.getInstance().getData().getUser_access_key());
-            obj.put("room_name",User.getInstance().getData().getUser_email());
-            obj.put("sender",User.getInstance().getData().getUser_name());
-            String Msg=chatMsgContents.getText().toString();
-            obj.put("message",Msg);
-            mSocket.emit("send_message", obj);
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if(chatMsgContents.getText().equals("")) {
+            JSONObject obj = new JSONObject();
+            //    String
+
+            try {
+                obj.put("access_key", User.getInstance().getData().getUser_access_key());
+                obj.put("room_name", User.getInstance().getData().getUser_email());
+                obj.put("sender", User.getInstance().getData().getUser_name());
+                String Msg = chatMsgContents.getText().toString();
+                obj.put("message", Msg);
+                mSocket.emit("send_message", obj);
+                chatMsgContents.setText("");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -186,14 +208,7 @@ public class QnaActivity extends AppCompatActivity {
                 public void run() {
 
                     //이곳에 ui 관련 작업을 할 수 있습니다.
-                    ChatData newChat=new ChatData();
-                    newChat.setSender(finalName);
-                    newChat.setContent(finalContent);
-                    newChat.setDateChangeSession(false);
-                    newChat.setDate("20170905");
-                    newChat.setTime("08:20");
-                    adapter.addItem(newChat);
-                    chatMsgList.setAdapter(adapter);
+
                 }
             });
         }

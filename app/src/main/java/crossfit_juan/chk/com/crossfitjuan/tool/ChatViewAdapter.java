@@ -85,6 +85,20 @@ public class ChatViewAdapter extends BaseAdapter {
 
         return convertView;
     }
+    public void setDateSession(){
+        String PrevDate="";
+        for(int i=0;i<listViewItemList.size();i++){
+            String Date=listViewItemList.get(i).getDate();
+            if(!Date.equals(PrevDate)) {
+                ChatData newSession=new ChatData();
+                newSession.setDate(Date);
+                newSession.setDateChangeSession(true);
+                listViewItemList.add(i,newSession);
+                PrevDate=Date;
+                i++;
+            }
+        }
+    }
 
     // 지정한 위치(position)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴. : 필수 구현
     @Override
