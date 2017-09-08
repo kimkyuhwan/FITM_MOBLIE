@@ -116,7 +116,7 @@ public class QnaActivity extends AppCompatActivity {
         adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:04", "Hello World!!!", false));
         adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:06", "Hello World!!!!", false));
         adapter.addItem(new ChatData("other", "2017. 08. 23", "11:08", "Good Good!", false));
-        adapter.addItem(new ChatData("klight1994", "2017. 08. 24", "11:00", "", true));
+        adapter.addItem(new ChatData("klight1994", "오늘", "11:00", "", true));
         adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:00", "테스트입니다", false));
         adapter.addItem(new ChatData("other", "2017. 08. 23", "11:02", "그렇습니까?", false));
         adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:04", "Hello World!!!", false));

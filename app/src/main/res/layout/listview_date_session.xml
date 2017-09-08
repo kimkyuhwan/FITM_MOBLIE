@@ -3,7 +3,6 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:background="#333377"
     >
 
     <TextView
@@ -13,8 +12,8 @@
         android:layout_gravity="center_vertical"
         android:text="2017. 08. 23"
         android:gravity="center"
-        android:textColor="#ffffff"
-        android:textSize="20dp" />
+        android:textColor="#333333"
+        android:textSize="15dp" />
 
 
 
