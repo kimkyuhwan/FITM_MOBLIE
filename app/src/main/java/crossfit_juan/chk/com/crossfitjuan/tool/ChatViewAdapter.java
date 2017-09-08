@@ -10,7 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.ChatData;
@@ -22,7 +24,7 @@ import crossfit_juan.chk.com.crossfitjuan.R;
 
 public class ChatViewAdapter extends BaseAdapter {
     private ArrayList<ChatData> listViewItemList = new ArrayList<ChatData>() ;
-
+    String PrevDate="";
     // ListViewAdapter의 생성자
     public ChatViewAdapter() {
 
@@ -86,12 +88,18 @@ public class ChatViewAdapter extends BaseAdapter {
         return convertView;
     }
     public void setDateSession(){
-        String PrevDate="";
+
         for(int i=0;i<listViewItemList.size();i++){
             String Date=listViewItemList.get(i).getDate();
             if(!Date.equals(PrevDate)) {
                 ChatData newSession=new ChatData();
-                newSession.setDate(Date);
+
+
+                String strDate=getTodayDate();
+                if(Date.equals(strDate))
+                    newSession.setDate("오늘");
+                else
+                    newSession.setDate(Date);
                 newSession.setDateChangeSession(true);
                 listViewItemList.add(i,newSession);
                 PrevDate=Date;
@@ -100,6 +108,12 @@ public class ChatViewAdapter extends BaseAdapter {
         }
     }
 
+    public String getTodayDate(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
+        Date date = new Date();
+        String strDate = dateFormat.format(date);
+        return strDate;
+    }
     // 지정한 위치(position)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴. : 필수 구현
     @Override
     public long getItemId(int position) {

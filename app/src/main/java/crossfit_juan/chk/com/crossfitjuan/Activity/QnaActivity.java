@@ -152,7 +152,7 @@ public class QnaActivity extends AppCompatActivity {
 
     @OnClick(R.id.chat_msg_send_Btn)
     public void onViewClicked() {
-        if(chatMsgContents.getText().equals("")) {
+        if(!chatMsgContents.getText().equals("")) {
             JSONObject obj = new JSONObject();
             //    String
 
@@ -187,25 +187,31 @@ public class QnaActivity extends AppCompatActivity {
 
         public void call(Object... args) {
             final JSONObject obj = (JSONObject)args[0];
-            String name="";
-            String content="";
-            //서버에서 보낸 JSON객체를 사용할 수 있습니다.
+            JSONObject msg_time=null;
             try {
-                name=obj.getString("sender");
+                msg_time=obj.getJSONObject("message_time");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            try {
-                content=obj.getString("message");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            final String finalName = name;
-            final String finalContent = content;
+            Log.d("DEBUGYU",obj.toString());
+            final JSONObject finalMsg_time = msg_time;
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    ChatData newChat=new ChatData();
+                    try {
+                        newChat.setSender(obj.getString("sender"));
+                        newChat.setContent(obj.getString("message"));
+                        newChat.setDateChangeSession(false);
+
+                        newChat.setDate(finalMsg_time.getString("year")+finalMsg_time.getString("month")+finalMsg_time.getString("day"));
+                        newChat.setTime(finalMsg_time.getString("hour")+":"+finalMsg_time.getString("minute"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    adapter.addItem(newChat);
+                    chatMsgList.setAdapter(adapter);
+                    chatMsgList.setSelection(adapter.getCount()-1);
 
                     //이곳에 ui 관련 작업을 할 수 있습니다.
 
