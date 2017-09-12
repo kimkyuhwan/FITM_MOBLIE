@@ -17,19 +17,22 @@ public class UserData {
     private String user_name;
     private String user_gender;
     private String user_phone_number;
+    private String user_birtyday;
 
     public UserData(){
         this.user_email = null;
         this.user_gender = null;
         this.user_phone_number = null;
         this.user_name = null;
+        this.user_birtyday=null;
     }
 
-    public UserData(String email, String name, String gender, String phone_number){
+    public UserData(String email, String name, String gender, String phone_number,String user_birtyday){
         this.user_name = name;
         this.user_email = email;
         this.user_gender = gender;
         this.user_phone_number = phone_number;
+        this.user_birtyday=user_birtyday;
     }
 
     public String getUser_email() {
@@ -70,6 +73,14 @@ public class UserData {
 
     public void setUser_access_key(String user_access_key) {
         this.user_access_key = user_access_key;
+    }
+
+    public String getUser_birtyday() {
+        return user_birtyday;
+    }
+
+    public void setUser_birtyday(String user_birtyday) {
+        this.user_birtyday = user_birtyday;
     }
 
     public String getDataForLog(){

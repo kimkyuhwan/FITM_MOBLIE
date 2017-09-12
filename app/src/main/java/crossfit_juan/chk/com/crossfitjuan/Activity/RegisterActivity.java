@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import crossfit_juan.chk.com.crossfitjuan.Common.Constants;
+import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.UserData;
 import crossfit_juan.chk.com.crossfitjuan.HttpConnection.CustomThread.ReqHTTPJSONThread;
 import crossfit_juan.chk.com.crossfitjuan.R;
@@ -38,6 +39,7 @@ public class RegisterActivity extends Activity {
     private EditText edt_mm;
     private EditText edt_dd;
     private EditText edt_phone_number;
+    private EditText edt_name;
     private Button btn_req_register;
 
     private Context my_context;
@@ -53,12 +55,13 @@ public class RegisterActivity extends Activity {
         Intent intent = getIntent();
         user_data.setUser_access_key(intent.getExtras().getString("access_key"));
         user_data.setUser_email(intent.getExtras().getString("id_email"));
-        user_data.setUser_name(intent.getExtras().getString("name"));
+     //   user_data.setUser_name(intent.getExtras().getString("name"));
         user_data.setUser_gender(intent.getExtras().getString("gender"));
 
         edt_yyyy = (EditText)findViewById(R.id.edttxt_register_yyyy);
         edt_mm = (EditText)findViewById(R.id.edttxt_register_mm);
         edt_dd = (EditText)findViewById(R.id.edttxt_register_mm);
+        edt_name= (EditText)findViewById(R.id.edttxt_register_name);
         edt_phone_number = (EditText)findViewById(R.id.edttxt_register_phone_number);
 
         btn_req_register = (Button)findViewById(R.id.btn_register_req_register);
@@ -67,9 +70,11 @@ public class RegisterActivity extends Activity {
             public void onClick(View view) {
                 String birthday = edt_yyyy.getText().toString() + edt_mm .getText().toString() + edt_dd.getText().toString();
                 String phone_number = edt_phone_number.getText().toString();
-                if(!birthday.equals("") && !phone_number.equals("")) {
+                String name = edt_name.getText().toString();
+                if(!birthday.equals("") && !phone_number.equals("") && !name.equals("")) {
                     JSONObject send_data = new JSONObject();
                     try {
+                        user_data.setUser_name(name);
                         send_data.put("access_key", user_data.getUser_access_key());
                         send_data.put("gender", user_data.getUser_gender());
                         send_data.put("birthday", birthday);
@@ -105,12 +110,15 @@ public class RegisterActivity extends Activity {
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
 
                         // 메인 액티비티로 넘길 데이터들 (String)
-                        intent.putExtra("access_key", user_data.getUser_access_key());
-                        intent.putExtra("name", user_data.getUser_name());
-                        intent.putExtra("id_email", user_data.getUser_email());
-                        intent.putExtra("gender", user_data.getUser_email());
-                        intent.putExtra("phone_number", phone_number);
-                        intent.putExtra("birthday", birthday);
+                        user_data.setUser_phone_number(phone_number);
+                        user_data.setUser_birtyday(birthday);
+                        User.getInstance().setUser(user_data);
+                        intent.putExtra("access_key", User.getInstance().getData().getUser_access_key());
+                        intent.putExtra("name", User.getInstance().getData().getUser_name());
+                        intent.putExtra("id_email", User.getInstance().getData().getUser_email());
+                        intent.putExtra("gender", User.getInstance().getData().getUser_gender());
+                        intent.putExtra("phone_number", User.getInstance().getData().getUser_phone_number());
+                        intent.putExtra("birthday", User.getInstance().getData().getUser_birtyday());
 
                         startActivity(intent);
                         finish();
