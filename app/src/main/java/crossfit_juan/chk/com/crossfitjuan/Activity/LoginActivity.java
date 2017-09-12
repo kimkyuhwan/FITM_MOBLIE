@@ -174,33 +174,52 @@ public class LoginActivity extends AppCompatActivity {
                 JSONObject result_data = null;
                 String user_access_key = null;
                 int result_code = 0;
+                int isRegistered=0;
+                String var_email="";
+                String var_name="";
+                String var_phone="";
+                String var_gender="";
+                String var_birthday="";
                 try{
                     result_data = new JSONObject(result);
                     result_code = result_data.getInt("code");
                     JSONObject response = result_data.getJSONObject("response");
                     user_access_key = response.getString("access_key");
                     user_data.setUser_access_key(user_access_key);
+                    Log.d("DEBUGYU",response.toString());
+                    isRegistered=response.getInt("check_register");
+                    var_name=response.getString("name");
+                    var_email=response.getString("id_email");
+                    var_gender=response.getString("gender");
+                    var_phone=response.getString("phone_number");
+                    var_birthday=response.getString("birthday");
+
                 }catch (JSONException jsonex){
                     jsonex.printStackTrace();
                 }
                 Log.e("FITM_LOGIN", user_data.getDataForLog()+"#"+String.valueOf(result_code));
-                if(result_code == 1100){
+                if(isRegistered==1){
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                    /* intent.putExtra("access_key", user_data.getUser_access_key());
                     intent.putExtra("id_email", user_data.getUser_email());
                     intent.putExtra("name", user_data.getUser_name());
                     intent.putExtra("gender", user_data.getUser_gender());
                     intent.putExtra("phone_number", "");*/
+                    user_data.setUser_email(var_email);
+                    user_data.setUser_name(var_name);
+                    user_data.setUser_gender(var_gender);
+                    user_data.setUser_phone_number(var_phone);
+                    user_data.setUser_birtyday(var_birthday);
                     User.getInstance().setUser(user_data);
                     Log.e("DEBUGYU",user_data.getDataForLog());
                     startActivity(intent);
                     finish();
                 }
-                else if(result_code == 1101){
+                else {
                     Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                     intent.putExtra("access_key", user_data.getUser_access_key());
                     intent.putExtra("id_email", user_data.getUser_email());
-                    intent.putExtra("name", user_data.getUser_name());
+                 //   intent.putExtra("name", user_data.getUser_name());
                     intent.putExtra("gender", user_data.getUser_gender());
                     startActivity(intent);
                     finish();

@@ -13,11 +13,13 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,7 +47,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        View navHeaderView=navView.getHeaderView(0);
         navView.setNavigationItemSelectedListener(this);
+
+        TextView tname=(TextView)navHeaderView.findViewById(R.id.nav_name);
+        TextView temail=(TextView)navHeaderView.findViewById(R.id.nav_email);
+        tname.setText(User.getInstance().getData().getUser_name());
+        temail.setText(User.getInstance().getData().getUser_email());
         //Log.d("mactest","hi");
     }
 

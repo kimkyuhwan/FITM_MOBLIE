@@ -75,6 +75,7 @@ public class QnaActivity extends AppCompatActivity {
          //   send_data.put("access_key", User.getInstance().getData().getUser_access_key());
             send_data.put("room_name", User.getInstance().getData().getUser_email());
             send_data.put("latest_idx_time", 0);
+            send_data.put("name",User.getInstance().getData().getUser_name());
         } catch (JSONException jsonex) {
             jsonex.printStackTrace();
         }

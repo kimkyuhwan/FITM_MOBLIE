@@ -24,18 +24,19 @@
         />
 
     <TextView
+        android:id="@+id/nav_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="김규환"
+        android:text="이름"
         />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/nav_email"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="gamekgh@naver.com" />
+        android:text="이메일" />
 
 </LinearLayout>
