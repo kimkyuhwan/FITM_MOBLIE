@@ -72,7 +72,7 @@ public class QnaActivity extends AppCompatActivity {
     public void makeRoom() throws JSONException{
         JSONObject send_data = new JSONObject();
         try {
-            send_data.put("access_key", User.getInstance().getData().getUser_access_key());
+         //   send_data.put("access_key", User.getInstance().getData().getUser_access_key());
             send_data.put("room_name", User.getInstance().getData().getUser_email());
             send_data.put("latest_idx_time", 0);
         } catch (JSONException jsonex) {
@@ -96,18 +96,23 @@ public class QnaActivity extends AppCompatActivity {
         if (result_code == 3334) { // 성공 시
             String msgLog = response.getString("message");
             JSONArray msgArr = response.getJSONArray("message_list");
+            Log.d("DEBUGYU",response.toString());
+
             for(int i=0;i<msgArr.length();i++){
                 JSONObject hereMsg=msgArr.getJSONObject(i);
+                JSONObject msg_time=hereMsg.getJSONObject("message_time");
                 Log.d("DEBUGYU",hereMsg.toString());
                 ChatData newChat=new ChatData();
                 newChat.setSender(hereMsg.getString("sender"));
                 newChat.setContent(hereMsg.getString("message"));
                 String Time=hereMsg.getString("time");
                 newChat.setDateChangeSession(false);
-                String Date=Time.substring(0,10);
+                /*String Date=Time.substring(0,10);
                 Time =Time.substring(11,16);
                 newChat.setDate(Date);
-                newChat.setTime(Time);
+                newChat.setTime(Time);*/
+                newChat.setDate(msg_time.getString("year")+"년 "+msg_time.getString("month")+"월 "+msg_time.getString("day")+"일");
+                newChat.setTime(msg_time.getString("hour")+":"+msg_time.getString("minute"));
                 adapter.addItem(newChat);
 
             }

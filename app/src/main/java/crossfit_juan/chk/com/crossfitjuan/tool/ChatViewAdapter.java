@@ -109,7 +109,7 @@ public class ChatViewAdapter extends BaseAdapter {
     }
 
     public String getTodayDate(){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일", java.util.Locale.getDefault());
         Date date = new Date();
         String strDate = dateFormat.format(date);
         return strDate;
