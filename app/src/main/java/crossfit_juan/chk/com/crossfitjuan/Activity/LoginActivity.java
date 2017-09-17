@@ -198,7 +198,7 @@ public class LoginActivity extends AppCompatActivity {
                     jsonex.printStackTrace();
                 }
                 Log.e("FITM_LOGIN", user_data.getDataForLog()+"#"+String.valueOf(result_code));
-                if(isRegistered==1){
+                if(result_code==1100 && isRegistered==1){
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                    /* intent.putExtra("access_key", user_data.getUser_access_key());
                     intent.putExtra("id_email", user_data.getUser_email());
@@ -215,13 +215,17 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-                else {
+                else if(result_code==1101 || (result_code==1100)) {
                     Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                     intent.putExtra("access_key", user_data.getUser_access_key());
                     intent.putExtra("id_email", user_data.getUser_email());
                  //   intent.putExtra("name", user_data.getUser_name());
                     intent.putExtra("gender", user_data.getUser_gender());
                     startActivity(intent);
+                    finish();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"네트워크 상태가 좋지 않습니다",Toast.LENGTH_LONG).show();
                     finish();
                 }
             }
