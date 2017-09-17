@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +24,7 @@ import crossfit_juan.chk.com.crossfitjuan.DataModel.ChatData;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.Time_Table;
 import crossfit_juan.chk.com.crossfitjuan.HttpConnection.CustomThread.ReqHTTPJSONThread;
 import crossfit_juan.chk.com.crossfitjuan.R;
+import crossfit_juan.chk.com.crossfitjuan.tool.ChatDBHelper;
 import crossfit_juan.chk.com.crossfitjuan.tool.ChatViewAdapter;
 import io.socket.client.IO;
 import io.socket.client.Socket;
@@ -31,6 +33,7 @@ import io.socket.emitter.Emitter;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.Master_Socket_Address;
 
 public class QnaActivity extends AppCompatActivity {
+
 
     @BindView(R.id.chat_msg_list)
     ListView chatMsgList;
@@ -41,11 +44,13 @@ public class QnaActivity extends AppCompatActivity {
     @BindView(R.id.chat_msg_send_Btn)
     Button chatMsgSendBtn;
     Socket mSocket;
+    ChatDBHelper dbHelper=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qna);
         ButterKnife.bind(this);
+        dbHelper=new ChatDBHelper(getApplicationContext(),"aa.db",null,1);
 
         updateChatLog();
 
@@ -69,13 +74,27 @@ public class QnaActivity extends AppCompatActivity {
 
     }
 
+    void ReadPreviousChatData(){
+        ArrayList<ChatData> list=dbHelper.getResult();
+        for(int i=0;i<list.size();i++){
+            ChatData a=list.get(i);
+            adapter.addItem(a);
+        }
+        adapter.setDateSession();
+        chatMsgList.setAdapter(adapter);
+        chatMsgList.setSelection(adapter.getCount()-1);
+    }
+
+
+
     public void makeRoom() throws JSONException{
         JSONObject send_data = new JSONObject();
         try {
          //   send_data.put("access_key", User.getInstance().getData().getUser_access_key());
             send_data.put("room_name", User.getInstance().getData().getUser_email());
-            send_data.put("latest_idx_time", 0);
+            send_data.put("latest_idx_time", dbHelper.getLast_idx());
             send_data.put("name",User.getInstance().getData().getUser_name());
+        //    Log.d("DEBUGYU","last idx : "+String.valueOf(dbHelper.getLast_idx()));
         } catch (JSONException jsonex) {
             jsonex.printStackTrace();
         }
@@ -102,7 +121,7 @@ public class QnaActivity extends AppCompatActivity {
             for(int i=0;i<msgArr.length();i++){
                 JSONObject hereMsg=msgArr.getJSONObject(i);
                 JSONObject msg_time=hereMsg.getJSONObject("message_time");
-                Log.d("DEBUGYU",hereMsg.toString());
+            //    Log.d("DEBUGYU",hereMsg.toString());
                 ChatData newChat=new ChatData();
                 newChat.setSender(hereMsg.getString("sender"));
                 newChat.setContent(hereMsg.getString("message"));
@@ -113,13 +132,11 @@ public class QnaActivity extends AppCompatActivity {
                 newChat.setDate(Date);
                 newChat.setTime(Time);*/
                 newChat.setDate(msg_time.getString("year")+"년 "+msg_time.getString("month")+"월 "+msg_time.getString("day")+"일");
-                newChat.setTime(msg_time.getString("hour")+":"+msg_time.getString("minute"));
-                adapter.addItem(newChat);
-
+                newChat.setTime(getTwoDemicalString(msg_time.getString("hour"))+":"+getTwoDemicalString(msg_time.getString("minute")));
+                // adapter.addItem(newChat);
+                dbHelper.InsertData(newChat);
             }
-            adapter.setDateSession();
-            chatMsgList.setAdapter(adapter);
-            chatMsgList.setSelection(adapter.getCount()-1);
+            ReadPreviousChatData();
             Log.e("DEBUGYU", "success MakeRoom Log = "+msgLog);
         } else if (result_code == 5800) { // 실패 시
             Log.e("DEBUGYU", "fail MakeRoom");
@@ -158,7 +175,7 @@ public class QnaActivity extends AppCompatActivity {
 
     @OnClick(R.id.chat_msg_send_Btn)
     public void onViewClicked() {
-        if(!chatMsgContents.getText().equals("")) {
+        if(!chatMsgContents.getText().toString().equals("")) {
             JSONObject obj = new JSONObject();
             //    String
 
@@ -211,10 +228,11 @@ public class QnaActivity extends AppCompatActivity {
                         newChat.setDateChangeSession(false);
 
                         newChat.setDate(finalMsg_time.getString("year")+finalMsg_time.getString("month")+finalMsg_time.getString("day"));
-                        newChat.setTime(finalMsg_time.getString("hour")+":"+finalMsg_time.getString("minute"));
+                        newChat.setTime(getTwoDemicalString(finalMsg_time.getString("hour"))+":"+getTwoDemicalString(finalMsg_time.getString("minute")));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    dbHelper.InsertData(newChat);
                     adapter.addItem(newChat);
                     chatMsgList.setAdapter(adapter);
                     chatMsgList.setSelection(adapter.getCount()-1);
@@ -254,6 +272,13 @@ public class QnaActivity extends AppCompatActivity {
     };
 
     // 액티비티 종료시 Socket 통신 종료
+
+    public String getTwoDemicalString(String data){
+        if(data.length()==1){
+            data='0'+data;
+        }
+        return data;
+    }
 
 
     @Override
