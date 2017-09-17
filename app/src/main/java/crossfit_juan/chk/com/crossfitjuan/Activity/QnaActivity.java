@@ -50,7 +50,7 @@ public class QnaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qna);
         ButterKnife.bind(this);
-        dbHelper=new ChatDBHelper(getApplicationContext(),"aa.db",null,1);
+        dbHelper=new ChatDBHelper(getApplicationContext(),"bb.db",null,1);
 
         updateChatLog();
 
@@ -94,7 +94,7 @@ public class QnaActivity extends AppCompatActivity {
             send_data.put("room_name", User.getInstance().getData().getUser_email());
             send_data.put("latest_idx_time", dbHelper.getLast_idx());
             send_data.put("name",User.getInstance().getData().getUser_name());
-        //    Log.d("DEBUGYU","last idx : "+String.valueOf(dbHelper.getLast_idx()));
+            Log.d("DEBUGYU","last idx : "+String.valueOf(dbHelper.getLast_idx()));
         } catch (JSONException jsonex) {
             jsonex.printStackTrace();
         }
@@ -127,6 +127,7 @@ public class QnaActivity extends AppCompatActivity {
                 newChat.setContent(hereMsg.getString("message"));
                 String Time=hereMsg.getString("time");
                 newChat.setDateChangeSession(false);
+                newChat.setIdx_time(hereMsg.getLong("idx_time"));
                 /*String Date=Time.substring(0,10);
                 Time =Time.substring(11,16);
                 newChat.setDate(Date);
@@ -149,21 +150,6 @@ public class QnaActivity extends AppCompatActivity {
     void updateChatLog() {
         adapter = null;
         adapter = new ChatViewAdapter();
-        // 서버에서 채팅 가져오는 거 대신 dummy
-       /* adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:00", "", true));
-        adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:00", "테스트입니다", false));
-        adapter.addItem(new ChatData("other", "2017. 08. 23", "11:02", "그렇습니까?", false));
-        adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:04", "Hello World!!!", false));
-        adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:06", "Hello World!!!!", false));
-        adapter.addItem(new ChatData("other", "2017. 08. 23", "11:08", "Good Good!", false));
-        adapter.addItem(new ChatData("klight1994", "오늘", "11:00", "", true));
-        adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:00", "테스트입니다", false));
-        adapter.addItem(new ChatData("other", "2017. 08. 23", "11:02", "그렇습니까?", false));
-        adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:04", "Hello World!!!", false));
-        adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:04", "Hello World!!!", false));
-        adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:04", "Hello World!!!", false));
-        adapter.addItem(new ChatData("klight1994", "2017. 08. 23", "11:04", "Hello World!!!", false));
-           */
 
         // 키보드 누르면 화면 올라가는거 item 개수가 10개 미만일때 절반보다 적으므로 올릴 필요 X 그 이상이면 올려줌.
         if (adapter.getCount() >= 10) {
@@ -226,7 +212,7 @@ public class QnaActivity extends AppCompatActivity {
                         newChat.setSender(obj.getString("sender"));
                         newChat.setContent(obj.getString("message"));
                         newChat.setDateChangeSession(false);
-
+                        newChat.setIdx_time(obj.getLong("idx_time"));
                         newChat.setDate(finalMsg_time.getString("year")+finalMsg_time.getString("month")+finalMsg_time.getString("day"));
                         newChat.setTime(getTwoDemicalString(finalMsg_time.getString("hour"))+":"+getTwoDemicalString(finalMsg_time.getString("minute")));
                     } catch (JSONException e) {

@@ -17,22 +17,27 @@ import crossfit_juan.chk.com.crossfitjuan.DataModel.ChatData;
 public class ChatDBHelper extends SQLiteOpenHelper{
 
     final private String TAG="ChatDataDBHelper";
-    int last_idx=0;
+    long last_idx=0;
     public ChatDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
         SQLiteDatabase db=getReadableDatabase();
         Cursor cursor=db.rawQuery("SELECT * FROM CHATDATA",null);
-        last_idx=cursor.getCount();
+        cursor.moveToLast();
+        cursor.moveToPrevious();
+        while(cursor.moveToNext()) {
+            last_idx = cursor.getLong(0);
+            Log.d(TAG,"last is "+String.valueOf(last_idx));
+        }
     }
 
-    public int getLast_idx() {
+    public long getLast_idx() {
         return last_idx;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
     //    Log.d(TAG,"Create!!");
-        db.execSQL("CREATE TABLE CHATDATA (_id INTEGER PRIMARY KEY AUTOINCREMENT, sender TEXT, message TEXT,time TEXT,date TEXT);");
+        db.execSQL("CREATE TABLE CHATDATA (_id BIGINT , sender TEXT, message TEXT,time TEXT,date TEXT);");
     }
 
     @Override
@@ -40,6 +45,7 @@ public class ChatDBHelper extends SQLiteOpenHelper{
 
     }
     public void InsertData(ChatData cData){
+        long idx_time=cData.getIdx_time();
         String sender=cData.getSender();
         String message=cData.getContent();
         String time=cData.getTime();
@@ -47,8 +53,7 @@ public class ChatDBHelper extends SQLiteOpenHelper{
         SQLiteDatabase db=getWritableDatabase();
      //   Log.d(TAG,"Insert!!"+db.toString());
 
-        db.execSQL("INSERT INTO CHATDATA VALUES(null, "+"'"+sender+"', '"+message+"', '"+time+"', '"+date+"');");
-        last_idx++;
+        db.execSQL("INSERT INTO CHATDATA VALUES("+idx_time+", "+"'"+sender+"', '"+message+"', '"+time+"', '"+date+"');");
         db.close();
     }
 
@@ -60,11 +65,13 @@ public class ChatDBHelper extends SQLiteOpenHelper{
         while(cursor.moveToNext()){
             ChatData a=new ChatData();
            // Log.d("HEllo",cursor.getString(1));
+            a.setIdx_time(cursor.getLong(0));
             a.setSender(cursor.getString(1));
             a.setContent(cursor.getString(2));
             a.setTime(cursor.getString(3));
             a.setDate(cursor.getString(4));
             result.add(a);
+            Log.d("AAAAAA",a.toString());
         }
 //        Log.d(TAG,"Get Result!!");
 

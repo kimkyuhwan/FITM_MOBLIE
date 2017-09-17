@@ -10,16 +10,18 @@ public class ChatData {
     private String Date;
     private String Time;
     private String content;
+    private long idx_time;
     private boolean isDateChangeSession;
 
     public ChatData() {
     }
 
-    public ChatData(String sender, String date, String time, String content, boolean isDateChangeSession) {
+    public ChatData(String sender, String date, String time, String content, long idx_time, boolean isDateChangeSession) {
         Sender = sender;
         Date = date;
         Time = time;
         this.content = content;
+        this.idx_time = idx_time;
         this.isDateChangeSession = isDateChangeSession;
     }
 
@@ -63,13 +65,23 @@ public class ChatData {
         isDateChangeSession = dateChangeSession;
     }
 
+    public long getIdx_time() {
+        return idx_time;
+    }
+
+    public void setIdx_time(long idx_time) {
+        this.idx_time = idx_time;
+    }
+
     @Override
     public String toString() {
         return "ChatData{" +
-                "Sender : '" + Sender + '\'' +
-                "content : '" + content + '\'' +
-                ", Date='" + Date + ':' +
-                ", Time='" + Time +
+                "Sender='" + Sender + '\'' +
+                ", Date='" + Date + '\'' +
+                ", Time='" + Time + '\'' +
+                ", content='" + content + '\'' +
+                ", idx_time=" + idx_time +
+                ", isDateChangeSession=" + isDateChangeSession +
                 '}';
     }
 }
