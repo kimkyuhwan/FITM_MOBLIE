@@ -50,7 +50,7 @@ public class QnaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qna);
         ButterKnife.bind(this);
-        dbHelper=new ChatDBHelper(getApplicationContext(),"CrossFitJuanC.db",null,1);
+        dbHelper=new ChatDBHelper(getApplicationContext(),"CrossFitJuanG.db",null,1);
 
         updateChatLog();
 
@@ -90,7 +90,6 @@ public class QnaActivity extends AppCompatActivity {
     public void makeRoom() throws JSONException{
         JSONObject send_data = new JSONObject();
         try {
-         //   send_data.put("access_key", User.getInstance().getData().getUser_access_key());
             send_data.put("room_name", User.getInstance().getData().getUser_email());
             send_data.put("latest_idx_time", dbHelper.getLast_idx());
             send_data.put("name",User.getInstance().getData().getUser_name());
@@ -121,20 +120,14 @@ public class QnaActivity extends AppCompatActivity {
             for(int i=0;i<msgArr.length();i++){
                 JSONObject hereMsg=msgArr.getJSONObject(i);
                 JSONObject msg_time=hereMsg.getJSONObject("message_time");
-            //    Log.d("DEBUGYU",hereMsg.toString());
                 ChatData newChat=new ChatData();
                 newChat.setSender(hereMsg.getString("sender"));
                 newChat.setContent(hereMsg.getString("message"));
                 String Time=hereMsg.getString("time");
                 newChat.setDateChangeSession(false);
                 newChat.setIdx_time(hereMsg.getLong("idx_time"));
-                /*String Date=Time.substring(0,10);
-                Time =Time.substring(11,16);
-                newChat.setDate(Date);
-                newChat.setTime(Time);*/
                 newChat.setDate(msg_time.getString("year")+"년 "+msg_time.getString("month")+"월 "+msg_time.getString("day")+"일");
                 newChat.setTime(getTwoDemicalString(msg_time.getString("hour"))+":"+getTwoDemicalString(msg_time.getString("minute")));
-                // adapter.addItem(newChat);
                 dbHelper.InsertData(newChat);
             }
             ReadPreviousChatData();
@@ -223,7 +216,7 @@ public class QnaActivity extends AppCompatActivity {
                     if(!newChat.getDate().equals(dbHelper.getLast_day())){
                         ChatData Todays=new ChatData();
                         Todays.setDate("오늘");
-                        Todays.setDateChangeSession(false);
+                        Todays.setDateChangeSession(true);
                         adapter.addItem(Todays);
                     }
                     dbHelper.InsertData(newChat);

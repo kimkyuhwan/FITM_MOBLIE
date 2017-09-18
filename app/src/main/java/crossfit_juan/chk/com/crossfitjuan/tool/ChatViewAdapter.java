@@ -59,6 +59,7 @@ public class ChatViewAdapter extends BaseAdapter {
             else {
                 TextView contentInfo;
                 TextView TimeInfo;
+                Log.d("DEBUGYU","ChatData Check"+chatData.toString());
                 Log.d("DEBUGYU","USER NAME = "+User.getInstance().getData().getUser_name());
                 Log.d("DEBUGYU","getSender = "+chatData.getSender());
                 if(chatData.getSender().equals(User.getInstance().getData().getUser_name())) {
