@@ -50,7 +50,7 @@ public class QnaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qna);
         ButterKnife.bind(this);
-        dbHelper=new ChatDBHelper(getApplicationContext(),"bb.db",null,1);
+        dbHelper=new ChatDBHelper(getApplicationContext(),"CrossFitJuanC.db",null,1);
 
         updateChatLog();
 
@@ -213,12 +213,21 @@ public class QnaActivity extends AppCompatActivity {
                         newChat.setContent(obj.getString("message"));
                         newChat.setDateChangeSession(false);
                         newChat.setIdx_time(obj.getLong("idx_time"));
-                        newChat.setDate(finalMsg_time.getString("year")+finalMsg_time.getString("month")+finalMsg_time.getString("day"));
+                        newChat.setDate(finalMsg_time.getString("year")+"년 "+finalMsg_time.getString("month")+"월 "+finalMsg_time.getString("day")+"일");
                         newChat.setTime(getTwoDemicalString(finalMsg_time.getString("hour"))+":"+getTwoDemicalString(finalMsg_time.getString("minute")));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    Log.d("DEBUGYU","Send_Message getLast : "+dbHelper.getLast_day());
+                    Log.d("DEBUGYU","Send Message newChat Date : "+newChat.getDate());
+                    if(!newChat.getDate().equals(dbHelper.getLast_day())){
+                        ChatData Todays=new ChatData();
+                        Todays.setDate("오늘");
+                        Todays.setDateChangeSession(false);
+                        adapter.addItem(Todays);
+                    }
                     dbHelper.InsertData(newChat);
+
                     adapter.addItem(newChat);
                     chatMsgList.setAdapter(adapter);
                     chatMsgList.setSelection(adapter.getCount()-1);

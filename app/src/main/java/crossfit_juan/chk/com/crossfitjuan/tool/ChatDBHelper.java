@@ -18,6 +18,7 @@ public class ChatDBHelper extends SQLiteOpenHelper{
 
     final private String TAG="ChatDataDBHelper";
     long last_idx=0;
+    String last_day="";
     public ChatDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
         SQLiteDatabase db=getReadableDatabase();
@@ -26,8 +27,17 @@ public class ChatDBHelper extends SQLiteOpenHelper{
         cursor.moveToPrevious();
         while(cursor.moveToNext()) {
             last_idx = cursor.getLong(0);
+            last_day=cursor.getString(4);
             Log.d(TAG,"last is "+String.valueOf(last_idx));
         }
+    }
+
+    public String getLast_day() {
+        return last_day;
+    }
+
+    public void setLast_day(String last_day) {
+        this.last_day = last_day;
     }
 
     public long getLast_idx() {
@@ -52,7 +62,7 @@ public class ChatDBHelper extends SQLiteOpenHelper{
         String date=cData.getDate();
         SQLiteDatabase db=getWritableDatabase();
      //   Log.d(TAG,"Insert!!"+db.toString());
-
+        last_day=date;
         db.execSQL("INSERT INTO CHATDATA VALUES("+idx_time+", "+"'"+sender+"', '"+message+"', '"+time+"', '"+date+"');");
         db.close();
     }
@@ -70,6 +80,7 @@ public class ChatDBHelper extends SQLiteOpenHelper{
             a.setContent(cursor.getString(2));
             a.setTime(cursor.getString(3));
             a.setDate(cursor.getString(4));
+
             result.add(a);
             Log.d("AAAAAA",a.toString());
         }

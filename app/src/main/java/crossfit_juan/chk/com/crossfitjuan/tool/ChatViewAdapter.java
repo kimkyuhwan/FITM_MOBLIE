@@ -59,6 +59,8 @@ public class ChatViewAdapter extends BaseAdapter {
             else {
                 TextView contentInfo;
                 TextView TimeInfo;
+                Log.d("DEBUGYU","USER NAME = "+User.getInstance().getData().getUser_name());
+                Log.d("DEBUGYU","getSender = "+chatData.getSender());
                 if(chatData.getSender().equals(User.getInstance().getData().getUser_name())) {
                     convertView = inflater.inflate(R.layout.listview_my_chat, parent, false);
                     LinearLayout linearLayout=(LinearLayout)convertView.findViewById(R.id.my_chat_layout);
