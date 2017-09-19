@@ -20,7 +20,9 @@
             tools:layout_editor_absoluteY="0dp"
             tools:layout_editor_absoluteX="8dp" />
 
+
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/linear1"
@@ -55,109 +57,162 @@
                 android:layout_marginTop="10dp"/>
 
 
-        </LinearLayout>
+            </LinearLayout>
+
 
         <LinearLayout
-            android:layout_marginTop="40dp"
             android:layout_width="match_parent"
-            android:layout_height="95dp"
-            android:orientation="horizontal"
-            android:background="@drawable/back_1"
-            android:layout_below="@+id/linear1"
-            android:id="@+id/linear_record"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@id/linear1"
             >
-            <ImageView
-                android:layout_marginLeft="30dp"
-                android:layout_width="100dp"
+
+            <LinearLayout
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
                 android:layout_height="95dp"
-                android:background="@drawable/img1"
-                />
-            <TextView
-                android:layout_marginLeft="100dp"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#a6a6a6"
-                android:textSize="20dp"
-                android:text="순위보기"
-                />
-            <ImageButton
-                android:layout_marginLeft="16dp"
-                android:layout_gravity="center_vertical"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/btn"
-                />
+                android:orientation="horizontal"
+                android:background="@drawable/back_1"
+                android:layout_below="@+id/linear1"
+                android:id="@+id/linear_record"
+                android:layout_weight="1"
+                >
+                <com.ssomai.android.scalablelayout.ScalableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:scale_base_height="200"
+                    app:scale_base_width="530"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:scale_left="20"
+                        app:scale_width="200"
+                        app:scale_height="200"
+                        android:background="@drawable/img1"
+                        />
+                    <TextView
 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="95dp"
-            android:orientation="horizontal"
-            android:background="@drawable/back_2"
-            android:layout_below="@+id/linear_record"
-            android:id="@+id/linear_reservation"
-            >
-            <ImageButton
-                android:layout_marginLeft="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                        app:scale_left="320"
+                        app:scale_top="50"
+                        app:scale_width="120"
+                        app:scale_textsize="30"
+                        android:textColor="#a6a6a6"
+                        android:text="순위보기"
 
-                android:background="@drawable/btn"
-                />
-            <TextView
-                android:layout_marginLeft="16dp"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#a6a6a6"
-                android:text="예약하기"
-                android:textSize="20dp"
-                />
+                        />
+                    <ImageButton
+                        app:scale_top="50"
+                        app:scale_left="450"
+                        app:scale_width="40"
+                        app:scale_height="40"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn"
+                        android:id="@+id/btn_ranking"
+                        />
+                </com.ssomai.android.scalablelayout.ScalableLayout>
 
-            <ImageView
-                android:layout_marginLeft="85dp"
+            </LinearLayout>
 
-                android:layout_width="130dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="95dp"
-                android:background="@drawable/img2"
-                />
+                android:orientation="horizontal"
+                android:background="@drawable/back_2"
+                android:layout_below="@+id/linear_record"
+                android:id="@+id/linear_reservation"
+                android:layout_weight="1"
+                >
+                <com.ssomai.android.scalablelayout.ScalableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:scale_base_width="530"
+                    app:scale_base_height="200"
+                    app:scale_top="200"
+                    >
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:scale_top="50"
+                    app:scale_left="20"
+                    app:scale_width="40"
+                    app:scale_height="40"
+                    android:background="@drawable/btn"
+                    android:id="@+id/btn_reserve"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#a6a6a6"
+                    android:text="예약하기"
+                    app:scale_left="90"
+                    app:scale_top="50"
+                    app:scale_width="120"
+                    app:scale_textsize="30"
+                    />
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="95dp"
-            android:orientation="horizontal"
-            android:id="@+id/linear_notice"
-            android:background="@drawable/back_3"
-            android:layout_below="@+id/linear_reservation"
-            >
-            <ImageView
-                android:layout_marginLeft="10dp"
-                android:layout_width="120dp"
+                <ImageView
+                    app:scale_left="330"
+                    app:scale_width="200"
+                    app:scale_height="200"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/img2"
+                    />
+
+                </com.ssomai.android.scalablelayout.ScalableLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="95dp"
-                android:background="@drawable/img3"
-                />
-            <TextView
-                android:layout_marginLeft="100dp"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#a6a6a6"
-                android:textSize="20dp"
-                android:text="공지사항"
-                />
-            <ImageButton
-                android:layout_marginLeft="16dp"
-                android:layout_gravity="center_vertical"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/btn"
-                />
+                android:orientation="horizontal"
+                android:id="@+id/linear_notice"
+                android:background="@drawable/back_3"
+                android:layout_below="@+id/linear_reservation"
+                android:layout_weight="1"
+                >
+                <com.ssomai.android.scalablelayout.ScalableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:scale_base_height="200"
+                    app:scale_base_width="530"
+                    >
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:scale_left="20"
+                    app:scale_width="200"
+                    app:scale_height="200"
+                    android:background="@drawable/img3"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:scale_left="320"
+                    app:scale_top="50"
+                    app:scale_width="120"
+                    app:scale_textsize="30"
+                    android:textColor="#a6a6a6"
 
+                    android:text="공지사항"
+                    />
+                <ImageButton
+                    android:id="@+id/btn_notice"
+                    app:scale_top="50"
+                    app:scale_left="450"
+                    app:scale_width="40"
+                    app:scale_height="40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn"
+                    />
+                </com.ssomai.android.scalablelayout.ScalableLayout>
+            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 

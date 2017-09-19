@@ -41,6 +41,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.nav_view)
     NavigationView navView;
 
+    @BindView(R.id.btn_notice)
+    ImageButton noticeBtn;
+    @BindView(R.id.btn_ranking)
+    ImageButton rankBtn;
+    @BindView(R.id.btn_reserve)
+    ImageButton reserveBtn;
+
     // macbook git push_commit test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Log.d("mactest","hi");
     }
 
-    @OnClick({R.id.menu_btn, R.id.linear_record, R.id.linear_reservation, R.id.linear_notice})
+    @OnClick({R.id.menu_btn, R.id.linear_record, R.id.linear_reservation, R.id.linear_notice,R.id.btn_reserve,R.id.btn_ranking,R.id.btn_notice})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.menu_btn:
@@ -66,17 +73,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 break;
             case R.id.linear_record:
+            case R.id.btn_ranking:
                 Toast.makeText(getApplicationContext(), "RECORD 추가 예정입나다", Toast.LENGTH_SHORT).show();
                 it = new Intent(MainActivity.this, RecordActivity.class);
                 startActivity(it);
                 break;
             case R.id.linear_reservation:
+            case R.id.btn_reserve:
            //
                 //     Toast.makeText(getApplicationContext(), "RESERVATION 추가 예정입나다", Toast.LENGTH_SHORT).show();
                 it = new Intent(MainActivity.this, ReservationActivity.class);
                 startActivity(it);
                 break;
             case R.id.linear_notice:
+            case R.id.btn_notice:
                 Toast.makeText(getApplicationContext(), "NOTICE 추가 예정입나다", Toast.LENGTH_SHORT).show();
                 it = new Intent(MainActivity.this, NoticeActivity.class);
                 startActivity(it);
