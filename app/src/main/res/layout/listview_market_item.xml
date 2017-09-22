@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:scale_base_width="500"
+        app:scale_base_height="160"
+        >
+        <ImageView
+            android:id="@+id/market_item_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:scale_width="160"
+            app:scale_height="160"
+            android:background="@mipmap/ic_launcher"
+            />
+        <TextView
+            android:id="@+id/market_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[판매][크로스핏 주안] 2nd Cross Fit"
+            app:scale_left="170"
+            app:scale_width="320"
+            app:scale_textsize="25"
+            />
+        <ImageView
+            android:id="@+id/market_item_like_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_launcher"
+            app:scale_left="175"
+            app:scale_top="120"
+            app:scale_width="20"
+            app:scale_height="20"
+            />
+        <TextView
+            android:id="@+id/market_item_like_cnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="27"
+            app:scale_left="200"
+            app:scale_top="120"
+            app:scale_textsize="20"
+            />
+        <TextView
+            android:id="@+id/market_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3,000원"
+            app:scale_left="390"
+            app:scale_textsize="22"
+            app:scale_top="115"
+            />
+
+
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+</RelativeLayout>
