@@ -1,6 +1,7 @@
 package crossfit_juan.chk.com.crossfitjuan.tool;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,14 +57,18 @@ public class MarketItemViewAdapter extends BaseAdapter {
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         MarketItem pp = listViewItemList.get(position);
 
+        // 아이템 내 각 위젯에 데이터 반영
         nameText.setText(pp.getTitle());
         likeCntText.setText(String.valueOf(pp.getLike_cnt()));
         priceText.setText(String.valueOf(pp.getPrice()+"원"));
+        /*itemImg.setImageBitmap(pp.getItemimg());
+        if(pp.isLike()){
+            // 꽉찬 하트
+        }
+        else{
+            // 빈 하트
+        }*/
 
-
-        // 아이템 내 각 위젯에 데이터 반영
-        //nameTextView.setText(pp.getName());
-        //commentTextView.setText(pp.getComment());
 
         return convertView;
     }

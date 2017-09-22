@@ -1,5 +1,6 @@
 package crossfit_juan.chk.com.crossfitjuan.DataModel;
 
+import android.graphics.Bitmap;
 import android.media.Image;
 
 /**
@@ -7,7 +8,7 @@ import android.media.Image;
  */
 
 public class MarketItem {
-    Image itemimg;
+    Bitmap itemimg;
     String title;
     long price;
     int like_cnt;
@@ -21,7 +22,7 @@ public class MarketItem {
         isLike=false;
     }
 
-    public MarketItem(Image itemimg, String title, long price, int like_cnt, boolean isLike) {
+    public MarketItem(Bitmap itemimg, String title, long price, int like_cnt, boolean isLike) {
         this.itemimg = itemimg;
         this.title = title;
         this.price = price;
@@ -40,11 +41,11 @@ public class MarketItem {
                 '}';
     }
 
-    public Image getItemimg() {
+    public Bitmap getItemimg() {
         return itemimg;
     }
 
-    public void setItemimg(Image itemimg) {
+    public void setItemimg(Bitmap itemimg) {
         this.itemimg = itemimg;
     }
 
