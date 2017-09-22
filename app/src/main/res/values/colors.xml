@@ -3,4 +3,9 @@
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#222222</color>
     <color name="colorAccent">#b40202</color>
+
+    <color name="tabTextColor">#000000</color>
+    <color name="tabTextColorSelected">#ffffb300</color>
+    <color name="tabIndicatorColor">#ffffb300</color>
+
 </resources>

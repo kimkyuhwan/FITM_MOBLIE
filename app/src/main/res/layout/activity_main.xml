@@ -101,7 +101,7 @@
                         app:scale_width="120"
                         app:scale_textsize="30"
                         android:textColor="#a6a6a6"
-                        android:text="순위보기"
+                        android:text="튜토리얼"
 
                         />
                     <ImageButton
@@ -199,7 +199,7 @@
                     app:scale_textsize="30"
                     android:textColor="#a6a6a6"
 
-                    android:text="공지사항"
+                    android:text="스몰마켓"
                     />
                 <ImageButton
                     android:id="@+id/btn_notice"

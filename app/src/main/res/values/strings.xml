@@ -14,4 +14,10 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="fragment1">판매</string>
+    <string name="fragment2">수요조사</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

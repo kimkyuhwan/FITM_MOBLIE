@@ -7,7 +7,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -87,8 +86,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.linear_notice:
             case R.id.btn_notice:
-                Toast.makeText(getApplicationContext(), "NOTICE 추가 예정입나다", Toast.LENGTH_SHORT).show();
-                it = new Intent(MainActivity.this, NoticeActivity.class);
+//                Toast.makeText(getApplicationContext(), "NOTICE 추가 예정입나다", Toast.LENGTH_SHORT).show();
+                it = new Intent(MainActivity.this, MarketActivity.class);
                 startActivity(it);
                 break;
         }

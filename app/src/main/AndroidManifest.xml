@@ -32,7 +32,8 @@
         <activity android:name=".Activity.ReservationActivity" />
         <activity android:name=".Activity.RecordActivity" />
         <activity android:name=".Activity.QnaActivity" />
-        <activity android:name=".Activity.UserInfoActivity"></activity>
+        <activity android:name=".Activity.UserInfoActivity" />
+        <activity android:name=".Activity.MarketActivity"></activity>
     </application>
 
 </manifest>
