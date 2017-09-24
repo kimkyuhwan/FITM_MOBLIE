@@ -20,6 +20,8 @@ public class Constants {
     public static final String REQ_USER_DATE_SCHEDULE_CHECK ="http://52.78.197.131:25478/res_check_class_by_key_m";
     public static final String REQ_CANCEL_RESERVATION="http://52.78.197.131:25478/res_cancel_classes_m";
     public static final String REQ_REGISTER_RESERVATION="http://52.78.197.131:25478/res_enroll_classes_m";
+    public static final String REQ_GET_NOTICE="http://52.78.197.131:25478/read_notification/list";
+    public static final String REQ_GET_NOTICE_CONTENT="http://52.78.197.131:25478/read_notification/item";
 
     public static final String MAKE_ROOM_URL = "http://52.78.197.131:25478/sync_message_log";
 

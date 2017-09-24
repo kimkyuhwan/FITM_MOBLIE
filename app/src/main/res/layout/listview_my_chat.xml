@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/chat_my_msg_content"
         android:text="Hello world!"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:textColor="#ffffff"
         android:background="#074ad3"
         android:padding="5dp"

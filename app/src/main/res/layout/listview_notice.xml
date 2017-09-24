@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:scale_base_height="40"
+        app:scale_base_width="400"
+        >
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/notice_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_left="10"
+            app:scale_width="300"
+            app:scale_textsize="20"
+            app:scale_top="5"
+            app:scale_height="40"
+            android:text="test"
+            />
+        <TextView
+            android:id="@+id/notice_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_left="310"
+            app:scale_textsize="15"
+            app:scale_top="10"
+            app:scale_height="40"
+            app:scale_width="90"
+            android:text="2017/09/21"
+
+            />
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+    <TextView
+        android:id="@+id/notice_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        />
+
+</LinearLayout>
