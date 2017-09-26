@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         temail.setText(User.getInstance().getData().getUser_email());
 
         SetProfileImage();
-        //Log.d("mactest","hi");
     }
 
     void SetProfileImage(){
@@ -81,8 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void run() {    // 오래 거릴 작업을 구현한다
                 try{
-                    // 걍 외우는게 좋다 -_-;
-
                     URL url = new URL(PROFILE_PATH+User.getInstance().getData().getUser_email()+".png");
                     InputStream is = url.openStream();
                     final Bitmap bm = BitmapFactory.decodeStream(is);
