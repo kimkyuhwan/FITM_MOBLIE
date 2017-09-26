@@ -48,13 +48,13 @@ public class NoticeActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                if(adapter.getNoticeItem(position).getContents().equals("")) {
+                /*if(adapter.getNoticeItem(position).getContents().equals("")) {
                     try {
                         ReadNoticeContent(position);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
+                }*/
                 adapter.setIdxSelected(position);
                 adapter.notifyDataSetChanged();
             }
@@ -90,11 +90,12 @@ public class NoticeActivity extends Activity {
                 JSONObject hereNotice=response.getJSONObject(i);
                 JSONObject msg_time=hereNotice.getJSONObject("time_obj");
                 String noti_title=hereNotice.getString("title");
+                String noti_body=hereNotice.getString("body");
                 long noti_idx=hereNotice.getLong("notification_idx");
 
                 String Time=getTwoDemicalString(msg_time.getString("h"))+getTwoDemicalString(msg_time.getString("m"));
                 String Date=msg_time.getString("yy")+"/"+getTwoDemicalString(msg_time.getString("mm"))+"/"+getTwoDemicalString(msg_time.getString("dd"));
-                NoticeData newNotice=new NoticeData(noti_idx,noti_title,"",Date,Time,false);
+                NoticeData newNotice=new NoticeData(noti_idx,noti_title,noti_body,Date,Time,false);
                 adapter.addItem(newNotice);
             }
             adapter.notifyDataSetChanged();
@@ -106,6 +107,7 @@ public class NoticeActivity extends Activity {
 
     }
 
+    /*
     void ReadNoticeContent(int idx) throws JSONException {
         Log.d("DEBUGYU","READNOTICE");
         JSONObject send_data = new JSONObject();
@@ -139,6 +141,7 @@ public class NoticeActivity extends Activity {
             Toast.makeText(getApplicationContext(),"잘못된 요청입니다",Toast.LENGTH_LONG).show();
         }
     }
+    */
     public String getTwoDemicalString(String data){
         if(data.length()==1){
             data='0'+data;
