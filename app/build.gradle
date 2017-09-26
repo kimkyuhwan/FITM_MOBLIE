@@ -45,6 +45,10 @@ dependencies {
         exclude group: 'org.json', module: 'json'
     }
 
+    compile 'com.amazonaws:aws-android-sdk-core:2.2.+'
+    compile 'com.amazonaws:aws-android-sdk-s3:2.2.+'
+    compile 'com.amazonaws:aws-android-sdk-ddb:2.2.+'
+
     compile 'com.ssomai:android.scalablelayout:2.1.6'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
