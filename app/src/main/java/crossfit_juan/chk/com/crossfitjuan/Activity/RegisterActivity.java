@@ -38,7 +38,8 @@ public class RegisterActivity extends Activity {
     private EditText edt_yyyy;
     private EditText edt_mm;
     private EditText edt_dd;
-    private EditText edt_phone_number;
+    private EditText[] edt_phone_number;
+
     private EditText edt_name;
     private Button btn_req_register;
 
@@ -62,16 +63,25 @@ public class RegisterActivity extends Activity {
         edt_mm = (EditText)findViewById(R.id.edttxt_register_mm);
         edt_dd = (EditText)findViewById(R.id.edttxt_register_mm);
         edt_name= (EditText)findViewById(R.id.edttxt_register_name);
-        edt_phone_number = (EditText)findViewById(R.id.edttxt_register_phone_number);
+        edt_phone_number=new EditText[3];
+        edt_phone_number[0]= (EditText)findViewById(R.id.edttxt_register_phonenumber_00);
+        edt_phone_number[1]= (EditText)findViewById(R.id.edttxt_register_phonenumber_01);
+        edt_phone_number[2]= (EditText)findViewById(R.id.edttxt_register_phonenumber_02);
 
         btn_req_register = (Button)findViewById(R.id.btn_register_req_register);
         btn_req_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String birthday = edt_yyyy.getText().toString() + edt_mm .getText().toString() + edt_dd.getText().toString();
-                String phone_number = edt_phone_number.getText().toString();
+                boolean isCorrectPhone=true;
+                for(int i=0;i<3;i++){
+                    if(edt_phone_number[i].getText().toString().equals("")){
+                        isCorrectPhone=false;
+                    }
+                }
+                String phone_number = edt_phone_number[0].getText().toString()+"-"+edt_phone_number[1].getText().toString()+"-"+edt_phone_number[2].getText().toString();
                 String name = edt_name.getText().toString();
-                if(!birthday.equals("") && !phone_number.equals("") && !name.equals("")) {
+                if(!birthday.equals("") && isCorrectPhone && !name.equals("")) {
                     JSONObject send_data = new JSONObject();
                     try {
                         user_data.setUser_name(name);

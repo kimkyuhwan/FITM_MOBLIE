@@ -73,20 +73,65 @@
 
     </LinearLayout>
 
-    <EditText
-        android:textColor="#ffffff"
-        android:id="@+id/edttxt_register_phone_number"
-        android:textColorHint="#ffffff"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:backgroundTint="#ffffff"
-        android:hint="Phone Number"
-        android:gravity="center"
-        android:inputType="number"
-        android:maxLength="11"
-        android:layout_weight="1"
+    <LinearLayout
+        android:layout_weight="1.5"
         android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        android:layout_height="0dp">
+
+        <EditText
+            android:textColor="#ffffff"
+            android:id="@+id/edttxt_register_phonenumber_00"
+            android:textColorHint="#ffffff"
+            android:backgroundTint="#ffffff"
+            android:hint=""
+            android:gravity="center"
+            android:maxLength="3"
+            android:inputType="number"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ㅡ"
+            android:textColor="#ffffff"
+            />
+
+        <EditText
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:id="@+id/edttxt_register_phonenumber_01"
+            android:textColorHint="#ffffff"
+            android:backgroundTint="#ffffff"
+            android:maxLength="4"
+            android:hint=""
+            android:inputType="number"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ㅡ"
+            android:textColor="#ffffff"
+            />
+        <EditText
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:id="@+id/edttxt_register_phonenumber_02"
+            android:textColorHint="#ffffff"
+            android:backgroundTint="#ffffff"
+            android:hint=""
+            android:inputType="number"
+            android:maxLength="4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
     <TextView
         android:layout_weight="1"
