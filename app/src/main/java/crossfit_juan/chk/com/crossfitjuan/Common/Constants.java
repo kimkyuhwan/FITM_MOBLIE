@@ -25,4 +25,8 @@ public class Constants {
 
     public static final String MAKE_ROOM_URL = "http://52.78.197.131:25478/sync_message_log";
 
+    public static final int PICK_FROM_ALBUM_ACTION=0x80;
+
+    public static final String PROFILE_PATH="https://s3.ap-northeast-2.amazonaws.com/fitmbucket/";
+
 }

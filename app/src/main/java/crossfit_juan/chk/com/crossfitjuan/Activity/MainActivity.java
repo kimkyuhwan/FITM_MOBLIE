@@ -1,6 +1,8 @@
 package crossfit_juan.chk.com.crossfitjuan.Activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -15,11 +17,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.R;
+import crossfit_juan.chk.com.crossfitjuan.tool.CircleImageView;
+
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PROFILE_PATH;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Intent it;
@@ -47,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.btn_reserve)
     ImageButton reserveBtn;
 
+    CircleImageView tProfileImg;
     // macbook git push_commit test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +68,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         TextView tname=(TextView)navHeaderView.findViewById(R.id.nav_name);
         TextView temail=(TextView)navHeaderView.findViewById(R.id.nav_email);
+        tProfileImg=(CircleImageView)navHeaderView.findViewById(R.id.profile_image);
         tname.setText(User.getInstance().getData().getUser_name());
         temail.setText(User.getInstance().getData().getUser_email());
+
+        SetProfileImage();
         //Log.d("mactest","hi");
+    }
+
+    void SetProfileImage(){
+        Thread ImageSetThread = new Thread(new Runnable() {
+            @Override
+            public void run() {    // 오래 거릴 작업을 구현한다
+                try{
+                    // 걍 외우는게 좋다 -_-;
+
+                    URL url = new URL(PROFILE_PATH+User.getInstance().getData().getUser_email()+".png");
+                    InputStream is = url.openStream();
+                    final Bitmap bm = BitmapFactory.decodeStream(is);
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {  // 화면에 그려줄 작업
+                            tProfileImg.setImageBitmap(bm);
+                        }
+                    });
+                    tProfileImg.setImageBitmap(bm); //비트맵 객체로 보여주기
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        ImageSetThread.start();
+
     }
 
     @OnClick({R.id.menu_btn, R.id.linear_record, R.id.linear_reservation, R.id.linear_notice,R.id.btn_reserve,R.id.btn_ranking,R.id.btn_notice})
@@ -129,5 +171,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        SetProfileImage();
     }
 }

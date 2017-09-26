@@ -50,7 +50,7 @@ public class QnaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qna);
         ButterKnife.bind(this);
-        dbHelper=new ChatDBHelper(getApplicationContext(),"CrossFitJuanG.db",null,1);
+        dbHelper=new ChatDBHelper(getApplicationContext(),"CrossFitJuan.db",null,1);
 
         updateChatLog();
 
