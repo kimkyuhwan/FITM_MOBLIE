@@ -48,13 +48,6 @@ public class NoticeActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                /*if(adapter.getNoticeItem(position).getContents().equals("")) {
-                    try {
-                        ReadNoticeContent(position);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }*/
                 adapter.setIdxSelected(position);
                 adapter.notifyDataSetChanged();
             }
@@ -83,7 +76,6 @@ public class NoticeActivity extends Activity {
         }
         if(result_code==3888){
 
-            //JSONArray msgArr = response.getJSONArray("list");
             Log.d("DEBUGYU",response.toString());
 
             for(int i=0;i<response.length();i++){
@@ -107,41 +99,6 @@ public class NoticeActivity extends Activity {
 
     }
 
-    /*
-    void ReadNoticeContent(int idx) throws JSONException {
-        Log.d("DEBUGYU","READNOTICE");
-        JSONObject send_data = new JSONObject();
-        send_data.put("notification_idx",adapter.getNotificationIdx(idx));
-        ReqHTTPJSONThread thread = new ReqHTTPJSONThread(Constants.REQ_GET_NOTICE_CONTENT, send_data);
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException interex) {
-            interex.printStackTrace();
-        }
-        String result = thread.handler.getMsg();
-        JSONObject result_data = null;
-        JSONObject response=null;
-        int result_code = 0;
-        try {
-            result_data = new JSONObject(result);
-            result_code = result_data.getInt("code");
-            response = result_data.getJSONObject("response");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        if(result_code==2700){
-
-            //JSONArray msgArr = response.getJSONArray("list");
-            Log.d("DEBUGYU",response.toString());
-            String data=response.getString("body");
-            adapter.setNotificationContent(idx,data);
-        }
-        else if(result_code==5800){
-            Toast.makeText(getApplicationContext(),"잘못된 요청입니다",Toast.LENGTH_LONG).show();
-        }
-    }
-    */
     public String getTwoDemicalString(String data){
         if(data.length()==1){
             data='0'+data;
