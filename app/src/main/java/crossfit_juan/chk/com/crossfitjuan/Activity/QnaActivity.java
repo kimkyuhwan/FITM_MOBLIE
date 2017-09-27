@@ -224,7 +224,6 @@ public class QnaActivity extends AppCompatActivity {
                     adapter.addItem(newChat);
                     chatMsgList.setAdapter(adapter);
                     chatMsgList.setSelection(adapter.getCount()-1);
-
                     //이곳에 ui 관련 작업을 할 수 있습니다.
 
                 }
@@ -236,23 +235,18 @@ public class QnaActivity extends AppCompatActivity {
 
         public void call(Object... args) {
             final JSONObject obj = (JSONObject)args[0];
-
             //서버에서 보낸 JSON객체를 사용할 수 있습니다.
             String result_msg="hi";
             try {
                 result_msg = obj.getString("message");
-                //                JSONObject response = result_data.getJSONObj/ect("response");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             Log.d("DEBUGYU",result_msg);
-
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-
                     //이곳에 ui 관련 작업을 할 수 있습니다.
-
 
                 }
             });
