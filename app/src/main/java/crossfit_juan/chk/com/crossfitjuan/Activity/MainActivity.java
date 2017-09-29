@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ImageButton rankBtn;
     @BindView(R.id.btn_reserve)
     ImageButton reserveBtn;
-
+    Bitmap bm;
     CircleImageView tProfileImg;
     // macbook git push_commit test
     @Override
@@ -71,8 +71,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tProfileImg=(CircleImageView)navHeaderView.findViewById(R.id.profile_image);
         tname.setText(User.getInstance().getData().getUser_name());
         temail.setText(User.getInstance().getData().getUser_email());
-
-        SetProfileImage();
     }
 
     void SetProfileImage(){
@@ -82,7 +80,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 try{
                     URL url = new URL(PROFILE_PATH+User.getInstance().getData().getUser_email()+".png");
                     InputStream is = url.openStream();
-                    final Bitmap bm = BitmapFactory.decodeStream(is);
+                    bm = BitmapFactory.decodeStream(is);
+
                     runOnUiThread(new Runnable() {
 
                         @Override
