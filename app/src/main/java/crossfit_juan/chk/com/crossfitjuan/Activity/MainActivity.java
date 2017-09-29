@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ImageButton rankBtn;
     @BindView(R.id.btn_reserve)
     ImageButton reserveBtn;
-    Bitmap bm;
+    Bitmap bm, resized;
     CircleImageView tProfileImg;
     // macbook git push_commit test
     @Override
@@ -81,15 +81,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     URL url = new URL(PROFILE_PATH+User.getInstance().getData().getUser_email()+".png");
                     InputStream is = url.openStream();
                     bm = BitmapFactory.decodeStream(is);
-
+                    resized = Bitmap.createScaledBitmap(bm, 128, 128, true);
                     runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {  // 화면에 그려줄 작업
-                            tProfileImg.setImageBitmap(bm);
+                            tProfileImg.setImageBitmap(resized);
                         }
                     });
-                    tProfileImg.setImageBitmap(bm); //비트맵 객체로 보여주기
+                //    tProfileImg.setImageBitmap(resized); //비트맵 객체로 보여주기
                 } catch(Exception e){
                     e.printStackTrace();
                 }
