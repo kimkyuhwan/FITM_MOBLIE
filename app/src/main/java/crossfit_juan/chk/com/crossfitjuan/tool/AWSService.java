@@ -1,5 +1,7 @@
 package crossfit_juan.chk.com.crossfitjuan.tool;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Message;
 
@@ -14,6 +16,10 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 import crossfit_juan.chk.com.crossfitjuan.Common.User;
 
@@ -50,9 +56,7 @@ public class AWSService {
             }
         }.start();
 
-
     }
-
 
     public void uploadFile(File file) {
         if (amazonS3 != null) {
