@@ -33,7 +33,7 @@ public class AWSService {
     private static final String SECRET_KEY = "KNGZSIPRnO3SMG2mGM00CgQ9A5JDWSkSd/mvp6fx";
     private AmazonS3 amazonS3;
 
-    private static final AWSService Instance=new AWSService();
+    private static AWSService Instance=new AWSService();
 
     public static AWSService getInstance(){
         return Instance;
@@ -49,12 +49,33 @@ public class AWSService {
 
     }
 
-    public void uploadFileThread(final File file){
-        new Thread() {
-            public void run() {
-                uploadFile(file);
-            }
-        }.start();
+    private void InstanceReload(){
+        Instance=null;
+        Instance=new AWSService();
+    }
+
+
+    public void upload(File file){
+        uploadFileThread A=new uploadFileThread(file);
+        A.start();
+        try {
+            A.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        InstanceReload();
+    }
+
+
+    private class uploadFileThread extends Thread{
+
+        private File file;
+        uploadFileThread(File file){
+            this.file=file;
+        }
+        public void run() {
+            uploadFile(file);
+        }
 
     }
 
