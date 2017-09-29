@@ -92,7 +92,7 @@ public class UserInfoActivity extends AppCompatActivity {
             case PICK_FROM_ALBUM_ACTION :
                 ImageCaptureUrl=data.getData();
                 String realpath=getImagePath(ImageCaptureUrl);
-                 AWSService.getInstance().uploadFileThread(new File(realpath));
+                AWSService.getInstance().upload(new File(realpath));
                 break;
         }
     }
