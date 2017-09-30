@@ -10,6 +10,7 @@ public class Constants {
 
     // 상수 변수
     public static final String Master_Socket_Address = "http://52.78.197.131:25478";
+    public static final String DB_FILE_NAME="CrossFitJuan.db";
 
 
     // URL
