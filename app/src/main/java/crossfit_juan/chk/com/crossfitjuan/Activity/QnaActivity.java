@@ -30,6 +30,7 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.DB_FILE_NAME;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.Master_Socket_Address;
 
 public class QnaActivity extends AppCompatActivity {
@@ -50,7 +51,7 @@ public class QnaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qna);
         ButterKnife.bind(this);
-        dbHelper=new ChatDBHelper(getApplicationContext(),"CrossFitJuan.db",null,1);
+        dbHelper=new ChatDBHelper(getApplicationContext(),DB_FILE_NAME,null,1);
 
         updateChatLog();
 
