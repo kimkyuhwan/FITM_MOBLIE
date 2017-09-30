@@ -90,4 +90,10 @@ public class ChatDBHelper extends SQLiteOpenHelper{
         return result;
     }
 
+    public void DeleteDataBase(){
+        SQLiteDatabase db=getReadableDatabase();
+        db.execSQL("DELETE FROM CHATDATA;");
+        db.close();
+    }
+
 }
