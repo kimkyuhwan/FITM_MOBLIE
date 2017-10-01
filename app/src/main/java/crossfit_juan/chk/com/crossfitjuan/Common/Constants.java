@@ -11,6 +11,7 @@ public class Constants {
     // 상수 변수
     public static final String Master_Socket_Address = "http://52.78.197.131:25478";
     public static final String DB_FILE_NAME="CrossFitJuan.db";
+    public static final String CROSSFITJUAN_ADDRESS_GOOGLE="https://www.google.co.kr/maps/place/%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C+%EB%82%A8%EA%B5%AC+%EC%A3%BC%EC%95%88%EB%A1%9C+100";
     public static final int REQUEST_PERMISSION_ACCESS_STORAGE =0x80;
 
     // URL
@@ -29,6 +30,8 @@ public class Constants {
     public static final String REQ_MARKET_ITEM_INFO="http://52.78.197.131:25478/info_item";
     public static final String REQ_MARKET_ITEM_PURCHASE="http://52.78.197.131:25478/add_item";
     public static final String REQ_MARKET_ITEM_PURCHASE_CANCEL="http://52.78.197.131:25478/sub_item";
+
+
 
     public static final int PICK_FROM_ALBUM_ACTION=0x80;
 
