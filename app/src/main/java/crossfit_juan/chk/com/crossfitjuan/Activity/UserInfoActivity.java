@@ -1,13 +1,20 @@
 package crossfit_juan.chk.com.crossfitjuan.Activity;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -35,6 +42,7 @@ import crossfit_juan.chk.com.crossfitjuan.tool.CircleImageView;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.DB_FILE_NAME;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PICK_FROM_ALBUM_ACTION;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PROFILE_PATH;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.REQUEST_PERMISSION_ACCESS_STORAGE;
 
 public class UserInfoActivity extends AppCompatActivity {
 
@@ -71,23 +79,8 @@ public class UserInfoActivity extends AppCompatActivity {
         userInfoEmail.setText(User.getInstance().getData().getUser_email());
         userInfoName.setText(User.getInstance().getData().getUser_name());
         userInfoPhone.setText(User.getInstance().getData().getUser_phone_number());
-        //   UserInfoTextEmail.setText(User.getInstance().getData().getUser_email());
-        //   UserInfoTextName.setText(User.getInstance().getData().getUser_name());
-        //heello
     }
 
-    /*  @OnClick({R.id.imageButton, R.id.button})
-      public void onViewClicked(View view) {
-          switch (view.getId()) {
-              case R.id.imageButton:
-  //                Toast.makeText(getApplicationContext(),"이미지 변경 버튼",Toast.LENGTH_LONG).show();
-                  TakeImagetoAlbum();
-                  break;
-              case R.id.button:
-                  Toast.makeText(getApplicationContext(),"기간 변경 버튼",Toast.LENGTH_LONG).show();
-                  break;
-          }
-      }*/
     public void TakeImagetoAlbum() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
@@ -122,15 +115,20 @@ public class UserInfoActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.user_info_photoAlbum:
-                TakeImagetoAlbum();
-                SetProfileImage();
+                int permission_ACCESS_COARSE_LOCATION= ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+                if(permission_ACCESS_COARSE_LOCATION == PackageManager.PERMISSION_DENIED){
+                    ActivityCompat.requestPermissions(UserInfoActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_ACCESS_STORAGE);
+                }
+                else{
+                    TakeImagetoAlbum();
+                }
                 break;
             case R.id.user_info_restBtn:
                 Toast.makeText(getApplicationContext(),"휴회버튼",Toast.LENGTH_LONG).show();
                 break;
             case R.id.user_info_sign_out:
-                DeleteUser();
-//                Toast.makeText(getApplicationContext(),"회원탈퇴 버튼",Toast.LENGTH_LONG).show();
+
+                DeleteCheckDialog();
                 break;
         }
     }
@@ -140,6 +138,7 @@ public class UserInfoActivity extends AppCompatActivity {
             public void run() {    // 오래 거릴 작업을 구현한다
                 try{
                     URL url = new URL(PROFILE_PATH+ User.getInstance().getData().getUser_email()+".png");
+                    Log.d("DEBUGYU",url.toString());
                     InputStream is = url.openStream();
                     bm = BitmapFactory.decodeStream(is);
                     resized = Bitmap.createScaledBitmap(bm, 128, 128, true);
@@ -158,6 +157,31 @@ public class UserInfoActivity extends AppCompatActivity {
             }
         });
         ImageSetThread.start();
+    }
+
+    void DeleteCheckDialog() {
+        AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
+        alt_bld.setMessage("회원 탈퇴할 경우 회원 정보와 함께 기존의 대화내용이 모두 지워집니다. 그래도 회원탈퇴 하시겠습니까?").setCancelable(
+                false).setPositiveButton("아니요",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Action for 'Yes' Button
+
+                        dialog.cancel();
+
+                    }
+                }).setNegativeButton("네",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Action for 'NO' Button
+                        DeleteUser();
+                    }
+                });
+        AlertDialog alert = alt_bld.create();
+        // Title for AlertDialog
+        alert.setTitle("회원 탈퇴 요청");
+        // Icon for AlertDialog
+        alert.show();
     }
 
     void DeleteUser(){
@@ -200,5 +224,30 @@ public class UserInfoActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_PERMISSION_ACCESS_STORAGE:
+                int permission_num = 0;
+                Log.d("DEUBGYU",String.valueOf(permissions.length));
+                for (int i = 0; i < permissions.length; i++) {
+                    int grantResult = grantResults[i];
+                    if (grantResult == PackageManager.PERMISSION_GRANTED) { permission_num++; }
+                }
+
+                if (permission_num == 2) { TakeImagetoAlbum();}
+                else {  Toast.makeText(getApplicationContext(), "권한을 허용해야 프로필 이미지 변경 기능을 사용할 수 있습니다", Toast.LENGTH_LONG).show();}
+
+                break;
+        }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        SetProfileImage();
+    }
 
 }
