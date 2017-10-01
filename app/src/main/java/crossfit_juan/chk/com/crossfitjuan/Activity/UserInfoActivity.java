@@ -204,7 +204,6 @@ public class UserInfoActivity extends AppCompatActivity {
         try {
             result_data = new JSONObject(result);
             result_code = result_data.getInt("code");
-            JSONObject response = result_data.getJSONObject("response");
         } catch (JSONException e) {
             e.printStackTrace();
         }

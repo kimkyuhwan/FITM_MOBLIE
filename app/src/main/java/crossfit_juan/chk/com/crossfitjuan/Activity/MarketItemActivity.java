@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewParent;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -269,6 +270,7 @@ public class MarketItemActivity extends AppCompatActivity {
     public void RequestPurchaseDialog(){
         final Dialog dR = new Dialog(MarketItemActivity.this);
         dR.setContentView(R.layout.register_marketitem_dialog);
+        
         final EditText dRcomment=(EditText)dR.findViewById(R.id.market_dialog_comment);
         final ImageButton dRcommentClearBtn=(ImageButton)dR.findViewById(R.id.market_dialog_comment_clear_Btn);
         Button dRRegisterBtn=(Button)dR.findViewById(R.id.market_dialog_comment_register_Btn);
