@@ -16,7 +16,6 @@
             android:layout_height="0dp"
             app:scale_width="160"
             app:scale_height="160"
-            android:background="@mipmap/ic_launcher"
             />
         <TextView
             android:id="@+id/market_item_name"
@@ -31,9 +30,9 @@
             android:id="@+id/market_item_like_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/ic_launcher"
+            android:background="@drawable/unlike"
             app:scale_left="175"
-            app:scale_top="120"
+            app:scale_top="123"
             app:scale_width="20"
             app:scale_height="20"
             />
@@ -43,15 +42,27 @@
             android:layout_height="wrap_content"
             android:text="27"
             app:scale_left="200"
-            app:scale_top="120"
+            app:scale_top="118"
+            app:scale_textsize="20"
+            />
+        <TextView
+            android:id="@+id/market_item_like_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            app:scale_left="230"
+            app:scale_top="117"
+            app:scale_width="80"
             app:scale_textsize="20"
             />
         <TextView
             android:id="@+id/market_item_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:text="3,000원"
-            app:scale_left="390"
+            app:scale_left="300"
+            app:scale_width="175"
             app:scale_textsize="22"
             app:scale_top="115"
             />
