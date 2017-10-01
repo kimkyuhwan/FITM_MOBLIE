@@ -1,7 +1,12 @@
 package crossfit_juan.chk.com.crossfitjuan.tool;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +14,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
+import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.MarketItem;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.Participant;
 import crossfit_juan.chk.com.crossfitjuan.R;
+
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PROFILE_PATH;
 
 /**
  * Created by erslab-gh on 2017-09-22.
@@ -50,6 +60,7 @@ public class MarketItemViewAdapter extends BaseAdapter {
         TextView nameText=(TextView)convertView.findViewById(R.id.market_item_name);
         TextView likeCntText=(TextView)convertView.findViewById(R.id.market_item_like_cnt);
         TextView priceText=(TextView)convertView.findViewById(R.id.market_item_price);
+        TextView likeText=(TextView)convertView.findViewById(R.id.market_item_like_text);
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
 //        TextView nameTextView = (TextView) convertView.findViewById(R.id.participant_name) ;
   //      TextView commentTextView = (TextView) convertView.findViewById(R.id.participant_comment) ;
@@ -60,18 +71,66 @@ public class MarketItemViewAdapter extends BaseAdapter {
         // 아이템 내 각 위젯에 데이터 반영
         nameText.setText(pp.getTitle());
         likeCntText.setText(String.valueOf(pp.getLike_cnt()));
-        priceText.setText(String.valueOf(pp.getPrice()+"원"));
-        /*itemImg.setImageBitmap(pp.getItemimg());
+        //String price=setPriceString(pp.getPrice());
+        priceText.setText(pp.getPrice());
         if(pp.isLike()){
             // 꽉찬 하트
+            Log.d("DEBUGYU","Like!");
+            likeText.setText("신청완료");
         }
-        else{
+        else {
             // 빈 하트
-        }*/
+            Log.d("DEBUGYU","unLike!");
+            likeText.setText("");
+//            itemLikeImg.setImage;
+        }
+
+        getImageFromS3(pp.getImageUrl(),itemImg);
 
 
         return convertView;
     }
+
+    void getImageFromS3(final String img_url, final ImageView imageView) {
+        Thread ImageSetThread = new Thread(new Runnable() {
+            @Override
+            public void run() {    // 오래 거릴 작업을 구현한다
+                try{
+
+                    URL url = new URL(img_url);
+                    Log.d("DEBUGYU", url.toString());
+                    InputStream is = url.openStream();
+                    Bitmap bm = BitmapFactory.decodeStream(is);
+                    final Bitmap resized = Bitmap.createScaledBitmap(bm, 128, 128, true);
+                    imageView.setImageBitmap(resized);
+                    //    tProfileImg.setImageBitmap(resized); //비트맵 객체로 보여주기
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        ImageSetThread.start();
+    }
+
+
+
+
+
+    /*  long타입 가격을 PPP,PPP원 의 형식으로 변환하는 함수이지만 서버에서 처리해주기로 변경하여 주석처리하였음
+    public String setPriceString(long price){
+        String ret=String.valueOf(price);
+        StringBuilder a=new StringBuilder(ret);
+        int cnt=0;
+        for(int i=a.length()-1;i>=0;i--){
+            cnt++;
+            if(cnt%4==0){
+                a.insert(i+1,",");
+                cnt=1;
+            }
+        }
+        return a.toString()+"원";
+    }*/
 
     // 지정한 위치(position)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴. : 필수 구현
     @Override
@@ -85,6 +144,9 @@ public class MarketItemViewAdapter extends BaseAdapter {
         return listViewItemList.get(position) ;
     }
 
+    public String getItemName(int position){
+        return listViewItemList.get(position).getName();
+    }
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
     public void addItem(MarketItem pp) {
         listViewItemList.add(pp);
