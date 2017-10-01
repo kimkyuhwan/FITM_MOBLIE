@@ -7,28 +7,28 @@
     >
     <TextView
         android:id="@+id/chat_my_msg_time"
-        android:layout_width="40dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
-        android:text="11:00"
+        android:text="오전 11:00"
         android:gravity="center"
         android:textColor="#334477"
         android:textSize="14dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
 
         />
 
     <TextView
         android:layout_gravity="right"
+        android:gravity="right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/chat_my_msg_content"
         android:text="Hello world!"
         android:textSize="15dp"
         android:textColor="#ffffff"
-        android:background="#074ad3"
-        android:padding="5dp"
+        android:background="#73aad3"
+        android:padding="4dp"
         android:layout_marginRight="5dp"
 
         />

@@ -3,6 +3,7 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/your_chat_layout"
+    android:layout_marginTop="2dp"
     >
 
 
@@ -23,11 +24,11 @@
 
     <TextView
         android:id="@+id/chat_your_msg_time"
-        android:layout_width="40dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:text="11:00"
-        android:gravity="center"
+        android:gravity="left"
         android:textColor="#334477"
         android:layout_marginRight="5dp"
         android:textSize="14dp" />
