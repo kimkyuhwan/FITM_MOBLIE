@@ -29,8 +29,27 @@
                    app:scale_top="60"
                    app:scale_width="540"
                    app:scale_height="864"
-                   android:scrollbars="vertical"
-                   />
+                   android:scrollbars="vertical">
+                   <LinearLayout
+                       android:id="@+id/aboutJuan_scroll_linear"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:orientation="vertical"
+                       >
+                   <WebView
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:id="@+id/webview"
+
+                       >
+
+                   </WebView>
+
+                   </LinearLayout>
+
+               </ScrollView>
+
+
     </com.ssomai.android.scalablelayout.ScalableLayout>
 
 
