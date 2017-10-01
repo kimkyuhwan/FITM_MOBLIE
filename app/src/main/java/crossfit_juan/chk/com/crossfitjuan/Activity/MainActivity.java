@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.InputStream;
-import java.net.URI;
 import java.net.URL;
 
 import butterknife.BindView;
@@ -111,9 +110,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.linear_record:
             case R.id.btn_ranking:
-                Toast.makeText(getApplicationContext(), "RECORD 추가 예정입나다", Toast.LENGTH_SHORT).show();
-                it = new Intent(MainActivity.this, RecordActivity.class);
-                startActivity(it);
+                Toast.makeText(getApplicationContext(), "튜토리얼 추가 예정입나다", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.linear_reservation:
             case R.id.btn_reserve:
@@ -148,7 +145,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(it);
             drawer.closeDrawer(GravityCompat.END);
         } else if (id == R.id.navigation_item_About) {
-            Toast.makeText(getApplicationContext(), "준비중입니다 p4", Toast.LENGTH_LONG).show();
+            Intent it=new Intent(MainActivity.this,AboutJuanActivity.class);
+            startActivity(it);
+            drawer.closeDrawer(GravityCompat.END);
         } else if (id == R.id.navigation_item_Cafe) {
             Toast.makeText(getApplicationContext(), "준비중입니다 p5", Toast.LENGTH_LONG).show();
         } else if (id == R.id.navigation_item_Facebook) {
