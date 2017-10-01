@@ -33,15 +33,24 @@
             />
     </RelativeLayout>
     <Button
+        android:layout_margin="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="등록"
+
+        android:textSize="18dp"
+        android:background="#000000"
+        android:textColor="#ffffff"
         android:id="@+id/dialog_comment_register_Btn"
         />
     <Button
+        android:layout_margin="3dp"
+        android:background="#000000"
+        android:textColor="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="취소"
+        android:textSize="18dp"
         android:id="@+id/dialog_comment_cancel_Btn"
         />
 
