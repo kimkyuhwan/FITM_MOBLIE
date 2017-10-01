@@ -1,11 +1,12 @@
 package crossfit_juan.chk.com.crossfitjuan.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -44,7 +45,7 @@ public class QnaActivity extends AppCompatActivity {
     @BindView(R.id.chat_msg_contents)
     EditText chatMsgContents;
     @BindView(R.id.chat_msg_send_Btn)
-    Button chatMsgSendBtn;
+    ImageButton chatMsgSendBtn;
 
 
     @Override
@@ -128,7 +129,19 @@ public class QnaActivity extends AppCompatActivity {
                 newChat.setDateChangeSession(false);
                 newChat.setIdx_time(hereMsg.getLong("idx_time"));
                 newChat.setDate(msg_time.getString("year") + "년 " + msg_time.getString("month") + "월 " + msg_time.getString("day") + "일");
-                newChat.setTime(getTwoDemicalString(msg_time.getString("hour")) + ":" + getTwoDemicalString(msg_time.getString("minute")));
+                int hh=Integer.parseInt(msg_time.getString("hour"));
+                String mm=getTwoDemicalString(msg_time.getString("minute"));
+                String time="";
+                if(hh>12){
+                    hh%=12;
+                    if(hh==0) hh=12;
+                    time+="오후 "+String.valueOf(hh)+":"+mm;
+                }
+                else{
+                    if(hh==0) hh=12;
+                    time+="오전 "+String.valueOf(hh)+":"+mm;
+                }
+                newChat.setTime(time);
                 dbHelper.InsertData(newChat);
             }
             ReadPreviousChatData();
@@ -208,7 +221,19 @@ public class QnaActivity extends AppCompatActivity {
                         newChat.setDateChangeSession(false);
                         newChat.setIdx_time(obj.getLong("idx_time"));
                         newChat.setDate(finalMsg_time.getString("year") + "년 " + finalMsg_time.getString("month") + "월 " + finalMsg_time.getString("day") + "일");
-                        newChat.setTime(getTwoDemicalString(finalMsg_time.getString("hour")) + ":" + getTwoDemicalString(finalMsg_time.getString("minute")));
+                        int hh=Integer.parseInt(finalMsg_time.getString("hour"));
+                        String mm=getTwoDemicalString(finalMsg_time.getString("minute"));
+                        String time="";
+                        if(hh>12){
+                            hh%=12;
+                            if(hh==0) hh=12;
+                            time+="오후 "+String.valueOf(hh)+":"+mm;
+                        }
+                        else{
+                            if(hh==0) hh=12;
+                            time+="오전 "+String.valueOf(hh)+":"+mm;
+                        }
+                        newChat.setTime(time);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
