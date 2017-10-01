@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.LoginActivity">
+        <activity android:name=".Activity.LoginActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,22 +31,35 @@
         <activity
             android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
             android:label="OAuth2.0 In-app" />
-        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.MainActivity"
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".Activity.RegisterActivity"
             android:windowSoftInputMode="adjustUnspecified"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".Activity.NoticeActivity" />
-        <activity android:name=".Activity.ReservationActivity" />
-        <activity android:name=".Activity.AboutJuanActivity" />
+        <activity android:name=".Activity.NoticeActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activity.ReservationActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activity.AboutJuanActivity"
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".Activity.QnaActivity"
+            android:screenOrientation="portrait"
+            />
 
-            >
-        </activity>
-
-        <activity android:name=".Activity.UserInfoActivity" />
-        <activity android:name=".Activity.MarketActivity" />
+        <activity android:name=".Activity.UserInfoActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Activity.MarketActivity"
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".Activity.MarketItemActivity"
             android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
             >
         </activity>
     </application>
