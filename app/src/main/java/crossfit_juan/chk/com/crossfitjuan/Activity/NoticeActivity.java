@@ -14,13 +14,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import crossfit_juan.chk.com.crossfitjuan.Common.Constants;
-import crossfit_juan.chk.com.crossfitjuan.Common.User;
-import crossfit_juan.chk.com.crossfitjuan.DataModel.ChatData;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.NoticeData;
-import crossfit_juan.chk.com.crossfitjuan.Fragment.SellFragment;
 import crossfit_juan.chk.com.crossfitjuan.HttpConnection.CustomThread.ReqHTTPJSONThread;
 import crossfit_juan.chk.com.crossfitjuan.R;
-import crossfit_juan.chk.com.crossfitjuan.tool.MarketItemViewAdapter;
 import crossfit_juan.chk.com.crossfitjuan.tool.NoticeViewAdapter;
 
 /**

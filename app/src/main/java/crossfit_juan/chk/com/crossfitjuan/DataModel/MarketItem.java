@@ -40,7 +40,7 @@ public class MarketItem {
         remained_num_of_item--;
     }
 
-    public String getImageUrl(){
+    public String getReadImageUrl(){
         return PROFILE_PATH+img_url+".png";
     }
 
@@ -137,7 +137,6 @@ public class MarketItem {
     public void setLike(boolean like) {
         isLike = like;
     }
-
     // End
 
     @Override
