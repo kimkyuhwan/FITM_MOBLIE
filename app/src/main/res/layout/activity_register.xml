@@ -1,154 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="#000000"
-    android:gravity="center"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:scale_base_height="924"
+        app:scale_base_width="540"
 
-    <TextView
-        android:layout_weight="4"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        android:background="#f2f2f2"
+        >
 
-    <EditText
-        android:textColor="#ffffff"
-        android:id="@+id/edttxt_register_name"
-        android:textColorHint="#ffffff"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:backgroundTint="#ffffff"
-        android:hint="Name"
-        android:gravity="center"
-        android:maxLength="11"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
-
-    <LinearLayout
-        android:layout_weight="1.5"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-        <EditText
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원가입"
+            app:scale_textsize="26"
             android:textColor="#ffffff"
-            android:id="@+id/edttxt_register_yyyy"
-            android:textColorHint="#ffffff"
-            android:backgroundTint="#ffffff"
-            android:hint="YYYY"
+            app:scale_width="540"
+            app:scale_height="60"
             android:gravity="center"
+            android:background="#000000"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_textsize="22"
+            android:text="이름"
+            app:scale_top="110"
+            app:scale_left="20"
+            android:textColor="#000000"
+            app:scale_width="500"
+            app:scale_height="40"
+            />
+        <EditText
+            android:id="@+id/register_name"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+
+            app:scale_textsize="30"
+            app:scale_top="150"
+            app:scale_left="20"
+            android:gravity="center"
+            app:scale_width="500"
+            app:scale_height="40"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_textsize="22"
+            android:text="생년월일"
+            app:scale_top="210"
+            app:scale_left="20"
+            android:textColor="#000000"
+            app:scale_width="500"
+            app:scale_height="40"
+            />
+        <EditText
+            android:id="@+id/register_birthday_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:hint="1999"
+            android:gravity="center"
+            app:scale_textsize="30"
+            app:scale_top="250"
+            app:scale_left="20"
             android:maxLength="4"
             android:inputType="number"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:layout_height="match_parent" />
-
+            app:scale_width="150"
+            app:scale_height="40"
+            />
         <EditText
+            android:id="@+id/register_birthday_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:hint="01"
             android:gravity="center"
-            android:textColor="#ffffff"
-            android:id="@+id/edttxt_register_mm"
-            android:textColorHint="#ffffff"
-            android:backgroundTint="#ffffff"
+            app:scale_textsize="30"
+            app:scale_top="250"
+            app:scale_left="195"
             android:maxLength="2"
-            android:hint="MM"
             android:inputType="number"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:layout_height="match_parent" />
-
+            app:scale_width="150"
+            app:scale_height="40"
+            />
         <EditText
+            android:id="@+id/register_birthday_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:hint="01"
             android:gravity="center"
-            android:textColor="#ffffff"
-            android:id="@+id/edttxt_register_dd"
-            android:textColorHint="#ffffff"
-            android:backgroundTint="#ffffff"
-            android:hint="DD"
-            android:inputType="number"
+            app:scale_textsize="30"
+            app:scale_top="250"
+            app:scale_left="370"
             android:maxLength="2"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_weight="1.5"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
-
+            android:inputType="number"
+            app:scale_width="150"
+            app:scale_height="40"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_textsize="22"
+            android:text="핸드폰번호"
+            android:textColor="#000000"
+            app:scale_top="310"
+            app:scale_left="20"
+            app:scale_width="500"
+            app:scale_height="40"
+            />
         <EditText
-            android:textColor="#ffffff"
-            android:id="@+id/edttxt_register_phonenumber_00"
-            android:textColorHint="#ffffff"
-            android:backgroundTint="#ffffff"
-            android:hint=""
+            android:id="@+id/register_phone_00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:hint="010"
             android:gravity="center"
+            app:scale_textsize="30"
+            app:scale_top="350"
+            app:scale_left="20"
             android:maxLength="3"
             android:inputType="number"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:layout_height="match_parent" />
+            app:scale_width="150"
+            app:scale_height="40"
+            />
+        <EditText
+            android:id="@+id/register_phone_01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:hint="1234"
+            android:gravity="center"
+            app:scale_textsize="30"
+            app:scale_top="350"
+            app:scale_left="195"
+            android:maxLength="4"
+            android:inputType="number"
+            app:scale_width="150"
+            app:scale_height="40"
+            />
+        <EditText
+            android:id="@+id/register_phone_02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:hint="5678"
+            android:gravity="center"
+            app:scale_textsize="30"
+            app:scale_top="350"
+            app:scale_left="370"
+            android:maxLength="4"
+            android:inputType="number"
+            app:scale_width="150"
+            app:scale_height="40"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ㅡ"
-            android:textColor="#ffffff"
+            app:scale_textsize="30"
+            android:text="-"
+            app:scale_top="349"
+            app:scale_left="178"
+            app:scale_width="500"
+            app:scale_height="40"
             />
-
-        <EditText
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:id="@+id/edttxt_register_phonenumber_01"
-            android:textColorHint="#ffffff"
-            android:backgroundTint="#ffffff"
-            android:maxLength="4"
-            android:hint=""
-            android:inputType="number"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:layout_height="match_parent" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ㅡ"
-            android:textColor="#ffffff"
+            app:scale_textsize="30"
+            android:text="-"
+            app:scale_top="349"
+            app:scale_left="353"
+            app:scale_width="500"
+            app:scale_height="40"
             />
-        <EditText
-            android:gravity="center"
+        <Button
+            android:id="@+id/req_registerBtn"
+            android:background="#000000"
+            android:text="등록하기"
             android:textColor="#ffffff"
-            android:id="@+id/edttxt_register_phonenumber_02"
-            android:textColorHint="#ffffff"
-            android:backgroundTint="#ffffff"
-            android:hint=""
-            android:inputType="number"
-            android:maxLength="4"
-            android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:layout_height="match_parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-    </LinearLayout>
+            app:scale_textsize="22"
+            app:scale_top="450"
+            app:scale_left="20"
 
-    <TextView
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
+            app:scale_width="500"
+            app:scale_height="60"
 
-    <Button
-        android:id="@+id/btn_register_req_register"
-        android:background="#ffffff"
-        android:text="등록하기"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
-
-    <TextView
-        android:layout_weight="4"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
-
+            />
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 </LinearLayout>
