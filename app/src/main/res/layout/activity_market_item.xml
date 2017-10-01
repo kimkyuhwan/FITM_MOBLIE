@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="crossfit_juan.chk.com.crossfitjuan.Activity.MarketItemActivity"
+    android:orientation="vertical"
+    >
+
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:scale_base_height="854"
+        app:scale_base_width="540"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/market_item_act_title_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공동구매"
+            app:scale_textsize="26"
+            android:textColor="#ffffff"
+            app:scale_width="540"
+            app:scale_height="60"
+            android:gravity="center"
+            android:background="#000000"
+            />
+        <ScrollView
+            android:id="@+id/market_item_act_scroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_top="60"
+            app:scale_width="540"
+            app:scale_height="700"
+            >
+        </ScrollView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="남은 수량"
+            android:gravity="center"
+            app:scale_textsize="22"
+            app:scale_top="760"
+            app:scale_left="60"
+            app:scale_width="100"
+            app:scale_height="30"
+            />
+        <TextView
+            android:id="@+id/market_item_act_remain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="40"
+            android:gravity="center"
+            app:scale_textsize="30"
+            app:scale_top="800"
+            app:scale_left="60"
+            app:scale_width="100"
+            app:scale_height="40"
+            />
+        <Button
+            android:id="@+id/market_item_act_registerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:textColor="#ffffff"
+            android:text="구매 신청"
+
+            app:scale_textsize="22"
+            app:scale_width="200"
+            app:scale_height="70"
+            app:scale_top="770"
+            app:scale_left="300"
+
+            />
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+</LinearLayout>
