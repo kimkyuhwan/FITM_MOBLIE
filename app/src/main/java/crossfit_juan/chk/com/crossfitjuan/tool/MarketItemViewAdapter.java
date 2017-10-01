@@ -50,47 +50,82 @@ public class MarketItemViewAdapter extends BaseAdapter {
         final Context context = parent.getContext();
 
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
-        convertView=null;
+       // convertView=null;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.listview_market_item, parent, false);
-        }
-        ImageView itemImg=(ImageView)convertView.findViewById(R.id.market_item_img);
-        ImageView itemLikeImg=(ImageView)convertView.findViewById(R.id.market_item_like_img);
-        TextView nameText=(TextView)convertView.findViewById(R.id.market_item_name);
-        TextView likeCntText=(TextView)convertView.findViewById(R.id.market_item_like_cnt);
-        TextView priceText=(TextView)convertView.findViewById(R.id.market_item_price);
-        TextView likeText=(TextView)convertView.findViewById(R.id.market_item_like_text);
-        // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
+            ImageView itemImg=(ImageView)convertView.findViewById(R.id.market_item_img);
+            ImageView itemLikeImg=(ImageView)convertView.findViewById(R.id.market_item_like_img);
+            TextView nameText=(TextView)convertView.findViewById(R.id.market_item_name);
+            TextView likeCntText=(TextView)convertView.findViewById(R.id.market_item_like_cnt);
+            TextView priceText=(TextView)convertView.findViewById(R.id.market_item_price);
+            TextView likeText=(TextView)convertView.findViewById(R.id.market_item_like_text);
+            // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
 //        TextView nameTextView = (TextView) convertView.findViewById(R.id.participant_name) ;
-  //      TextView commentTextView = (TextView) convertView.findViewById(R.id.participant_comment) ;
+            //      TextView commentTextView = (TextView) convertView.findViewById(R.id.participant_comment) ;
 
-        // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        MarketItem pp = listViewItemList.get(position);
+            // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
+            MarketItem pp = listViewItemList.get(position);
 
-        // 아이템 내 각 위젯에 데이터 반영
-        nameText.setText(pp.getTitle());
-        likeCntText.setText(String.valueOf(pp.getLike_cnt()));
-        //String price=setPriceString(pp.getPrice());
-        priceText.setText(pp.getPrice());
-        if(pp.isLike()){
-            // 꽉찬 하트
-            Log.d("DEBUGYU","Like!");
-            likeText.setText("신청완료");
-        }
-        else {
-            // 빈 하트
-            Log.d("DEBUGYU","unLike!");
-            likeText.setText("");
+            // 아이템 내 각 위젯에 데이터 반영
+            nameText.setText(pp.getTitle());
+            likeCntText.setText(String.valueOf(pp.getLike_cnt()));
+            //String price=setPriceString(pp.getPrice());
+            priceText.setText(pp.getPrice());
+            if(pp.isLike()){
+                // 꽉찬 하트
+                Log.d("DEBUGYU","Like!");
+                likeText.setText("신청완료");
+            }
+            else {
+                // 빈 하트
+                Log.d("DEBUGYU","unLike!");
+                likeText.setText("");
 //            itemLikeImg.setImage;
+            }
+
+            getImageFromS3(pp.getReadImageUrl(),itemImg);
+        }
+        else{
+            TextView nameText=(TextView)convertView.findViewById(R.id.market_item_name);
+            TextView likeCntText=(TextView)convertView.findViewById(R.id.market_item_like_cnt);
+            TextView priceText=(TextView)convertView.findViewById(R.id.market_item_price);
+            TextView likeText=(TextView)convertView.findViewById(R.id.market_item_like_text);
+            MarketItem pp = listViewItemList.get(position);
+            // 아이템 내 각 위젯에 데이터 반영
+            nameText.setText(pp.getTitle());
+            Log.d("DEBUGYU","LikeCntText"+pp.getLike_cnt());
+            likeCntText.setText(String.valueOf(pp.getLike_cnt()));
+            //String price=setPriceString(pp.getPrice());
+            priceText.setText(pp.getPrice());
+            if(pp.isLike()){
+                // 꽉찬 하트
+                Log.d("DEBUGYU","Like!");
+                likeText.setText("신청완료");
+            }
+            else {
+                // 빈 하트
+                Log.d("DEBUGYU","unLike!");
+                likeText.setText("");
+//            itemLikeImg.setImage;
+            }
         }
 
-        getImageFromS3(pp.getImageUrl(),itemImg);
 
 
         return convertView;
     }
 
+    public Object getListViewItemList(){
+        return listViewItemList.clone();
+    }
+
+    public void setListViewItemList(ArrayList<MarketItem> list){
+        listViewItemList.clear();
+        for(int i=0;i<list.size();i++){
+            addItem(list.get(i));
+        }
+    }
     void getImageFromS3(final String img_url, final ImageView imageView) {
         Thread ImageSetThread = new Thread(new Runnable() {
             @Override
@@ -114,24 +149,9 @@ public class MarketItemViewAdapter extends BaseAdapter {
     }
 
 
-
-
-
-    /*  long타입 가격을 PPP,PPP원 의 형식으로 변환하는 함수이지만 서버에서 처리해주기로 변경하여 주석처리하였음
-    public String setPriceString(long price){
-        String ret=String.valueOf(price);
-        StringBuilder a=new StringBuilder(ret);
-        int cnt=0;
-        for(int i=a.length()-1;i>=0;i--){
-            cnt++;
-            if(cnt%4==0){
-                a.insert(i+1,",");
-                cnt=1;
-            }
-        }
-        return a.toString()+"원";
-    }*/
-
+    public MarketItem getMarketItem(int position){
+        return listViewItemList.get(position);
+    }
     // 지정한 위치(position)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴. : 필수 구현
     @Override
     public long getItemId(int position) {
