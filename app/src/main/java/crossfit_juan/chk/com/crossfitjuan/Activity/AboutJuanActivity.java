@@ -5,12 +5,13 @@ import android.os.Bundle;
 
 import crossfit_juan.chk.com.crossfitjuan.R;
 
-public class RecordActivity extends AppCompatActivity {
+public class AboutJuanActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_record);
+        setContentView(R.layout.activity_aboutjuan);
+
     }
 
     @Override

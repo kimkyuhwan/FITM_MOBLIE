@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:scale_base_height="924"
+        app:scale_base_width="540"
+        >
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="About 크로스핏 주안"
+                   app:scale_textsize="26"
+                   android:textColor="#ffffff"
+                   app:scale_width="540"
+                   app:scale_height="60"
+                   android:gravity="center"
+                   android:background="#000000"
+                   />
+               <ScrollView
+                   android:id="@+id/aboutJuan_scroll"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:scale_top="60"
+                   app:scale_width="540"
+                   app:scale_height="864"
+                   android:scrollbars="vertical"
+                   />
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+
+
+
+</LinearLayout>
