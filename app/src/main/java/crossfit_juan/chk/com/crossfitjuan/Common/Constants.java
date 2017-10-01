@@ -27,6 +27,8 @@ public class Constants {
     public static final String MAKE_ROOM_URL = "http://52.78.197.131:25478/sync_message_log";
     public static final String REQ_MARKET_ITEM_LIST="http://52.78.197.131:25478/list_item";
     public static final String REQ_MARKET_ITEM_INFO="http://52.78.197.131:25478/info_item";
+    public static final String REQ_MARKET_ITEM_PURCHASE="http://52.78.197.131:25478/add_item";
+    public static final String REQ_MARKET_ITEM_PURCHASE_CANCEL="http://52.78.197.131:25478/sub_item";
 
     public static final int PICK_FROM_ALBUM_ACTION=0x80;
 
