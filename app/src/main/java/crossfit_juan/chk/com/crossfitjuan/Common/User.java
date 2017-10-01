@@ -9,7 +9,7 @@ import crossfit_juan.chk.com.crossfitjuan.DataModel.UserData;
 public class User {
     private static User Me=new User();
 
-    private UserData data;
+    private static UserData data;
 
     private User(){}
     public static User getInstance(){
