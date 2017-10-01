@@ -43,7 +43,10 @@
 
         <activity android:name=".Activity.UserInfoActivity" />
         <activity android:name=".Activity.MarketActivity" />
-        <activity android:name=".Activity.MarketItemActivity"></activity>
+        <activity android:name=".Activity.MarketItemActivity"
+            android:windowSoftInputMode="adjustPan"
+            >
+        </activity>
     </application>
 
 </manifest>
