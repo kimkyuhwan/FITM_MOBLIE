@@ -1,15 +1,24 @@
 package crossfit_juan.chk.com.crossfitjuan.Activity;
 
-import android.app.Activity;
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,12 +28,15 @@ import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CROSSFITJUAN_A
 
 public class AboutJuanActivity extends AppCompatActivity {
 
-    @BindView(R.id.aboutJuan_scroll)
-    ScrollView aboutJuanScroll;
+
+    @BindView(R.id.crossfit_imgview)
+    ImageView crossfitImgview;
     @BindView(R.id.aboutJuan_scroll_linear)
     LinearLayout aboutJuanScrollLinear;
-    @BindView(R.id.webview)
-    WebView webview;
+    @BindView(R.id.aboutJuan_scroll)
+    ScrollView aboutJuanScroll;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +48,43 @@ public class AboutJuanActivity extends AppCompatActivity {
 
     void setScrollViewContent() {
 
-        webview.getSettings().setJavaScriptEnabled(true);
-        webview.loadUrl(CROSSFITJUAN_ADDRESS_GOOGLE);
+        //webview.getSettings().setJavaScriptEnabled(true);
+        //webview.loadUrl(CROSSFITJUAN_ADDRESS_GOOGLE);
 
-        ImageView imageView = new ImageView(this);
-        imageView.setAdjustViewBounds(true);
-        imageView.setImageResource(R.drawable.about_juan);
+
+        crossfitImgview.setAdjustViewBounds(true);
+        crossfitImgview.setImageResource(R.drawable.about_juan);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lp.gravity = Gravity.CENTER_HORIZONTAL;
-        imageView.setLayoutParams(lp);
-        imageView.setScaleType(ImageView.ScaleType.FIT_XY); // 레이아웃 크기에 이미지를 맞춘다
+        crossfitImgview.setLayoutParams(lp);
+        crossfitImgview.setScaleType(ImageView.ScaleType.FIT_XY); // 레이아웃 크기에 이미지를 맞춘다
 
-        aboutJuanScrollLinear.addView(imageView);
+        SupportMapFragment mapFragment=(SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.crossfit_googlemap);
+
+        mapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                LatLng CrossfitJuan = new LatLng(37.463798, 126.680629);
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(CrossfitJuan, 17));
+
+                googleMap.addMarker(new MarkerOptions()
+                        .title("크로스핏 주안")
+                        .position(CrossfitJuan));
+
+                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(LatLng latLng) {
+                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                Uri.parse(CROSSFITJUAN_ADDRESS_GOOGLE));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addCategory(Intent.CATEGORY_LAUNCHER );
+                        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                        startActivity(intent);
+                    }
+                });
+
+            }
+        });
     }
 
     @Override
