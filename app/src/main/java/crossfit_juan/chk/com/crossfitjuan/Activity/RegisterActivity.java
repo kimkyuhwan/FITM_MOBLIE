@@ -98,11 +98,6 @@ public class RegisterActivity extends Activity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        Toast.makeText(getApplicationContext(), "가입을 완료해주세요", Toast.LENGTH_LONG).show();
-    }
-
     @OnClick(R.id.req_registerBtn)
     public void onViewClicked() {
         register();
