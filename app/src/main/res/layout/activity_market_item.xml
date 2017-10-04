@@ -9,12 +9,12 @@
     >
 
     <com.ssomai.android.scalablelayout.ScalableLayout
+        android:id="@+id/market_item_act_Scalalayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:scale_base_height="924"
+        app:scale_base_height="60"
         app:scale_base_width="540"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        >
 
         <TextView
             android:id="@+id/market_item_act_title_bar"
@@ -28,14 +28,13 @@
             android:gravity="center"
             android:background="#000000"
             />
+    </com.ssomai.android.scalablelayout.ScalableLayout>
         <ScrollView
             android:id="@+id/market_item_act_scroll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:scale_top="60"
-            app:scale_width="540"
-            app:scale_height="730"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:scrollbars="vertical"
+            android:layout_weight="1000"
             >
             <!--
             <com.ssomai.android.scalablelayout.ScalableLayout
@@ -56,13 +55,23 @@
        <!--     </com.ssomai.android.scalablelayout.ScalableLayout> -->
 
         </ScrollView>
+        <com.ssomai.android.scalablelayout.ScalableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:scale_base_height="120"
+            app:scale_base_width="540"
+            >
+
+
         <TextView
+            android:id="@+id/market_item_act_remain_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="남은 수량"
             android:gravity="center"
             app:scale_textsize="22"
-            app:scale_top="815"
+            app:scale_top="20"
             app:scale_left="20"
             app:scale_width="100"
             app:scale_height="30"
@@ -74,7 +83,7 @@
             android:text="40"
             android:gravity="center"
             app:scale_textsize="30"
-            app:scale_top="850"
+            app:scale_top="55"
             app:scale_left="20"
             app:scale_width="100"
             app:scale_height="40"
@@ -89,7 +98,7 @@
             app:scale_textsize="30"
             app:scale_width="200"
             app:scale_height="40"
-            app:scale_top="840"
+            app:scale_top="45"
             app:scale_left="130"
 
             />
@@ -103,10 +112,9 @@
             app:scale_textsize="26"
             app:scale_width="160"
             app:scale_height="70"
-            app:scale_top="820"
-            app:scale_left="360"
+            app:scale_top="35"
+            app:scale_left="370"
 
             />
-
-    </com.ssomai.android.scalablelayout.ScalableLayout>
+        </com.ssomai.android.scalablelayout.ScalableLayout>
 </LinearLayout>
