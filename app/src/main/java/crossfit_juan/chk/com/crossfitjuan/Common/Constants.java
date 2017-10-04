@@ -31,6 +31,9 @@ public class Constants {
     public static final String REQ_MARKET_ITEM_PURCHASE="http://52.78.197.131:25478/add_item";
     public static final String REQ_MARKET_ITEM_PURCHASE_CANCEL="http://52.78.197.131:25478/sub_item";
 
+    public static final String REQ_REGISTER_FIREBASE_TOKEN="http://52.78.197.131:25478/udt_device_token";
+
+
 
 
     public static final int PICK_FROM_ALBUM_ACTION=0x80;
