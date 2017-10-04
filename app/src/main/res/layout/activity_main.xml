@@ -10,85 +10,53 @@
     android:background="#000000"
     tools:context="crossfit_juan.chk.com.crossfitjuan.Activity.MainActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:background="#b40202"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="8dp" />
-
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linear1"
-            android:orientation="vertical"
-            >
-            <ImageButton
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:id="@+id/menu_btn"
-                android:background="@drawable/menu_btn"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="15dp"
-                android:layout_gravity="right"
-                />
-            <ImageView
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="35dp"
-                android:layout_gravity="center"
-                android:layout_width="320dp"
-                android:layout_height="180dp"
-                android:background="@drawable/juanlogo"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:id="@+id/imageView" />
-            <TextView
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="C R O S S F I T"
-                android:textColor="#ffffff"
-                android:textSize="30dp"
-                android:layout_marginTop="10dp"/>
-
-
-            </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_below="@id/linear1"
             >
-
-            <LinearLayout
-                android:layout_marginTop="40dp"
-                android:layout_width="match_parent"
-                android:layout_height="95dp"
-                android:orientation="horizontal"
-                android:background="@drawable/back_1"
-                android:layout_below="@+id/linear1"
-                android:id="@+id/linear_record"
+            <com.ssomai.android.scalablelayout.ScalableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                app:scale_base_width="540"
+                app:scale_base_height="510"
+                android:background="@drawable/juan_background"
+                android:id="@+id/main_background"
+
+                >
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/menu_btn"
+                    android:background="@drawable/menu_btn"
+                    app:scale_width="36"
+                    app:scale_height="36"
+                    app:scale_top="10"
+                    app:scale_left="480"
+                    />
+
+            </com.ssomai.android.scalablelayout.ScalableLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="100"
                 >
                 <com.ssomai.android.scalablelayout.ScalableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:scale_base_height="200"
-                    app:scale_base_width="530"
+                    android:layout_height="match_parent"
+                    app:scale_base_height="110"
+                    app:scale_base_width="540"
+                    android:id="@+id/main_scalable1"
                     >
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:scale_left="20"
-                        app:scale_width="200"
-                        app:scale_height="200"
+                        app:scale_left="30"
+                        app:scale_width="130"
+                        app:scale_height="110"
                         android:background="@drawable/img1"
                         />
                     <TextView
@@ -97,7 +65,8 @@
                         android:layout_height="wrap_content"
 
                         app:scale_left="320"
-                        app:scale_top="50"
+                        app:scale_top="32"
+                        app:scale_height="40"
                         app:scale_width="120"
                         app:scale_textsize="30"
                         android:textColor="#a6a6a6"
@@ -105,39 +74,33 @@
 
                         />
                     <ImageButton
-                        app:scale_top="50"
-                        app:scale_left="450"
+                        app:scale_top="35"
+                        app:scale_left="460"
                         app:scale_width="40"
                         app:scale_height="40"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/btn"
-                        android:id="@+id/btn_ranking"
+                        android:id="@+id/btn_tutorial"
                         />
                 </com.ssomai.android.scalablelayout.ScalableLayout>
-
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="95dp"
-                android:orientation="horizontal"
-                android:background="@drawable/back_2"
-                android:layout_below="@+id/linear_record"
-                android:id="@+id/linear_reservation"
-                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:layout_weight="100"
                 >
                 <com.ssomai.android.scalablelayout.ScalableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:scale_base_width="530"
-                    app:scale_base_height="200"
-                    app:scale_top="200"
+                    android:layout_height="match_parent"
+                    app:scale_base_width="540"
+                    app:scale_base_height="110"
+                    android:id="@+id/main_scalable2"
                     >
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:scale_top="50"
+                    app:scale_top="35"
                     app:scale_left="20"
                     app:scale_width="40"
                     app:scale_height="40"
@@ -150,15 +113,15 @@
                     android:textColor="#a6a6a6"
                     android:text="예약하기"
                     app:scale_left="90"
-                    app:scale_top="50"
+                    app:scale_top="32"
                     app:scale_width="120"
                     app:scale_textsize="30"
                     />
 
                 <ImageView
-                    app:scale_left="330"
-                    app:scale_width="200"
-                    app:scale_height="200"
+                    app:scale_left="380"
+                    app:scale_width="150"
+                    app:scale_height="110"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/img2"
@@ -168,33 +131,30 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="95dp"
-                android:orientation="horizontal"
-                android:id="@+id/linear_notice"
-                android:background="@drawable/back_3"
-                android:layout_below="@+id/linear_reservation"
-                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:layout_weight="100"
                 >
                 <com.ssomai.android.scalablelayout.ScalableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:scale_base_height="200"
-                    app:scale_base_width="530"
+                    android:layout_height="match_parent"
+                    app:scale_base_height="110"
+                    app:scale_base_width="540"
+                    android:id="@+id/main_scalable3"
                     >
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:scale_left="20"
-                    app:scale_width="200"
-                    app:scale_height="200"
+                    app:scale_width="140"
+                    app:scale_height="110"
                     android:background="@drawable/img3"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:scale_left="320"
-                    app:scale_top="50"
+                    app:scale_top="32"
                     app:scale_width="120"
                     app:scale_textsize="30"
                     android:textColor="#a6a6a6"
@@ -202,8 +162,8 @@
                     android:text="공동구매"
                     />
                 <ImageButton
-                    android:id="@+id/btn_notice"
-                    app:scale_top="50"
+                    android:id="@+id/btn_market"
+                    app:scale_top="35"
                     app:scale_left="450"
                     app:scale_width="40"
                     app:scale_height="40"
@@ -214,7 +174,8 @@
                 </com.ssomai.android.scalablelayout.ScalableLayout>
             </LinearLayout>
         </LinearLayout>
-    </RelativeLayout>
+
+
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

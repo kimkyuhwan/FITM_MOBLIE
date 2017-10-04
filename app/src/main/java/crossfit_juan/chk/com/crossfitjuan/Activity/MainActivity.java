@@ -12,10 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.ssomai.android.scalablelayout.ScalableLayout;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -34,53 +34,54 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Intent it;
     @BindView(R.id.menu_btn)
     ImageButton menuBtn;
-    @BindView(R.id.imageView)
-    ImageView imageView;
-    @BindView(R.id.linear1)
-    LinearLayout linear1;
-    @BindView(R.id.linear_record)
-    LinearLayout linearRecord;
-    @BindView(R.id.linear_reservation)
-    LinearLayout linearReservation;
-    @BindView(R.id.linear_notice)
-    LinearLayout linearNotice;
+
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     @BindView(R.id.nav_view)
     NavigationView navView;
 
-    @BindView(R.id.btn_notice)
-    ImageButton noticeBtn;
-    @BindView(R.id.btn_ranking)
-    ImageButton rankBtn;
-    @BindView(R.id.btn_reserve)
-    ImageButton reserveBtn;
+
     Bitmap bm, resized;
     CircleImageView tProfileImg;
+    @BindView(R.id.main_background)
+    ScalableLayout mainBackground;
+    @BindView(R.id.main_scalable1)
+    ScalableLayout mainScalable1;
+    @BindView(R.id.main_scalable2)
+    ScalableLayout mainScalable2;
+    @BindView(R.id.main_scalable3)
+    ScalableLayout mainScalable3;
+    @BindView(R.id.btn_tutorial)
+    ImageButton btnTutorial;
+    @BindView(R.id.btn_reserve)
+    ImageButton btnReserve;
+    @BindView(R.id.btn_market)
+    ImageButton btnMarket;
+
     // macbook git push_commit test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        MyFirebaseInstanceIdService tokenRegisterService=new MyFirebaseInstanceIdService();
+        MyFirebaseInstanceIdService tokenRegisterService = new MyFirebaseInstanceIdService();
         tokenRegisterService.RegistrationTokenToServer();
-        View navHeaderView=navView.getHeaderView(0);
+        View navHeaderView = navView.getHeaderView(0);
         navView.setNavigationItemSelectedListener(this);
 
-        TextView tname=(TextView)navHeaderView.findViewById(R.id.nav_name);
-        TextView temail=(TextView)navHeaderView.findViewById(R.id.nav_email);
-        tProfileImg=(CircleImageView)navHeaderView.findViewById(R.id.profile_image);
+        TextView tname = (TextView) navHeaderView.findViewById(R.id.nav_name);
+        TextView temail = (TextView) navHeaderView.findViewById(R.id.nav_email);
+        tProfileImg = (CircleImageView) navHeaderView.findViewById(R.id.profile_image);
         tname.setText(User.getInstance().getData().getUser_name());
         temail.setText(User.getInstance().getData().getUser_email());
     }
 
-    void SetProfileImage(){
+    void SetProfileImage() {
         Thread ImageSetThread = new Thread(new Runnable() {
             @Override
             public void run() {    // 오래 거릴 작업을 구현한다
-                try{
-                    URL url = new URL(PROFILE_PATH+User.getInstance().getData().getUser_email()+".png");
+                try {
+                    URL url = new URL(PROFILE_PATH + User.getInstance().getData().getUser_email() + ".png");
                     InputStream is = url.openStream();
                     bm = BitmapFactory.decodeStream(is);
                     resized = Bitmap.createScaledBitmap(bm, 128, 128, true);
@@ -91,8 +92,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             tProfileImg.setImageBitmap(resized);
                         }
                     });
-                //    tProfileImg.setImageBitmap(resized); //비트맵 객체로 보여주기
-                } catch(Exception e){
+                    //    tProfileImg.setImageBitmap(resized); //비트맵 객체로 보여주기
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -103,52 +104,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    @OnClick({R.id.menu_btn, R.id.linear_record, R.id.linear_reservation, R.id.linear_notice,R.id.btn_reserve,R.id.btn_ranking,R.id.btn_notice})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.menu_btn:
-                if (!drawerLayout.isDrawerOpen(GravityCompat.END)) {
-                    drawerLayout.openDrawer(GravityCompat.END);
-                }
-                break;
-            case R.id.linear_record:
-            case R.id.btn_ranking:
-                Toast.makeText(getApplicationContext(), "튜토리얼 추가 예정입나다", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.linear_reservation:
-            case R.id.btn_reserve:
-           //
-                //     Toast.makeText(getApplicationContext(), "RESERVATION 추가 예정입나다", Toast.LENGTH_SHORT).show();
-                it = new Intent(MainActivity.this, ReservationActivity.class);
-                startActivity(it);
-                break;
-            case R.id.linear_notice:
-            case R.id.btn_notice:
-//                Toast.makeText(getApplicationContext(), "NOTICE 추가 예정입나다", Toast.LENGTH_SHORT).show();
-                it = new Intent(MainActivity.this, MarketActivity.class);
-                startActivity(it);
-                break;
-        }
-    }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (id == R.id.navigation_item_my_Info) {
-            Intent it=new Intent(MainActivity.this,UserInfoActivity.class);
+            Intent it = new Intent(MainActivity.this, UserInfoActivity.class);
             startActivity(it);
             drawer.closeDrawer(GravityCompat.END);
         } else if (id == R.id.navigation_item_Notice) {
-            Intent it=new Intent(MainActivity.this,NoticeActivity.class);
+            Intent it = new Intent(MainActivity.this, NoticeActivity.class);
             startActivity(it);
             drawer.closeDrawer(GravityCompat.END);
         } else if (id == R.id.navigation_item_QnA) {
-            Intent it=new Intent(MainActivity.this,QnaActivity.class);
+            Intent it = new Intent(MainActivity.this, QnaActivity.class);
             startActivity(it);
             drawer.closeDrawer(GravityCompat.END);
         } else if (id == R.id.navigation_item_About) {
-            Intent it=new Intent(MainActivity.this,AboutJuanActivity.class);
+            Intent it = new Intent(MainActivity.this, AboutJuanActivity.class);
             startActivity(it);
             drawer.closeDrawer(GravityCompat.END);
         } else if (id == R.id.navigation_item_Cafe) {
@@ -172,8 +145,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         SetProfileImage();
+    }
+    @OnClick({R.id.menu_btn, R.id.btn_tutorial, R.id.main_scalable1, R.id.btn_reserve, R.id.main_scalable2, R.id.btn_market, R.id.main_scalable3})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.menu_btn:
+                if (!drawerLayout.isDrawerOpen(GravityCompat.END)) {
+                    drawerLayout.openDrawer(GravityCompat.END);
+                }
+                break;
+            case R.id.btn_tutorial:
+            case R.id.main_scalable1:
+                Toast.makeText(getApplicationContext(), "튜토리얼 추가 예정입나다", Toast.LENGTH_SHORT).show();
+
+                break;
+            case R.id.btn_reserve:
+            case R.id.main_scalable2:
+                it = new Intent(MainActivity.this, ReservationActivity.class);
+                startActivity(it);
+                break;
+            case R.id.btn_market:
+            case R.id.main_scalable3:
+                it = new Intent(MainActivity.this, MarketActivity.class);
+                startActivity(it);
+                break;
+        }
     }
 }
