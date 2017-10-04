@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="crossfit_juan.chk.com.crossfitjuan.Activity.UserInfoActivity">
+    tools:context="crossfit_juan.chk.com.crossfitjuan.Activity.UserInfoActivity"
+    android:orientation="vertical"
+    >
 
     <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:scale_base_height="854"
+        app:scale_base_height="750"
         app:scale_base_width="540"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -173,19 +175,22 @@
             app:scale_left="470"
             />
 
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <Button
             android:id="@+id/user_info_sign_out"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:text="회원탈퇴"
-            app:scale_top="790"
-            app:scale_left="170"
-            app:scale_textsize="22"
-            app:scale_width="200"
-            app:scale_height="60"
+            android:textSize="16dp"
+            android:layout_centerInParent="true"
             android:textColor="#ffffff"
             android:background="#000000"
             />
 
-    </com.ssomai.android.scalablelayout.ScalableLayout>
-</RelativeLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>
