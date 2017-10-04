@@ -24,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import crossfit_juan.chk.com.crossfitjuan.Common.User;
+import crossfit_juan.chk.com.crossfitjuan.Firebase.MyFirebaseInstanceIdService;
 import crossfit_juan.chk.com.crossfitjuan.R;
 import crossfit_juan.chk.com.crossfitjuan.tool.CircleImageView;
 
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        MyFirebaseInstanceIdService tokenRegisterService=new MyFirebaseInstanceIdService();
+        tokenRegisterService.RegistrationTokenToServer();
         View navHeaderView=navView.getHeaderView(0);
         navView.setNavigationItemSelectedListener(this);
 
