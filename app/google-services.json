@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "833198006111",
-    "firebase_url": "https://fitm-f8c1e.firebaseio.com",
-    "project_id": "fitm-f8c1e",
-    "storage_bucket": "fitm-f8c1e.appspot.com"
+    "project_number": "104832213867",
+    "firebase_url": "https://crossfitjuan-1506921758614.firebaseio.com",
+    "project_id": "crossfitjuan-1506921758614",
+    "storage_bucket": "crossfitjuan-1506921758614.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:833198006111:android:b6f9c582623e48ba",
+        "mobilesdk_app_id": "1:104832213867:android:731193d15a45e81e",
         "android_client_info": {
-          "package_name": "com.team_fitm.myown.fitm_mobile"
+          "package_name": "crossfit_juan.chk.com.crossfitjuan"
         }
       },
       "oauth_client": [
         {
-          "client_id": "833198006111-43m3v9jst4on9cfteqc2dgp5hu3g3ae0.apps.googleusercontent.com",
+          "client_id": "104832213867-p1r4kfd9n3gj5a4593snsgrghvslan5f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.team_fitm.myown.fitm_mobile",
-            "certificate_hash": "bd153cfd395fc680c9f0892e017b309ca86aa13f"
+            "package_name": "crossfit_juan.chk.com.crossfitjuan",
+            "certificate_hash": "ef9cd0aaa78e886349bb621e3e1d3f2fe5a28871"
           }
         },
         {
-          "client_id": "833198006111-6iu319sqtocoq16vvld4217739b041b3.apps.googleusercontent.com",
+          "client_id": "104832213867-q0v885t99btk8rt0159e0o0v0lckm7uv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA4YKlnbdJzIHSxgnqmwQUkJ0dI9b6wOWo"
+          "current_key": "AIzaSyBsylnQNvXMwRwBxUjd9amJZmqZg-80nF0"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "833198006111-6iu319sqtocoq16vvld4217739b041b3.apps.googleusercontent.com",
+              "client_id": "104832213867-q0v885t99btk8rt0159e0o0v0lckm7uv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
