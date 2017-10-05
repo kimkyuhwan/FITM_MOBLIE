@@ -64,7 +64,7 @@
         </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB0JEjRfOlYoTGTuM-2Z2VVUZHcSC9HVRc"/>
+            android:value="AIzaSyDlzXR_iAvy_2rVWuqkiH13DNCyrh8J_ZM"/>
         <service
             android:name=".Firebase.MyFirebaseInstanceIdService">
             <intent-filter>
