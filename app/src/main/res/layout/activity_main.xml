@@ -50,6 +50,7 @@
                     app:scale_base_height="110"
                     app:scale_base_width="540"
                     android:id="@+id/main_scalable1"
+                    android:layout_gravity="bottom"
                     >
                     <ImageView
                         android:layout_width="wrap_content"
@@ -96,6 +97,7 @@
                     app:scale_base_width="540"
                     app:scale_base_height="110"
                     android:id="@+id/main_scalable2"
+                    android:layout_gravity="bottom"
                     >
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -140,6 +142,7 @@
                     app:scale_base_height="110"
                     app:scale_base_width="540"
                     android:id="@+id/main_scalable3"
+                    android:layout_gravity="bottom"
                     >
 
                 <ImageView
@@ -183,10 +186,12 @@
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:fitsSystemWindows="true"
+        app:theme="@style/ThemeOverlay.AppCompat.navTheme"
         app:headerLayout="@layout/nav_header_test"
         app:menu="@menu/drawer"
+        app:itemIconTint="#ffffff"
         app:itemTextColor="#ffffff"
-        android:background="#aaa2a2a2"
+        android:background="#aa000000"
         />
 </android.support.v4.widget.DrawerLayout>
 

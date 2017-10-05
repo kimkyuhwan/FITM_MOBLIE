@@ -11,7 +11,9 @@
             android:id="@+id/navigation_item_Notice"
             android:checked="true"
             android:icon="@drawable/p2"
-            android:title="@string/drawer_p2" />
+            android:title="@string/drawer_p2"
+
+            />
         <item
             android:id="@+id/navigation_item_QnA"
             android:checked="true"
