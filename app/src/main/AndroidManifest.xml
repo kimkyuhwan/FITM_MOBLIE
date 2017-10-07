@@ -8,10 +8,10 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/juan_icon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@drawable/juan_icon"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.LoginActivity"
@@ -64,10 +64,11 @@
         </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB0JEjRfOlYoTGTuM-2Z2VVUZHcSC9HVRc"/>
+            android:value="AIzaSyDlzXR_iAvy_2rVWuqkiH13DNCyrh8J_ZM"/>
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/juan_icon" />
+
         <service
             android:name=".Firebase.MyFirebaseInstanceIdService">
             <intent-filter>
