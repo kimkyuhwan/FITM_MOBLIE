@@ -8,7 +8,7 @@
     <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:scale_base_height="40"
+        app:scale_base_height="60"
         app:scale_base_width="400"
         >
         <TextView
@@ -19,9 +19,13 @@
             app:scale_left="10"
             app:scale_width="300"
             app:scale_textsize="20"
-            app:scale_top="5"
+            app:scale_top="10"
             app:scale_height="40"
             android:text="test"
+            android:maxLines="1"
+            app:textview_wrapcontent_direction="bottom"
+            app:textview_wrapcontent_resizesurrounded="true"
+            app:textview_wrapcontent_movesiblings="true"
             />
         <TextView
             android:id="@+id/notice_date"
@@ -29,7 +33,7 @@
             android:layout_height="wrap_content"
             app:scale_left="310"
             app:scale_textsize="15"
-            app:scale_top="10"
+            app:scale_top="12"
             app:scale_height="40"
             app:scale_width="90"
             android:text="2017/09/21"
