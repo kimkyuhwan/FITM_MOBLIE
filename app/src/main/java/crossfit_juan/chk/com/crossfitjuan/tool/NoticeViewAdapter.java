@@ -63,9 +63,11 @@ public class NoticeViewAdapter extends BaseAdapter {
             params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
             contentTexvView.setLayoutParams(params);
             Log.d("DEBUGYU","300");
+            titleTextView.setMaxLines(4);
         }
         else{
             contentTexvView.setHeight(0);
+            titleTextView.setMaxLines(1);
             Log.d("DEBUGYU","0");
         }
 
