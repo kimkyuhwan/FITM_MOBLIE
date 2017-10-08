@@ -20,11 +20,11 @@
 
     <TextView
         android:layout_gravity="right"
-        android:gravity="right"
+        android:gravity="left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/chat_my_msg_content"
-        android:text="Hello world!"
+        android:text="Hello worldHello worldHello worldHello worldHello world Hello world!"
         android:textSize="15dp"
         android:textColor="#ffffff"
         android:background="#73aad3"

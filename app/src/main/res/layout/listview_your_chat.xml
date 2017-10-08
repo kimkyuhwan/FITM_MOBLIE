@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/your_chat_layout"
     android:layout_marginTop="2dp"
     >
 
-
     <TextView
+        android:layout_weight="2"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/chat_your_msg_content"
-        android:text="Hello world!"
+        android:text="Hello world!Hello world!Hello world!Hello world!Hello world!Hello world! Hello world!"
         android:textSize="15dp"
         android:background="#ebf1f4"
         android:layout_marginLeft="5dp"
@@ -23,6 +25,7 @@
         />
 
     <TextView
+        android:layout_weight="1"
         android:id="@+id/chat_your_msg_time"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
@@ -31,7 +34,8 @@
         android:gravity="left"
         android:textColor="#334477"
         android:layout_marginRight="5dp"
-        android:textSize="14dp" />
+        android:textSize="14dp"
+        />
 
 
 
