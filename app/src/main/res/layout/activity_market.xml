@@ -35,6 +35,7 @@
     </com.ssomai.android.scalablelayout.ScalableLayout>
 
     <ListView
+        android:listSelector="@android:color/transparent"
         android:id="@+id/listview_market"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
