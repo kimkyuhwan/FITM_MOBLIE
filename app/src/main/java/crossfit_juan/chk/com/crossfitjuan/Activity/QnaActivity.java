@@ -1,13 +1,18 @@
 package crossfit_juan.chk.com.crossfitjuan.Activity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +52,9 @@ public class QnaActivity extends AppCompatActivity {
     @BindView(R.id.chat_msg_send_Btn)
     ImageButton chatMsgSendBtn;
 
+    ClipboardManager clipboardManager;
+    ClipData clipData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +82,16 @@ public class QnaActivity extends AppCompatActivity {
         mSocket.on("send_message", listen_send_message);
         mSocket.on("get_result", listener_get_result);
         // http://yanmari.tistory.com/2 추가 참조할 예정
+        clipboardManager=(ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+        chatMsgList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                clipData=ClipData.newPlainText("label",adapter.getMessageContent(i));
+                clipboardManager.setPrimaryClip(clipData);
+                Toast.makeText(getApplicationContext(),"클립보드에 복사되었습니다",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
 
     }
 
