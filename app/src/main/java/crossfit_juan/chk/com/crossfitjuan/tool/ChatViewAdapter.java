@@ -90,6 +90,10 @@ public class ChatViewAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+    public String getMessageContent(int idx){
+        return listViewItemList.get(idx).getContent();
+    }
     public void setDateSession(){
 
         for(int i=0;i<listViewItemList.size();i++){
