@@ -19,21 +19,30 @@ public class UserData {
     private String user_phone_number;
     private String user_birtyday;
 
+    private int user_locker_num;
+    private String user_lock_start;
+    private String user_lock_finish;
+
+    private String user_start_date;
+    private String user_finish_date;
+
+    private int certification;
+    private int remain_break_day;
+
+
     public UserData(){
         this.user_email = null;
         this.user_gender = null;
         this.user_phone_number = null;
         this.user_name = null;
         this.user_birtyday=null;
+        this.user_locker_num=-1;
+        this.user_lock_start=null;
+        this.user_lock_finish=null;
+        certification=0;
+        remain_break_day=0;
     }
 
-    public UserData(String email, String name, String gender, String phone_number,String user_birtyday){
-        this.user_name = name;
-        this.user_email = email;
-        this.user_gender = gender;
-        this.user_phone_number = phone_number;
-        this.user_birtyday=user_birtyday;
-    }
 
     public String getUser_email() {
         return user_email;
@@ -81,6 +90,62 @@ public class UserData {
 
     public void setUser_birtyday(String user_birtyday) {
         this.user_birtyday = user_birtyday;
+    }
+
+    public int getUser_locker_num() {
+        return user_locker_num;
+    }
+
+    public void setUser_locker_num(int user_locker_num) {
+        this.user_locker_num = user_locker_num;
+    }
+
+    public String getUser_lock_start() {
+        return user_lock_start;
+    }
+
+    public void setUser_lock_start(String user_lock_start) {
+        this.user_lock_start = user_lock_start;
+    }
+
+    public String getUser_lock_finish() {
+        return user_lock_finish;
+    }
+
+    public void setUser_lock_finish(String user_lock_finish) {
+        this.user_lock_finish = user_lock_finish;
+    }
+
+    public int getCertification() {
+        return certification;
+    }
+
+    public void setCertification(int certification) {
+        this.certification = certification;
+    }
+
+    public String getUser_start_date() {
+        return user_start_date;
+    }
+
+    public void setUser_start_date(String user_start_date) {
+        this.user_start_date = user_start_date;
+    }
+
+    public String getUser_finish_date() {
+        return user_finish_date;
+    }
+
+    public void setUser_finish_date(String user_finish_date) {
+        this.user_finish_date = user_finish_date;
+    }
+
+    public int getRemain_break_day() {
+        return remain_break_day;
+    }
+
+    public void setRemain_break_day(int remain_break_day) {
+        this.remain_break_day = remain_break_day;
     }
 
     public String getDataForLog(){
