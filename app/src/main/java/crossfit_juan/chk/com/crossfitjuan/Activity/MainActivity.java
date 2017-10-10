@@ -1,14 +1,22 @@
 package crossfit_juan.chk.com.crossfitjuan.Activity;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.util.Linkify;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -19,6 +27,7 @@ import com.ssomai.android.scalablelayout.ScalableLayout;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +36,18 @@ import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.Firebase.MyFirebaseInstanceIdService;
 import crossfit_juan.chk.com.crossfitjuan.R;
 import crossfit_juan.chk.com.crossfitjuan.tool.CircleImageView;
+import crossfit_juan.chk.com.crossfitjuan.tool.NaverCafe;
 
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.APP_ID;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CAFE_URL;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CERTIFICATION_MARKET;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CERTIFICATION_RESERVATION;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.COMMAND_CERTIFICATION_MARKET;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.COMMAND_CERTIFICATION_RESERVATION;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CROSSFITJUAN_FACEBOOK_URL;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CROSSFITJUAN_INSTAGRAM_URL;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CROSSFITJUAN_NAVER_CAFE_CALL_URL;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CROSSFITJUAN_NAVER_CAFE_URL;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PROFILE_PATH;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -112,10 +132,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent it = new Intent(MainActivity.this, UserInfoActivity.class);
             startActivity(it);
             drawer.closeDrawer(GravityCompat.END);
-        } else if (id == R.id.navigation_item_Notice) {
-            Intent it = new Intent(MainActivity.this, NoticeActivity.class);
-            startActivity(it);
-            drawer.closeDrawer(GravityCompat.END);
         } else if (id == R.id.navigation_item_QnA) {
             Intent it = new Intent(MainActivity.this, QnaActivity.class);
             startActivity(it);
@@ -125,15 +141,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(it);
             drawer.closeDrawer(GravityCompat.END);
         } else if (id == R.id.navigation_item_Cafe) {
-            Toast.makeText(getApplicationContext(), "준비중입니다 p5", Toast.LENGTH_LONG).show();
+            new NaverCafe(MainActivity.this, APP_ID).cafe(CAFE_URL);
         } else if (id == R.id.navigation_item_Facebook) {
-            Toast.makeText(getApplicationContext(), "준비중입니다 p6", Toast.LENGTH_LONG).show();
+            startActivity(getOpenFacebookIntent(this,CROSSFITJUAN_FACEBOOK_URL));
+        /*
+          */  //Toast.makeText(getApplicationContext(), "준비중입니다 p6", Toast.LENGTH_LONG).show();
         } else if (id == R.id.navigation_item_Instagram) {
-            Toast.makeText(getApplicationContext(), "준비중입니다 p7", Toast.LENGTH_LONG).show();
+            Intent i=new Intent(Intent.ACTION_VIEW);
+            Uri u = Uri.parse(CROSSFITJUAN_INSTAGRAM_URL);
+            i.setData(u);
+            startActivity(i);
         }
         return true;
     }
 
+    public static Intent getOpenFacebookIntent(Context context,String url) {
+        Uri uri = Uri.parse(url);
+        try {
+            ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo("com.facebook.katana", 0);
+            if (applicationInfo.enabled) {
+                // http://stackoverflow.com/a/24547437/1048340
+                uri = Uri.parse("fb://facewebmodal/f?href=" + url);
+            }
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+        return new Intent(Intent.ACTION_VIEW,uri);
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -159,19 +192,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.btn_tutorial:
             case R.id.main_scalable1:
-                Toast.makeText(getApplicationContext(), "튜토리얼 추가 예정입나다", Toast.LENGTH_SHORT).show();
-
+                it = new Intent(MainActivity.this, NoticeActivity.class);
+                startActivity(it);
                 break;
             case R.id.btn_reserve:
             case R.id.main_scalable2:
-                it = new Intent(MainActivity.this, ReservationActivity.class);
-                startActivity(it);
+                if(checkthePermission(COMMAND_CERTIFICATION_RESERVATION)) {
+                    it = new Intent(MainActivity.this, ReservationActivity.class);
+                    startActivity(it);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"예약은 정회원부터 가능합니다",Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.btn_market:
             case R.id.main_scalable3:
-                it = new Intent(MainActivity.this, MarketActivity.class);
-                startActivity(it);
+                if(checkthePermission(COMMAND_CERTIFICATION_MARKET)) {
+                    it = new Intent(MainActivity.this, MarketActivity.class);
+                    startActivity(it);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"공동구매는 준회원부터 가능합니다",Toast.LENGTH_LONG).show();
+                }
                 break;
         }
     }
+    boolean checkthePermission(int command){
+        switch (command){
+            case COMMAND_CERTIFICATION_RESERVATION:
+                if(User.getInstance().getData().getCertification()>=CERTIFICATION_RESERVATION){
+                    return true;
+                }
+                break;
+            case COMMAND_CERTIFICATION_MARKET:
+                if(User.getInstance().getData().getCertification()>=CERTIFICATION_MARKET){
+                    return true;
+                }
+                break;
+        }
+        return false;
+    }
+
 }
