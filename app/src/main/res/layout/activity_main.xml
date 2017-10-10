@@ -71,7 +71,7 @@
                         app:scale_width="120"
                         app:scale_textsize="30"
                         android:textColor="#a6a6a6"
-                        android:text="튜토리얼"
+                        android:text="공지사항"
 
                         />
                     <ImageButton
@@ -113,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#a6a6a6"
-                    android:text="예약하기"
+                    android:text="수업예약"
                     app:scale_left="90"
                     app:scale_top="32"
                     app:scale_width="120"
