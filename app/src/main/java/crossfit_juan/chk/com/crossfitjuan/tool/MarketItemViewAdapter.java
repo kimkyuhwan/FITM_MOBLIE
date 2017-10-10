@@ -74,11 +74,13 @@ public class MarketItemViewAdapter extends BaseAdapter {
             priceText.setText(pp.getPrice());
             if(pp.isLike()){
                 // 꽉찬 하트
+                itemLikeImg.setImageResource(R.drawable.like);
                 Log.d("DEBUGYU","Like!");
                 likeText.setText("신청완료");
             }
             else {
                 // 빈 하트
+                itemLikeImg.setImageResource(R.drawable.unlike);
                 Log.d("DEBUGYU","unLike!");
                 likeText.setText("");
 //            itemLikeImg.setImage;
@@ -87,6 +89,7 @@ public class MarketItemViewAdapter extends BaseAdapter {
             getImageFromS3(pp.getReadImageUrl(),itemImg);
         }
         else{
+            ImageView itemLikeImg=(ImageView)convertView.findViewById(R.id.market_item_like_img);
             TextView nameText=(TextView)convertView.findViewById(R.id.market_item_name);
             TextView likeCntText=(TextView)convertView.findViewById(R.id.market_item_like_cnt);
             TextView priceText=(TextView)convertView.findViewById(R.id.market_item_price);
@@ -100,11 +103,13 @@ public class MarketItemViewAdapter extends BaseAdapter {
             priceText.setText(pp.getPrice());
             if(pp.isLike()){
                 // 꽉찬 하트
+                itemLikeImg.setImageResource(R.drawable.like);
                 Log.d("DEBUGYU","Like!");
                 likeText.setText("신청완료");
             }
             else {
                 // 빈 하트
+                itemLikeImg.setImageResource(R.drawable.unlike);
                 Log.d("DEBUGYU","unLike!");
                 likeText.setText("");
 //            itemLikeImg.setImage;
