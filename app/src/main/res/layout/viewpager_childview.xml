@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#000000"
+    >
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:scale_base_height="720"
+        app:scale_base_width="540"
+        >
+    <ImageView
+        android:id="@+id/viewpager_childimage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:scale_left="70"
+        app:scale_top="20"
+        app:scale_width="400"
+        app:scale_height="500"
+        android:src="@drawable/login_image01"
+        />
+    <TextView
+        android:id="@+id/viewpager_childitext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:scale_left="20"
+        app:scale_top="540"
+        app:scale_width="500"
+        app:scale_height="180"
+        app:scale_textsize="24"
+        android:textColor="#ffffff"
+        android:text="안녕하세요 크로스핏 주안입니다"
+        />
+
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+</LinearLayout>
+
