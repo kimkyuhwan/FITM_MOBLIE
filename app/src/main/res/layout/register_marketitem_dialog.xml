@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="300dp"
     android:layout_gravity="center"
-    android:padding="20dp"
     android:layout_height="wrap_content"
     android:windowSoftInputMode="adjustResize"
     >
     <TextView
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,26 +40,35 @@
             android:background="@drawable/cancel_btn"
             />
     </RelativeLayout>
-    <Button
-        android:layout_margin="3dp"
+    <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="신청하기"
-        android:textSize="18dp"
-        android:background="#000000"
-        android:textColor="#ffffff"
-        android:id="@+id/market_dialog_comment_register_Btn"
-        />
-    <Button
-        android:layout_margin="3dp"
-        android:background="#000000"
-        android:textColor="#ffffff"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:background="#aaaaaa"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:textSize="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="취소"
+            android:id="@+id/market_dialog_comment_cancel_Btn"
+            />
+        <Button
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="신청하기"
+            android:textSize="18dp"
+            android:background="#4488ff"
+            android:textColor="#ffffff"
+            android:id="@+id/market_dialog_comment_register_Btn"
+            />
 
-        android:textSize="18dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="취소"
-        android:id="@+id/market_dialog_comment_cancel_Btn"
-        />
+
+    </LinearLayout>
+
 
 </LinearLayout>
