@@ -7,6 +7,28 @@
     tools:context="crossfit_juan.chk.com.crossfitjuan.Activity.ReservationActivity"
     android:orientation="vertical"
     >
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:scale_base_width="540"
+        app:scale_base_height="60"
+
+        >
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수업예약"
+            app:scale_textsize="26"
+            android:textColor="#ffffff"
+            app:scale_width="540"
+            app:scale_height="60"
+            android:gravity="center"
+            android:background="#000000"
+            />
+
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
 
     <TextView
         android:layout_marginTop="20dp"
@@ -24,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ROW_BP_BJ"
-        android:textColor="#ff0000"
+        android:textColor="#777777"
         android:textSize="20dp" />
     <TextView
         android:layout_marginTop="20dp"
