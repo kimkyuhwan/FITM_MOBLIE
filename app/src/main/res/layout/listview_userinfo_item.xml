@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:scale_base_width="540"
+        app:scale_base_height="100"
+        >
+        <TextView
+            android:id="@+id/user_info_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_top="15"
+            app:scale_textsize="26"
+            android:text="Title"
+            android:textColor="#000000"
+            app:scale_width="400"
+            app:scale_height="40"
+            app:scale_left="20"
+            />
+        <TextView
+            android:id="@+id/user_info_item_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_top="55"
+            app:scale_textsize="22"
+            android:hint="hint"
+            android:textColor="#000000"
+            app:scale_width="500"
+            app:scale_height="30"
+            app:scale_left="20"
+            />
+        <ImageButton
+            android:id="@+id/user_info_item_imageBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rest"
+            android:visibility="invisible"
+            app:scale_top="23"
+            app:scale_textsize="22"
+            android:textColor="#000000"
+            app:scale_width="50"
+            app:scale_height="50"
+            app:scale_left="470"
+            />
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+</RelativeLayout>
