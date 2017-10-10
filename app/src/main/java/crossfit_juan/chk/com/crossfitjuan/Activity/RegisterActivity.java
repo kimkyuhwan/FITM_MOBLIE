@@ -72,15 +72,15 @@ public class RegisterActivity extends Activity {
         user_data.setUser_email(intent.getExtras().getString("id_email"));
         //   user_data.setUser_name(intent.getExtras().getString("name"));
         user_data.setUser_gender(intent.getExtras().getString("gender"));
-        makeEditTextListenersrcTodst(registerBirthdayYear,4,registerBirthdayMonth);
-        makeEditTextListenersrcTodst(registerBirthdayMonth,2,registerBirthdayDay);
-        makeEditTextListenersrcTodst(registerBirthdayDay,2,registerPhone00);
-        makeEditTextListenersrcTodst(registerPhone00,3,registerPhone01);
-        makeEditTextListenersrcTodst(registerPhone01,4,registerPhone02);
+        makeEditTextListenersrcTodst(registerBirthdayYear, 4, registerBirthdayMonth);
+        makeEditTextListenersrcTodst(registerBirthdayMonth, 2, registerBirthdayDay);
+        makeEditTextListenersrcTodst(registerBirthdayDay, 2, registerPhone00);
+        makeEditTextListenersrcTodst(registerPhone00, 3, registerPhone01);
+        makeEditTextListenersrcTodst(registerPhone01, 4, registerPhone02);
 
     }
 
-    void makeEditTextListenersrcTodst(final EditText src, final int length, final EditText dst){
+    void makeEditTextListenersrcTodst(final EditText src, final int length, final EditText dst) {
         src.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -89,7 +89,9 @@ public class RegisterActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.length()==length){dst.requestFocus();}
+                if (charSequence.length() == length) {
+                    dst.requestFocus();
+                }
             }
 
             @Override
@@ -100,72 +102,86 @@ public class RegisterActivity extends Activity {
 
     @OnClick(R.id.req_registerBtn)
     public void onViewClicked() {
-        register();
+        isPossibleRegister();
+    }
+
+
+    public void isPossibleRegister() {
+        boolean isCorrectPhone = registerPhone00.getText().toString().length() >= 3 && registerPhone01.getText().toString().length() >= 3 && registerPhone02.getText().toString().length() >= 4;
+        boolean isCorretName = !registerName.getText().toString().equals("");
+        boolean isCorrectBirthday = registerBirthdayYear.getText().toString().length()>=4 && registerBirthdayMonth.getText().toString().length()>=2 && registerBirthdayDay.getText().toString().length()>=2;
+        if (isCorretName) {
+            if (isCorrectBirthday) {
+                if (isCorrectPhone) {
+                    register();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "핸드폰 번호를 제대로 입력해주세요.", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "생일을 제대로 입력해주세요.", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "이름을 입력해주세요.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void register() {
+        String phone_number = registerPhone00.getText().toString() + "-" + registerPhone01.getText().toString() + "-" + registerPhone02.getText().toString();
         String birthday = registerBirthdayYear.getText().toString() + registerBirthdayMonth.getText().toString() + registerBirthdayDay.getText().toString();
-        boolean isCorrectPhone = false;
+        String name = registerName.getText().toString();
+        JSONObject send_data = new JSONObject();
+        try {
+            user_data.setUser_name(name);
+            send_data.put("access_key", user_data.getUser_access_key());
+            send_data.put("gender", user_data.getUser_gender());
+            send_data.put("birthday", birthday);
+            send_data.put("phone_number", phone_number);
+            send_data.put("name", user_data.getUser_name());
+        } catch (JSONException jsonex) {
+            jsonex.printStackTrace();
+        }
+        Log.i("name data", user_data.getUser_name());
+        ReqHTTPJSONThread thread = new ReqHTTPJSONThread(Constants.REGISTER_MEMBER_URL, send_data);
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException interex) {
+            interex.printStackTrace();
+        }
+        String result = thread.handler.getMsg();
+        JSONObject result_data = null;
+        boolean flag = false;
 
-        if (registerPhone00.getText().toString().length() >= 3 && registerPhone01.getText().toString().length() >= 3 && registerPhone02.getText().toString().length() >= 4) {
-            isCorrectPhone = true;
-            String phone_number = registerPhone00.getText().toString() + "-" + registerPhone01.getText().toString() + "-" + registerPhone02.getText().toString();
-            String name = registerName.getText().toString();
-            if (!birthday.equals("") && isCorrectPhone && !name.equals("")) {
-                JSONObject send_data = new JSONObject();
-                try {
-                    user_data.setUser_name(name);
-                    send_data.put("access_key", user_data.getUser_access_key());
-                    send_data.put("gender", user_data.getUser_gender());
-                    send_data.put("birthday", birthday);
-                    send_data.put("phone_number", phone_number);
-                    send_data.put("name", user_data.getUser_name());
-                } catch (JSONException jsonex) {
-                    jsonex.printStackTrace();
-                }
-                Log.i("name data", user_data.getUser_name());
-                ReqHTTPJSONThread thread = new ReqHTTPJSONThread(Constants.REGISTER_MEMBER_URL, send_data);
-                thread.start();
-                try {
-                    thread.join();
-                } catch (InterruptedException interex) {
-                    interex.printStackTrace();
-                }
-                String result = thread.handler.getMsg();
-                JSONObject result_data = null;
-                boolean flag = false;
-
-                try {
-                    result_data = new JSONObject(result);
-                    if (result_data.getInt("code") == 1110) {
-                        flag = true;
-                    }
-                } catch (JSONException jsonex) {
-                    jsonex.printStackTrace();
-                }
-
-                if (flag) {
-                    Toast.makeText(my_context, "JUAN CROSS-FIT 가입을 환영합니다..", Toast.LENGTH_LONG);
-
-                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-
-                    // 메인 액티비티로 넘길 데이터들 (String)
-                    user_data.setUser_phone_number(phone_number);
-                    user_data.setUser_birtyday(birthday);
-                    User.getInstance().setUser(user_data);
-                    intent.putExtra("access_key", User.getInstance().getData().getUser_access_key());
-                    intent.putExtra("name", User.getInstance().getData().getUser_name());
-                    intent.putExtra("id_email", User.getInstance().getData().getUser_email());
-                    intent.putExtra("gender", User.getInstance().getData().getUser_gender());
-                    intent.putExtra("phone_number", User.getInstance().getData().getUser_phone_number());
-                    intent.putExtra("birthday", User.getInstance().getData().getUser_birtyday());
-
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(my_context, "가입에 실패하였습니다. 다시 시도해주세요.", Toast.LENGTH_LONG);
-                }
+        try {
+            result_data = new JSONObject(result);
+            if (result_data.getInt("code") == 1110) {
+                flag = true;
             }
+        } catch (JSONException jsonex) {
+            jsonex.printStackTrace();
+        }
+
+        if (flag) {
+            Toast.makeText(my_context, "JUAN CROSS-FIT 가입을 환영합니다..", Toast.LENGTH_LONG);
+
+            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+
+            // 메인 액티비티로 넘길 데이터들 (String)
+            user_data.setUser_phone_number(phone_number);
+            user_data.setUser_birtyday(birthday);
+            User.getInstance().setUser(user_data);
+            intent.putExtra("access_key", User.getInstance().getData().getUser_access_key());
+            intent.putExtra("name", User.getInstance().getData().getUser_name());
+            intent.putExtra("id_email", User.getInstance().getData().getUser_email());
+            intent.putExtra("gender", User.getInstance().getData().getUser_gender());
+            intent.putExtra("phone_number", User.getInstance().getData().getUser_phone_number());
+            intent.putExtra("birthday", User.getInstance().getData().getUser_birtyday());
+
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(my_context, "가입에 실패하였습니다. 다시 시도해주세요.", Toast.LENGTH_LONG);
         }
     }
 
