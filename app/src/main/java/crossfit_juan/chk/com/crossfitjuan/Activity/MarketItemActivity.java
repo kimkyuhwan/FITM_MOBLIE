@@ -250,6 +250,7 @@ public class MarketItemActivity extends AppCompatActivity {
         lp.setMargins(20, 10, 20, 10);
         ret.setTextSize(16);
         ret.setLayoutParams(lp);
+        ret.setGravity(Gravity.CENTER_HORIZONTAL);
         return ret;
     }
 
