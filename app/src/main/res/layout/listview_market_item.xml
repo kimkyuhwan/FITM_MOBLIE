@@ -14,8 +14,10 @@
             android:id="@+id/market_item_img"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:scale_width="160"
-            app:scale_height="160"
+            app:scale_width="140"
+            app:scale_height="140"
+            app:scale_top="10"
+            app:scale_left="10"
             />
         <TextView
             android:id="@+id/market_item_name"
