@@ -35,6 +35,10 @@ public class MyFirebaseInstanceIdService extends FirebaseInstanceIdService {
     public void RegistrationTokenToServer(){
         String token = FirebaseInstanceId.getInstance().getToken();
         String access_key = User.getInstance().getData().getUser_access_key();
+        if(token==null || access_key==null){
+            Log.d("DEBUGYU","RegistrationTokenToServer Null Error");
+            return;
+        }
         try {
             RegistrationTokenToServerWithEmail(access_key,token);
         } catch (JSONException e) {
