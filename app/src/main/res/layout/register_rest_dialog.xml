@@ -15,29 +15,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="휴회 기간과 이유를 적으신 후 신청해주세요"
-        android:textSize="12dp" />
+        android:text="휴회 시작 일자를 선택해주세요"
+        android:textSize="16dp" />
     <RelativeLayout
         android:padding="15dp"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <EditText
-            android:layout_width="250dp"
+        <CalendarView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rest_dialog_comment"
-            android:maxLines="4"
-            />
-        <ImageButton
-            android:layout_toRightOf="@+id/rest_dialog_comment"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:visibility="invisible"
-            android:layout_alignRight="@id/rest_dialog_comment"
-            android:layout_centerInParent="true"
-            android:id="@+id/rest_dialog_comment_clear_Btn"
-            android:background="@drawable/cancel_btn"
-            />
+            android:id="@+id/rest_dialog_calander"
+            >
+
+
+        </CalendarView>
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
