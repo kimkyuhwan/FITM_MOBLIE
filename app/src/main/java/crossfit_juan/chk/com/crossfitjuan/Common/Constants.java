@@ -18,17 +18,27 @@ public class Constants {
     public static final int COMMAND_CERTIFICATION_MARKET=0x02;
     public static final int CERTIFICATION_RESERVATION=0x02;
     public static final int CERTIFICATION_MARKET=0x01;
+    public static final int CERTIFICATION_REST=0x02;
+
+    // 휴회 기능 상태 변수
+    public static final int REST_STATE_NONE=0;
+    public static final int REST_STATE_REMAIN=1;
+    public static final int REST_STATE_PENDING=2;
+    public static final int REST_STATE_DONE=3;
+
 
     // 상수 변수
     public static final String Master_Socket_Address = "http://52.78.197.131:25478";
     public static final String DB_FILE_NAME="CrossFitJuan.db";
     public static final String CROSSFITJUAN_ADDRESS_GOOGLE="https://www.google.co.kr/maps/place/%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C+%EB%82%A8%EA%B5%AC+%EC%A3%BC%EC%95%88%EB%A1%9C+100";
     public static final int REQUEST_PERMISSION_ACCESS_STORAGE =0x80;
+    public static final String PUSH_NOTICE_ACTIVITY="0";
+    public static final String PUSH_QNA_ACTIVITY="1";
 
     // 유저 정보 상수 변수
-    public static final int USER_INFO_INDEX_REGISTER_PERIOD=4;
-    public static final int USER_INFO_INDEX_LOGOUT=5;
-    public static final int USER_INFO_INDEX_SIGNOUT=6;
+    public static final int USER_INFO_INDEX_REST_PERIOD=5;
+    public static final int USER_INFO_INDEX_LOGOUT=6;
+    public static final int USER_INFO_INDEX_SIGNOUT=7;
 
     // 커뮤니티 주소
     public static final String CROSSFITJUAN_NAVER_CAFE_URL="http://cafe.naver.com/cfja";
@@ -59,7 +69,7 @@ public class Constants {
 
     public static final String REQ_SET_REMAIN_DAY="http://52.78.197.131:25478/set_remain_day";
     public static final String REQ_REGISTER_FIREBASE_TOKEN="http://52.78.197.131:25478/udt_device_token";
-
+    public static final String REQ_GET_REMAIN_DAY="http://52.78.197.131:25478/get_remain_day";
 
 
 
