@@ -286,21 +286,25 @@ public class UserInfoActivity extends AppCompatActivity {
         final CalendarView start_dRCalander=(CalendarView)startdR.findViewById(R.id.rest_dialog_calander);
         Button start_dRRegisterBtn=(Button)startdR.findViewById(R.id.rest_dialog_comment_register_Btn);
         Button start_dRCancelBtn=(Button)startdR.findViewById(R.id.rest_dialog_comment_cancel_Btn);
+        StartDate=new Date(start_dRCalander.getDate());
         start_dRCalander.setMinDate(start_dRCalander.getDate());
         start_dRCalander.setMaxDate(EndDate.getTime());
         start_dRCalander.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 StartDate=(new GregorianCalendar(year,month,dayOfMonth)).getTime();
-                GregorianCalendar gregorianCalendar=(new GregorianCalendar(year,month,dayOfMonth));
-                gregorianCalendar.add(Calendar.DATE, User.getInstance().getData().getRemain_break_day()-1);
-                EndDate=gregorianCalendar.getTime();
             }
         });
         start_dRRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 long start_date=StartDate.getTime();
+                Log.d("DEBUGYU","StartDate:"+StartDate.toString());
+                Calendar a=Calendar.getInstance();
+                a.setTime(StartDate);
+                a.add(Calendar.DATE, User.getInstance().getData().getRemain_break_day()-1);
+                EndDate=a.getTime();
+                Log.d("DEBUGYU","EndDate:"+EndDate.toString());
                 long end_date=EndDate.getTime();
                 Date date=new Date(start_date);
                 Log.d("DEBUGYU",date.toString());
