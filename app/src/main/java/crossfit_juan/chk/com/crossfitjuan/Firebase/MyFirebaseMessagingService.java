@@ -1,25 +1,43 @@
 package crossfit_juan.chk.com.crossfitjuan.Firebase;
 
 import android.app.ActivityManager;
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.json.JSONException;
+
 import java.util.List;
 
 import crossfit_juan.chk.com.crossfitjuan.Activity.LoginActivity;
+import crossfit_juan.chk.com.crossfitjuan.Activity.MainActivity;
 import crossfit_juan.chk.com.crossfitjuan.Activity.NoticeActivity;
 import crossfit_juan.chk.com.crossfitjuan.Activity.QnaActivity;
+import crossfit_juan.chk.com.crossfitjuan.Activity.ReservationActivity;
 import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.R;
+
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_NOTICE_ACTIVITY;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_QNA_ACTIVITY;
 
 /**
  * Created by gyuhwan on 2017. 10. 3..
@@ -37,38 +55,94 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String type=remoteMessage.getData().get("notification_type");
         String title=remoteMessage.getData().get("title");
         String body=remoteMessage.getData().get("body");
-        Intent intent=null;
-        if(type.equals("0")) {
-            intent = new Intent(this, NoticeActivity.class);
-
+        if(type.equals(PUSH_NOTICE_ACTIVITY)) {
+            getNoticeDialog(body);
         }
-        else if(type.equals("1") ){
-            intent = new Intent(this, QnaActivity.class);
-
+        else if(type.equals(PUSH_QNA_ACTIVITY) ){
+            getQnADialog(body);
         }
         else{
             Log.d("DEBUGYU","잘못된 타입의 메시지");
-            return;
         }
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+        return;
+    }
+    void getNoticeDialog(final String NoticeTitle){
+        Handler handler = new Handler(Looper.getMainLooper());
 
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.juan_push_icon)
-                .setContentTitle(title)
-                .setContentText(body)
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent);
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (User.getHereActivity().equals("Notice")) {
+                    try {
+                        Toast.makeText(User.getHereActivityContext(),"공지사항이 올라왔습니다",Toast.LENGTH_SHORT).show();
+                        ((NoticeActivity) (User.getHereActivityContext())).ReadNoticeList();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    final Dialog dR = new Dialog(User.getHereActivityContext());
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+                    dR.setContentView(R.layout.move_to_notice_dialog);
+                    TextView dRNoticeTitle = (TextView) dR.findViewById(R.id.move_to_notice_dialog_title);
+                    Button dROkBtn = (Button) dR.findViewById(R.id.move_to_notice_dialog_check_Btn);
+                    Button dRCancelBtn = (Button) dR.findViewById(R.id.move_to_notice_dialog_close_Btn);
+                    dRNoticeTitle.setText(NoticeTitle);
+                    dRCancelBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dR.dismiss();
+                        }
+                    });
+                    dROkBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getApplicationContext(), NoticeActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            startActivity(intent);
+                            dR.dismiss();
+                        }
+                    });
+                    dR.show();
+                }
+            }
+        });
+
     }
 
+    void getQnADialog(final String contents) {
+        if(User.getHereActivity().equals("Qna")){
+            return;
+        }
+        Handler handler = new Handler(Looper.getMainLooper());
 
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                final Dialog dR = new Dialog(User.getHereActivityContext());
+                dR.setContentView(R.layout.move_to_qna_dialog);
+                TextView dRQnaContents = (TextView) dR.findViewById(R.id.move_to_qna_dialog_title);
+                Button dROkBtn = (Button) dR.findViewById(R.id.move_to_qna_dialog_send_Btn);
+                Button dRCancelBtn = (Button) dR.findViewById(R.id.move_to_qna_dialog_close_Btn);
+                dRQnaContents.setText(contents);
+                dRCancelBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dR.dismiss();
+                    }
+                });
+                dROkBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), QnaActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
+                        dR.dismiss();
+                    }
+                });
+                dR.show();
+            }
+        });
+    }
 
 }
