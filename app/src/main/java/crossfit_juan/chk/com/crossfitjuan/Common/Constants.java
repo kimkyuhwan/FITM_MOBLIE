@@ -36,7 +36,7 @@ public class Constants {
     public static final String PUSH_QNA_ACTIVITY="1";
 
     // 유저 정보 상수 변수
-    public static final int USER_INFO_INDEX_REST_PERIOD=5;
+    public static final int USER_INFO_INDEX_REST_PERIOD=3;
     public static final int USER_INFO_INDEX_LOGOUT=6;
     public static final int USER_INFO_INDEX_SIGNOUT=7;
 
