@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import crossfit_juan.chk.com.crossfitjuan.Common.Constants;
+import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.NoticeData;
 import crossfit_juan.chk.com.crossfitjuan.HttpConnection.CustomThread.ReqHTTPJSONThread;
 import crossfit_juan.chk.com.crossfitjuan.R;
@@ -40,17 +41,10 @@ public class NoticeActivity extends Activity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                adapter.setIdxSelected(position);
-                adapter.notifyDataSetChanged();
-            }
-        });
+
     }
 
-    void ReadNoticeList() throws JSONException {
+    public void ReadNoticeList() throws JSONException {
         JSONObject send_data = new JSONObject();
         ReqHTTPJSONThread thread = new ReqHTTPJSONThread(Constants.REQ_GET_NOTICE, send_data);
         thread.start();
@@ -71,7 +65,7 @@ public class NoticeActivity extends Activity {
             e.printStackTrace();
         }
         if(result_code==3888){
-
+            adapter=new NoticeViewAdapter();
             Log.d("DEBUGYU",response.toString());
 
             for(int i=0;i<response.length();i++){
@@ -86,6 +80,14 @@ public class NoticeActivity extends Activity {
                 NoticeData newNotice=new NoticeData(noti_idx,noti_title,noti_body,Date,Time,false);
                 adapter.addItem(newNotice);
             }
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                    adapter.setIdxSelected(position);
+                    adapter.notifyDataSetChanged();
+                }
+            });
             adapter.notifyDataSetChanged();
         }
         else if(result_code==5800){
@@ -106,5 +108,11 @@ public class NoticeActivity extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        User.setHereActivityContext(this);
+        User.setHereActivity("Notice");
     }
 }

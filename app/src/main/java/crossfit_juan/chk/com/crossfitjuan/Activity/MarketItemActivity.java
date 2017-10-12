@@ -324,4 +324,11 @@ public class MarketItemActivity extends AppCompatActivity {
         });
         dR.show();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        User.setHereActivityContext(this);
+        User.setHereActivity("MarketItem");
+    }
 }

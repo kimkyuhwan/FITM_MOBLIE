@@ -185,5 +185,9 @@ public class RegisterActivity extends Activity {
         }
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        User.setHereActivityContext(null);
+    }
 }

@@ -1,5 +1,6 @@
 package crossfit_juan.chk.com.crossfitjuan.Activity;
 
+import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +35,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.Firebase.MyFirebaseInstanceIdService;
+import crossfit_juan.chk.com.crossfitjuan.Firebase.MyFirebaseMessagingService;
 import crossfit_juan.chk.com.crossfitjuan.R;
 import crossfit_juan.chk.com.crossfitjuan.tool.CircleImageView;
 import crossfit_juan.chk.com.crossfitjuan.tool.NaverCafe;
@@ -181,6 +183,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onResume() {
         super.onResume();
         SetProfileImage();
+        User.setHereActivityContext(this);
+        User.setHereActivity("Main");
+        NotificationManager NotiManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        NotiManager.cancelAll();
     }
     @OnClick({R.id.menu_btn, R.id.btn_tutorial, R.id.main_scalable1, R.id.btn_reserve, R.id.main_scalable2, R.id.btn_market, R.id.main_scalable3})
     public void onViewClicked(View view) {
@@ -232,5 +238,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return false;
     }
+
+
 
 }

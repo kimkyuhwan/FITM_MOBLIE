@@ -150,7 +150,7 @@ public class QnaActivity extends AppCompatActivity {
                 int hh=Integer.parseInt(msg_time.getString("hour"));
                 String mm=getTwoDemicalString(msg_time.getString("minute"));
                 String time="";
-                if(hh>12){
+                if(hh>=12){
                     hh%=12;
                     if(hh==0) hh=12;
                     time+="오후 "+String.valueOf(hh)+":"+mm;
@@ -242,7 +242,7 @@ public class QnaActivity extends AppCompatActivity {
                         int hh=Integer.parseInt(finalMsg_time.getString("hour"));
                         String mm=getTwoDemicalString(finalMsg_time.getString("minute"));
                         String time="";
-                        if(hh>12){
+                        if(hh>=12){
                             hh%=12;
                             if(hh==0) hh=12;
                             time+="오후 "+String.valueOf(hh)+":"+mm;
@@ -313,5 +313,12 @@ public class QnaActivity extends AppCompatActivity {
         mSocket.disconnect();
         mSocket.off();
         mSocket.close();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        User.setHereActivityContext(this);
+        User.setHereActivity("Qna");
     }
 }

@@ -190,6 +190,8 @@ public class MarketActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+        User.setHereActivity("Market");
+        User.setHereActivityContext(this);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

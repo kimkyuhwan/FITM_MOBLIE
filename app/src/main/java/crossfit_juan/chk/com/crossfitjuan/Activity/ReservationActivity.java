@@ -418,4 +418,11 @@ public class ReservationActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        User.setHereActivityContext(this);
+        User.setHereActivity("Reservation");
+    }
 }
