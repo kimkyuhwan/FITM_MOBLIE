@@ -32,16 +32,20 @@ public class UserData {
 
 
     public UserData(){
-        this.user_email = null;
-        this.user_gender = null;
-        this.user_phone_number = null;
-        this.user_name = null;
-        this.user_birtyday=null;
-        this.user_locker_num=-1;
-        this.user_lock_start=null;
-        this.user_lock_finish=null;
-        certification=0;
-        remain_break_day=0;
+       this.user_access_key=null;
+       this.user_email=null;
+       this.user_name=null;
+       this.user_gender=null;
+       this.user_phone_number=null;
+       this.user_birtyday=null;
+       this.user_locker_num=-1;
+       this.user_lock_start=null;
+       this.user_lock_finish=null;
+       this.user_start_date=null;
+       this.user_finish_date=null;
+       this.certification=0;
+       this.remain_break_day=0;
+       this.rest_state=0;
     }
 
 
