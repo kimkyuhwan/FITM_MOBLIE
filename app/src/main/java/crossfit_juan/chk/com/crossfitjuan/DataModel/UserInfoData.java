@@ -9,16 +9,14 @@ public class UserInfoData {
     String title;
     String body;
     String hint;
-    boolean isBtnVisible;
 
     public UserInfoData() {
     }
 
-    public UserInfoData(String title, String body, String hint, boolean isBtnVisible) {
+    public UserInfoData(String title, String body, String hint) {
         this.title = title;
         this.body = body;
         this.hint = hint;
-        this.isBtnVisible = isBtnVisible;
     }
 
     public String getTitle() {
@@ -45,11 +43,4 @@ public class UserInfoData {
         this.hint = hint;
     }
 
-    public boolean isBtnVisible() {
-        return isBtnVisible;
-    }
-
-    public void setBtnVisible(boolean btnVisible) {
-        isBtnVisible = btnVisible;
-    }
 }
