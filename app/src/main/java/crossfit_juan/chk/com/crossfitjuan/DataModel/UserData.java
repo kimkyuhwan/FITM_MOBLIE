@@ -28,6 +28,7 @@ public class UserData {
 
     private int certification;
     private int remain_break_day;
+    private int rest_state;
 
 
     public UserData(){
@@ -146,6 +147,14 @@ public class UserData {
 
     public void setRemain_break_day(int remain_break_day) {
         this.remain_break_day = remain_break_day;
+    }
+
+    public int getRest_state() {
+        return rest_state;
+    }
+
+    public void setRest_state(int rest_state) {
+        this.rest_state = rest_state;
     }
 
     public String getDataForLog(){
