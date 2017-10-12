@@ -274,7 +274,7 @@ public class UserInfoActivity extends AppCompatActivity {
     }
 
     void rest(){
-        String EndDate_String=User.getInstance().getData().getUser_finish_date();
+        final String EndDate_String=User.getInstance().getData().getUser_finish_date();
         try {
             EndDate=new SimpleDateFormat("yyyyMMdd").parse(EndDate_String);
         } catch (ParseException e) {
@@ -303,7 +303,12 @@ public class UserInfoActivity extends AppCompatActivity {
                 Calendar a=Calendar.getInstance();
                 a.setTime(StartDate);
                 a.add(Calendar.DATE, User.getInstance().getData().getRemain_break_day()-1);
-                EndDate=a.getTime();
+                try {
+                    EndDate=least(new SimpleDateFormat("yyyyMMdd").parse(EndDate_String),a.getTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 Log.d("DEBUGYU","EndDate:"+EndDate.toString());
                 long end_date=EndDate.getTime();
                 Date date=new Date(start_date);
@@ -348,6 +353,9 @@ public class UserInfoActivity extends AppCompatActivity {
             }
         });
         startdR.show();
+    }
+    public static Date least(Date a, Date b) {
+        return a == null ? b : (b == null ? a : (a.before(b) ? a : b));
     }
     void RegisterRest(String body) throws JSONException {
         JSONObject send_data = new JSONObject();
