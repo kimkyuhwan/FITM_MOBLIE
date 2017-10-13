@@ -65,6 +65,7 @@ import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PICK_FROM_ALBU
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PROFILE_PATH;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.REQUEST_PERMISSION_ACCESS_STORAGE;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.REST_STATE_DONE;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.REST_STATE_FAILED;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.REST_STATE_NONE;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.REST_STATE_PENDING;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.REST_STATE_REMAIN;
@@ -80,6 +81,11 @@ public class UserInfoActivity extends AppCompatActivity {
     Bitmap bm, resized;
 
     Date StartDate, EndDate;
+    String restStr="";
+    String alertStr="";
+    String rest_comments;
+    String rest_period;
+    String rest_admin_message;
 
     @BindView(R.id.user_info_profile_image)
     CircleImageView userInfoProfileImage;
@@ -97,7 +103,7 @@ public class UserInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_info);
         ButterKnife.bind(this);
         userInfoName.setText(User.getInstance().getData().getUser_name());
-        initAdapter();
+
         setListViewClickListener();
         Initalize_OAuthLogin();
 
@@ -105,6 +111,21 @@ public class UserInfoActivity extends AppCompatActivity {
 
     public void initAdapter(){
         adapter=new UserInfoItemViewAdapter(this);
+        String period="";
+        if(User.getInstance().getData().getUser_start_date()!=null && !User.getInstance().getData().getUser_start_date().equals("")){
+            period=User.getInstance().getData().getUser_start_date()+"~"+User.getInstance().getData().getUser_finish_date();
+        }
+        adapter.addItem(new UserInfoData("등록기간",period,"등록되지 않은 사용자 입니다"));
+        setRestTextView();
+        adapter.addItem(new UserInfoData("휴회신청",restStr,alertStr));
+
+        String locker_num="";
+        int lock_num=User.getInstance().getData().getUser_locker_num();
+        if(lock_num!=-1){
+            locker_num=String.valueOf(lock_num);
+            locker_num+=" ("+User.getInstance().getData().getUser_start_date()+"~"+User.getInstance().getData().getUser_start_date()+")";
+        }
+        adapter.addItem(new UserInfoData("락커 번호",locker_num,"락커를 등록해 주세요"));
         int user_certfication=User.getInstance().getData().getCertification();
         String user_rank="JUAN Crossfit ";
         if(user_certfication==0){
@@ -117,25 +138,31 @@ public class UserInfoActivity extends AppCompatActivity {
             user_rank+="정회원";
         }
         adapter.addItem(new UserInfoData("회원등급",user_rank,""));
-        String locker_num="";
-        int lock_num=User.getInstance().getData().getUser_locker_num();
-        if(lock_num!=-1){
-            locker_num=String.valueOf(lock_num);
-            locker_num+=" ("+User.getInstance().getData().getUser_start_date()+"~"+User.getInstance().getData().getUser_start_date()+")";
-        }
-        adapter.addItem(new UserInfoData("락커 번호",locker_num,"락커를 등록해 주세요"));
-        String period="";
-        if(User.getInstance().getData().getUser_start_date()!=null && !User.getInstance().getData().getUser_start_date().equals("")){
-            period=User.getInstance().getData().getUser_start_date()+"~"+User.getInstance().getData().getUser_finish_date();
-        }
-        adapter.addItem(new UserInfoData("등록기간",period,"등록되지 않은 사용자 입니다"));
-        String restStr="현재 잔여 일수는 "+User.getInstance().getData().getRemain_break_day()+"일 입니다";
-        adapter.addItem(new UserInfoData("휴회신청","",restStr));
         adapter.addItem(new UserInfoData("이메일",User.getInstance().getData().getUser_email(),""));
         adapter.addItem(new UserInfoData("휴대폰 번호",User.getInstance().getData().getUser_phone_number(),""));
         adapter.addItem(new UserInfoData("로그아웃","","로그아웃 시 회원정보는 삭제되지 않습니다"));
         adapter.addItem(new UserInfoData("회원탈퇴","","회원 정보와 함께 기존의 대화내용이 모두 지워집니다"));
         userInfoList.setAdapter(adapter);
+    }
+    void setRestTextView(){
+        restStr="";
+        alertStr="";
+        switch (User.getInstance().getData().getRest_state()){
+            case REST_STATE_NONE:
+            case REST_STATE_REMAIN:
+                alertStr = "현재 잔여 일수는 " + User.getInstance().getData().getRemain_break_day() + "일 입니다";
+                break;
+            case REST_STATE_PENDING:
+                restStr="관리자가 휴회 신청을 보류중입니다";
+                break;
+            case REST_STATE_DONE:
+                restStr="관리자가 휴회 신청을 수락했습니다.";
+                break;
+            case REST_STATE_FAILED:
+                restStr="관리자가 휴회 신청을 거절했습니다.";
+                break;
+        }
+
     }
 
     public void setListViewClickListener(){
@@ -145,11 +172,20 @@ public class UserInfoActivity extends AppCompatActivity {
                 switch (idx){
                     case USER_INFO_INDEX_REST_PERIOD:
                         if(User.getInstance().getData().getCertification()>=CERTIFICATION_REST) {
-                            if(User.getInstance().getData().getRest_state()==REST_STATE_NONE){
-                                Toast.makeText(getApplicationContext(),"잔여 일수가 부족합니다",Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                rest();
+                            switch (User.getInstance().getData().getRest_state()){
+                                case REST_STATE_NONE:
+                                    Toast.makeText(getApplicationContext(),"잔여 일수가 부족합니다",Toast.LENGTH_SHORT).show();
+                                    break;
+                                case REST_STATE_REMAIN:
+                                    rest();
+                                    break;
+                                case REST_STATE_PENDING:
+                                    restCancelDialog();
+                                    break;
+                                case REST_STATE_DONE:
+                                case REST_STATE_FAILED:
+                                    restResultDialog(User.getInstance().getData().getRest_state());
+                                    break;
                             }
                         }
                         else{
@@ -184,10 +220,88 @@ public class UserInfoActivity extends AppCompatActivity {
         Log.d("DEBUGYU","State : "+User.getInstance().getData().getRest_state());
     }
 
+    void restCancelDialog(){
+        final Dialog dR = new Dialog(User.getHereActivityContext());
+
+        dR.setContentView(R.layout.move_to_notice_dialog);
+        TextView dRNoticeTap=(TextView)dR.findViewById(R.id.move_to_notice_dialog_tap);
+        TextView dRNoticeTitle = (TextView) dR.findViewById(R.id.move_to_notice_dialog_title);
+        Button dROkBtn = (Button) dR.findViewById(R.id.move_to_notice_dialog_check_Btn);
+        Button dRCancelBtn = (Button) dR.findViewById(R.id.move_to_notice_dialog_close_Btn);
+        dRNoticeTap.setText(rest_period);
+        dRNoticeTitle.setText(rest_comments);
+        dRCancelBtn.setText("닫기");
+        dROkBtn.setText("신청취소");
+        dRCancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dR.dismiss();
+            }
+        });
+        dROkBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    restCancel();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                dR.dismiss();
+            }
+        });
+        dR.show();
+    }
+    void restCancel() throws JSONException {
+        JSONObject send_data = new JSONObject();
+        try{
+            send_data.put("id_email", User.getInstance().getData().getUser_email());
+        }catch (JSONException jsonex){
+            jsonex.printStackTrace();
+        }
+        ReqHTTPJSONThread thread = new ReqHTTPJSONThread(Constants.REQ_CANCEL_REMAIN_DAY, send_data);
+        thread.start();
+        try{
+            thread.join();
+        }catch (InterruptedException interex){
+            interex.printStackTrace();
+        }
+        String result = thread.handler.getMsg();
+        JSONObject result_data = new JSONObject(result);
+        int result_code = result_data.getInt("code");
+        // JSONObject response=result_data.getJSONObject(  "response");
+        if(result_code==9999){
+            Log.d("DEBUGYU","신청 취소 성공");
+            User.getInstance().getData().setRest_state(REST_STATE_REMAIN);
+            setRestTextView();
+            adapter.changebodyText(USER_INFO_INDEX_REST_PERIOD,restStr,alertStr);
+            adapter.notifyDataSetChanged();
+        }
+        else if(result_code==8888){
+            Log.d("DEBUGYU","신청 취소 실패");
+        }
+    }
+    void restResultDialog(int state){
+        AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
+        alt_bld.setMessage(rest_admin_message).setCancelable(
+                false).setNegativeButton("닫기",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Action for 'NO' Button
+                    }
+                });
+        AlertDialog alert = alt_bld.create();
+        // Title for AlertDialog
+        if(state==REST_STATE_DONE)
+            alert.setTitle("[관리자]가 승인하였습니다");
+        else if(state==REST_STATE_FAILED)
+            alert.setTitle("[관리자]가 거절하였습니다");
+        // Icon for AlertDialog
+        alert.show();
+    }
     int checkRestState() throws JSONException {
         JSONObject send_data = new JSONObject();
         try{
-            send_data.put("access_key", User.getInstance().getData().getUser_access_key());
+            send_data.put("id_email", User.getInstance().getData().getUser_email());
         }catch (JSONException jsonex){
             jsonex.printStackTrace();
         }
@@ -205,11 +319,23 @@ public class UserInfoActivity extends AppCompatActivity {
         if(result_code==9999){
             JSONObject resultData=result_data.getJSONObject("result");
             int state=resultData.getInt("state");
+            Log.d("DEBUGYU","getRemain Data : "+resultData
+                    .toString());
+            String startdate=resultData.getString("start_date");
+            String enddate=resultData.getString("end_date");
+            String comments=resultData.getString("comments");
+            String message=resultData.getString("message");
+            rest_period=startdate+"~"+enddate;
+            rest_comments=comments;
+            rest_admin_message=message;
             if(state==0){
                 return REST_STATE_PENDING;
             }
-            else{
+            else if(state==1){
                 return REST_STATE_DONE;
+            }
+            else if(state==2){
+                return REST_STATE_FAILED;
             }
 
         }
@@ -222,20 +348,18 @@ public class UserInfoActivity extends AppCompatActivity {
         startActivityForResult(intent, PICK_FROM_ALBUM_ACTION);
     }
 
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != RESULT_OK) {
-            return;
-        }
-        switch (requestCode) {
-            case PICK_FROM_ALBUM_ACTION:
-                ImageCaptureUrl = data.getData();
-                String realpath = getImagePath(ImageCaptureUrl);
-                AWSService.getInstance().upload(new File(realpath));
-                break;
-        }
+    void Initalize_OAuthLogin(){
+        mOAuthLoginModule = OAuthLogin.getInstance();
+        mOAuthLoginModule.init(
+                UserInfoActivity.this
+                ,OAUTH_CLIENT_ID
+                ,OAUTH_CLIENT_SECRET
+                ,OAUTH_CLIENT_NAME
+                //,OAUTH_CALLBACK_INTENT
+                // SDK 4.1.4 버전부터는 OAUTH_CALLBACK_INTENT변수를 사용하지 않습니다.
+        );
     }
+
 
     public String getImagePath(Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
@@ -274,9 +398,10 @@ public class UserInfoActivity extends AppCompatActivity {
     }
 
     void rest(){
+        Log.d("DEBUGYU",User.getInstance().getData().toString());
         final String EndDate_String=User.getInstance().getData().getUser_finish_date();
         try {
-            EndDate=new SimpleDateFormat("yyyyMMdd").parse(EndDate_String);
+            EndDate=new SimpleDateFormat("yyyy/MM/dd").parse(EndDate_String);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -304,7 +429,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 a.setTime(StartDate);
                 a.add(Calendar.DATE, User.getInstance().getData().getRemain_break_day()-1);
                 try {
-                    EndDate=least(new SimpleDateFormat("yyyyMMdd").parse(EndDate_String),a.getTime());
+                    EndDate=least(new SimpleDateFormat("yyyy/MM/dd").parse(EndDate_String),a.getTime());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -333,6 +458,11 @@ public class UserInfoActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Log.d("DEBUGYU",StartDate.toString()+"~"+EndDate.toString());
+                        try {
+                            RegisterRest(StartDate,EndDate,"테스트");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         enddR.dismiss();
                     }
                 });
@@ -357,11 +487,17 @@ public class UserInfoActivity extends AppCompatActivity {
     public static Date least(Date a, Date b) {
         return a == null ? b : (b == null ? a : (a.before(b) ? a : b));
     }
-    void RegisterRest(String body) throws JSONException {
+    void RegisterRest(Date StartDate,Date EndDate, String body) throws JSONException {
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy/MM/dd");
         JSONObject send_data = new JSONObject();
         try{
-            send_data.put("access_key", User.getInstance().getData().getUser_access_key());
+            send_data.put("id_email", User.getInstance().getData().getUser_email());
+            send_data.put("name",User.getInstance().getData().getUser_name());
             send_data.put("comments",body);
+            send_data.put("start_date",dateFormat.format(StartDate));
+            send_data.put("end_date",dateFormat.format(EndDate));
+            Log.d("DEBUGYU","rest 신청 : "+send_data.toString());
         }catch (JSONException jsonex){
             jsonex.printStackTrace();
         }
@@ -375,11 +511,22 @@ public class UserInfoActivity extends AppCompatActivity {
         String result = thread.handler.getMsg();
         JSONObject result_data = new JSONObject(result);
         int result_code = result_data.getInt("code");
+        Log.d("DEBUGYU","Code : "+String.valueOf(result_code));
         // JSONObject response=result_data.getJSONObject(  "response");
-        if(result_code==8888){
+        if(result_code==9999){
             Log.d("DEBUGYU","신청되었습니다");
+            User.getInstance().getData().setRest_state(REST_STATE_PENDING);
+            rest_period=dateFormat2.format(StartDate)+"~"+dateFormat2.format(EndDate);
+            rest_comments=body;
+            rest_admin_message="";
+            setRestTextView();
+            adapter.changebodyText(USER_INFO_INDEX_REST_PERIOD,restStr,alertStr);
+            adapter.notifyDataSetChanged();
         }
-        else if(result_code==5800){
+        else if(result_code==6666){
+            Log.d("DEBUGYU","이미 신청한 상태입니다");
+        }
+        else{
             Log.d("DEBUGYU","신청에 실패했습니다");
         }
     }
@@ -505,12 +652,30 @@ public class UserInfoActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+        try {
+            User.LoadStomUserInfo();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         SetProfileImage();
         User.setHereActivityContext(this);
         User.setHereActivity("UserInfo");
         setRestState();
+        initAdapter();
     }
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        switch (requestCode) {
+            case PICK_FROM_ALBUM_ACTION:
+                ImageCaptureUrl = data.getData();
+                String realpath = getImagePath(ImageCaptureUrl);
+                AWSService.getInstance().upload(new File(realpath));
+                break;
+        }
+    }
 
     @OnClick({R.id.user_info_photoAlbum})
     public void onViewClicked(View view) {
@@ -525,15 +690,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 break;
         }
     }
-    void Initalize_OAuthLogin(){
-        mOAuthLoginModule = OAuthLogin.getInstance();
-        mOAuthLoginModule.init(
-                UserInfoActivity.this
-                ,OAUTH_CLIENT_ID
-                ,OAUTH_CLIENT_SECRET
-                ,OAUTH_CLIENT_NAME
-                //,OAUTH_CALLBACK_INTENT
-                // SDK 4.1.4 버전부터는 OAUTH_CALLBACK_INTENT변수를 사용하지 않습니다.
-        );
-    }
+
+
+
 }
