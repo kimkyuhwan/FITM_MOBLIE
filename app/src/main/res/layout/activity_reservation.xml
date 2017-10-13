@@ -58,6 +58,7 @@
         android:text="2 in 1 TEAM\n 4 Rounds for time of:\n500m Row \n24 Burpees \n42 Box jumps 24/20"
         android:textColor="#121212"
         android:textSize="20dp" />
+    <!--
     <LinearLayout
         android:padding="5dp"
         android:layout_width="wrap_content"
@@ -83,11 +84,11 @@
             />
 
     </LinearLayout>
-
+    -->
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/participants_List"
+        android:id="@+id/timetable_List"
         android:dividerHeight="1dp"
         android:divider="#000000"
         >
