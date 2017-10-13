@@ -161,7 +161,23 @@ public class UserData {
         this.rest_state = rest_state;
     }
 
-    public String getDataForLog(){
-        return getUser_access_key() + " , " + getUser_email() + " , " + getUser_name() + " , " + getUser_gender();
+    @Override
+    public String toString() {
+        return "UserData{" +
+                "user_access_key='" + user_access_key + '\'' +
+                ", user_email='" + user_email + '\'' +
+                ", user_name='" + user_name + '\'' +
+                ", user_gender='" + user_gender + '\'' +
+                ", user_phone_number='" + user_phone_number + '\'' +
+                ", user_birtyday='" + user_birtyday + '\'' +
+                ", user_locker_num=" + user_locker_num +
+                ", user_lock_start='" + user_lock_start + '\'' +
+                ", user_lock_finish='" + user_lock_finish + '\'' +
+                ", user_start_date='" + user_start_date + '\'' +
+                ", user_finish_date='" + user_finish_date + '\'' +
+                ", certification=" + certification +
+                ", remain_break_day=" + remain_break_day +
+                ", rest_state=" + rest_state +
+                '}';
     }
 }
