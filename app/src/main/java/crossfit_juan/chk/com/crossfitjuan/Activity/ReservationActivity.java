@@ -35,7 +35,11 @@ import crossfit_juan.chk.com.crossfitjuan.DataModel.Participant;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.Time_Table;
 import crossfit_juan.chk.com.crossfitjuan.HttpConnection.CustomThread.ReqHTTPJSONThread;
 import crossfit_juan.chk.com.crossfitjuan.R;
-import crossfit_juan.chk.com.crossfitjuan.tool.ParticipantViewAdapter;
+import crossfit_juan.chk.com.crossfitjuan.tool.TimetableViewAdapter;
+
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.RESERVATION_SELECT_STATE_NONE;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.RESERVATION_SELECT_STATE_NOT_SELECTED;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.RESERVATION_SELECT_STATE_SELECTED;
 
 public class ReservationActivity extends AppCompatActivity {
 
@@ -46,31 +50,28 @@ public class ReservationActivity extends AppCompatActivity {
     TextView textViewTitle;
     @BindView(R.id.textView_contents)
     TextView textViewContents;
-    @BindView(R.id.select_schedule_Btn)
-    Button selectScheduleBtn;
-    @BindView(R.id.schedule_Register_Btn)
-    Button scheduleRegisterBtn;
-    @BindView(R.id.participants_List)
-    ListView participantsList;
 
-    boolean isReserved=false;
-    boolean isPossibleToReserve=false;
-    int selectedSchedule=-1;
+
+    boolean isReserved = false;
+    boolean isPossibleToReserve = false;
+    int selectedSchedule = -1;
 
     Time_Table timetable;
     Classinfo cinfo;
-    ParticipantViewAdapter adapter;
+    TimetableViewAdapter adapter;
 
     String toDate;
+    @BindView(R.id.timetable_List)
+    ListView timetableList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
         ButterKnife.bind(this);
-        toDate=getToDate();
-        adapter = new ParticipantViewAdapter();
-        participantsList.setAdapter(adapter);
+        toDate = getToDate();
+        adapter = new TimetableViewAdapter(this,toDate);
+        timetableList.setAdapter(adapter);
 
         try {
             getMyTodayWod();
@@ -81,14 +82,14 @@ public class ReservationActivity extends AppCompatActivity {
 
     }
 
-    public String getToDate(){
+    public String getToDate() {
         Date from = new Date();
         SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
         String to = transFormat.format(from);
         return to;
     }
 
-    public void getTodayWod() throws JSONException{
+    public void getTodayWod() throws JSONException {
         JSONObject send_data = new JSONObject();
         try {
             send_data.put("date", toDate);
@@ -106,12 +107,13 @@ public class ReservationActivity extends AppCompatActivity {
         String result = thread.handler.getMsg();
         JSONObject result_data = null;
         int result_code = 0;
-            result_data = new JSONObject(result);
-            result_code = result_data.getInt("code");
-            JSONObject response = result_data.getJSONObject("response");
+        result_data = new JSONObject(result);
+        result_code = result_data.getInt("code");
+        JSONObject response = result_data.getJSONObject("response");
 
         if (result_code == 1150) { // 성공 시
             timetable = new Time_Table();
+            Log.d("DEBUGYU", response.toString());
 
             timetable.setDate(response.getString("date"));
             timetable.setToday_wod_name(response.getString("today_wod_name"));
@@ -121,30 +123,42 @@ public class ReservationActivity extends AppCompatActivity {
             for (int i = 0; i < A.length(); i++) {
                 timetable.addClasses(A.getJSONObject(i));
             }
-            String date=timetable.getDate();
-            String dd=dataFormatGen(date);
-            Log.d("DDDDDD",dd);
+            for(int i=0;i<timetable.getClasses().size();i++){
+                int state=RESERVATION_SELECT_STATE_NONE;
+                if(timetable.getClasses().get(i).getClass_num()==cinfo.getClass_num()){
+                    state=RESERVATION_SELECT_STATE_SELECTED;
+                }
+                else if(cinfo.getClass_num()!=-1){
+                    state=RESERVATION_SELECT_STATE_NOT_SELECTED;
+                }
+                timetable.getClasses().get(i).setSelected_state(state);
+                adapter.addItem(timetable.getClasses().get(i));
+            }
+            adapter.notifyDataSetChanged();
+            String date = timetable.getDate();
+            String dd = dataFormatGen(date);
+            Log.d("DDDDDD", dd);
             textViewDate.setText(dd);
             textViewTitle.setText(timetable.getToday_wod_name());
             textViewContents.setText(timetable.getToday_wod_content());
-            isPossibleToReserve=true;
+            isPossibleToReserve = true;
 
             Log.e("DEBUGYU", "success" + timetable.toString());
         } else if (result_code == 2170) { // 실패 시
             Log.e("DEBUGYU", "fail");
-            String dd=dataFormatGen(toDate);
+            String dd = dataFormatGen(toDate);
             textViewDate.setText(dd);
             textViewTitle.setText("오늘은 쉽니다");
             textViewContents.setText("");
-            isPossibleToReserve=false;
+            isPossibleToReserve = false;
         }
-        if(selectedSchedule!=-1){
-            getParticipantsInfo(selectedSchedule);
+        if (selectedSchedule != -1) {
+//            getParticipantsInfo(selectedSchedule);
         }
     }
 
-    public String dataFormatGen(String date){
-        String dd=date.subSequence(0,4)+". "+date.subSequence(4,6)+". "+date.subSequence(6,8);
+    public String dataFormatGen(String date) {
+        String dd = date.subSequence(0, 4) + ". " + date.subSequence(4, 6) + ". " + date.subSequence(6, 8);
         return dd;
     }
 
@@ -169,26 +183,19 @@ public class ReservationActivity extends AppCompatActivity {
         result_data = new JSONObject(result);
         result_code = result_data.getInt("code");
         JSONObject response = result_data.getJSONObject("response");
+        cinfo = new Classinfo();
+
         if (result_code == 1170) { // 성공 시
             timetable = new Time_Table();
 
-            cinfo=new Classinfo();
             timetable.setDate(response.getString("date"));
             timetable.setToday_wod_name(response.getString("today_wod_name"));
             timetable.setToday_wod_content(response.getString("today_wod_content"));
             cinfo.setClass_num(response.getInt("class_num"));
             cinfo.setStart_time(response.getString("start_time"));
             cinfo.setFinish_time(response.getString("finish_time"));
-//            timetable.setNum_of_classes(response.getInt("num_of_classes"));
-
-            //textViewDate.setText(dd);
-        //    textViewTitle.setText(timetable.getToday_wod_name());
-       //     textViewContents.setText(timetable.getToday_wod_content());
-            selectScheduleBtn.setText(cinfo.getStart_time()+" ~ "+cinfo.getFinish_time());
-            isReserved=true;
-            selectScheduleBtn.setClickable(!isReserved);
-            scheduleRegisterBtn.setText("취소");
-            selectedSchedule=cinfo.getClass_num()-1;
+            isReserved = true;
+            selectedSchedule = cinfo.getClass_num() - 1;
 
             Log.e("DEBUGYU", "success" + timetable.toString());
         } else if (result_code == 2170) { // 실패 시
@@ -198,107 +205,6 @@ public class ReservationActivity extends AppCompatActivity {
         getTodayWod();
     }
 
-    public void RegisterReservation(String comment){
-        JSONObject send_data = new JSONObject();
-        try {
-            send_data.put("access_key", User.getInstance().getData().getUser_access_key());
-            send_data.put("date", toDate);
-            send_data.put("class_num",selectedSchedule+1);
-            send_data.put("name",User.getInstance().getData().getUser_name());
-            send_data.put("comments",comment);
-        } catch (JSONException jsonex) {
-            jsonex.printStackTrace();
-        }
-        ReqHTTPJSONThread thread = new ReqHTTPJSONThread(Constants.REQ_REGISTER_RESERVATION, send_data);
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException interex) {
-            interex.printStackTrace();
-        }
-        String result = thread.handler.getMsg();
-        JSONObject result_data = null;
-        int result_code = 0;
-        try {
-            result_data = new JSONObject(result);
-            result_code = result_data.getInt("code");
-            JSONObject response = result_data.getJSONObject("response");
-            Log.d("DEBUGYU",String.valueOf(result_code) );
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        if(result_code==1350){
-            Toast.makeText(getApplicationContext(),"등록되었습니다",Toast.LENGTH_LONG).show();
-            isReserved=true;
-            selectScheduleBtn.setClickable(!isReserved);
-            scheduleRegisterBtn.setText("취소");
-            try {
-                getTodayWod();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        else if(result_code==1270){
-            Toast.makeText(getApplicationContext(),"잘못된 요청입니다",Toast.LENGTH_LONG).show();
-        }
-    }
-
-
-    public void getParticipantsInfo(int idx){
-        Vector<Participant> vp=timetable.getClasses().get(idx).getParticipants();
-        adapter=null;
-        adapter = new ParticipantViewAdapter();
-        for(int i=0;i<vp.size();i++)
-            adapter.addItem(vp.elementAt(i));
-        Log.d("DEBUGYU",String.valueOf(adapter.getCount()));
-        participantsList.setAdapter(adapter);
-    }
-
-
-
-    public void CancelReservation(){
-        JSONObject send_data = new JSONObject();
-        try {
-            send_data.put("access_key", User.getInstance().getData().getUser_access_key());
-            send_data.put("date", toDate);
-        } catch (JSONException jsonex) {
-            jsonex.printStackTrace();
-        }
-        ReqHTTPJSONThread thread = new ReqHTTPJSONThread(Constants.REQ_CANCEL_RESERVATION, send_data);
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException interex) {
-            interex.printStackTrace();
-        }
-        String result = thread.handler.getMsg();
-        JSONObject result_data = null;
-        int result_code = 0;
-        try {
-            result_data = new JSONObject(result);
-            result_code = result_data.getInt("code");
-            JSONObject response = result_data.getJSONObject("response");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        if(result_code==1270){
-            Toast.makeText(getApplicationContext(),"취소되었습니다",Toast.LENGTH_LONG).show();
-            scheduleRegisterBtn.setText("등록");
-            isReserved=false;
-            selectScheduleBtn.setClickable(!isReserved);
-            try {
-                getTodayWod();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        else if(result_code==2170){
-            Toast.makeText(getApplicationContext(),"잘못된 요청입니다",Toast.LENGTH_LONG).show();
-        }
-
-
-    }
-
 
 
     @Override
@@ -306,12 +212,12 @@ public class ReservationActivity extends AppCompatActivity {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
-
+/*
     @OnClick({R.id.select_schedule_Btn, R.id.schedule_Register_Btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.select_schedule_Btn:
-                if(isPossibleToReserve) {
+                if (isPossibleToReserve) {
                     // 시간 선택 기능
                     final Dialog d = new Dialog(ReservationActivity.this);
                     d.setContentView(R.layout.time_select_dialog);
@@ -350,9 +256,8 @@ public class ReservationActivity extends AppCompatActivity {
                     Window window = d.getWindow();
                     window.setGravity(Gravity.BOTTOM);
                     d.show();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),"오늘은 예약이 불가능합니다",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "오늘은 예약이 불가능합니다", Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.schedule_Register_Btn:
@@ -364,11 +269,11 @@ public class ReservationActivity extends AppCompatActivity {
 //                    Toast.makeText(getApplicationContext(), "스케줄 등록 기능 준비중", Toast.LENGTH_LONG).show();
                     final Dialog dR = new Dialog(ReservationActivity.this);
                     dR.setContentView(R.layout.register_reservation_dialog);
-                    TextView dRTime=(TextView)dR.findViewById(R.id.dialog_time);
-                    final EditText dRcomment=(EditText)dR.findViewById(R.id.dialog_comment);
-                    final ImageButton dRcommentClearBtn=(ImageButton)dR.findViewById(R.id.dialog_comment_clear_Btn);
-                    Button dRRegisterBtn=(Button)dR.findViewById(R.id.dialog_comment_register_Btn);
-                    Button dRCancelBtn=(Button)dR.findViewById(R.id.dialog_comment_cancel_Btn);
+                    TextView dRTime = (TextView) dR.findViewById(R.id.dialog_time);
+                    final EditText dRcomment = (EditText) dR.findViewById(R.id.dialog_comment);
+                    final ImageButton dRcommentClearBtn = (ImageButton) dR.findViewById(R.id.dialog_comment_clear_Btn);
+                    Button dRRegisterBtn = (Button) dR.findViewById(R.id.dialog_comment_register_Btn);
+                    Button dRCancelBtn = (Button) dR.findViewById(R.id.dialog_comment_cancel_Btn);
                     dRTime.setText(selectScheduleBtn.getText().toString());
                     dRcomment.addTextChangedListener(new TextWatcher() {
                         @Override
@@ -378,10 +283,9 @@ public class ReservationActivity extends AppCompatActivity {
 
                         @Override
                         public void onTextChanged(CharSequence s, int start, int before, int count) {
-                            if(s.length()==0){
+                            if (s.length() == 0) {
                                 dRcommentClearBtn.setVisibility(View.INVISIBLE);
-                            }
-                            else{
+                            } else {
                                 dRcommentClearBtn.setVisibility(View.VISIBLE);
                             }
                         }
@@ -400,9 +304,9 @@ public class ReservationActivity extends AppCompatActivity {
                     dRRegisterBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String tx=dRcomment.getText().toString();
+                            String tx = dRcomment.getText().toString();
                             RegisterReservation(tx);
-                            Log.d("DEBUGYU",tx);
+                            Log.d("DEBUGYU", tx);
                             dR.dismiss();
                         }
                     });
@@ -418,7 +322,7 @@ public class ReservationActivity extends AppCompatActivity {
                 break;
         }
     }
-
+*/
     @Override
     public void onResume() {
         super.onResume();
