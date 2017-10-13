@@ -65,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
-                        app:scale_left="320"
+                        app:scale_left="350"
                         app:scale_top="32"
                         app:scale_height="40"
                         app:scale_width="120"
@@ -76,7 +76,7 @@
                         />
                     <ImageButton
                         app:scale_top="35"
-                        app:scale_left="460"
+                        app:scale_left="480"
                         app:scale_width="40"
                         app:scale_height="40"
                         android:layout_width="wrap_content"
@@ -156,7 +156,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:scale_left="320"
+                    app:scale_left="350"
                     app:scale_top="32"
                     app:scale_width="120"
                     app:scale_textsize="30"
@@ -167,7 +167,7 @@
                 <ImageButton
                     android:id="@+id/btn_market"
                     app:scale_top="35"
-                    app:scale_left="450"
+                    app:scale_left="480"
                     app:scale_width="40"
                     app:scale_height="40"
                     android:layout_width="wrap_content"
