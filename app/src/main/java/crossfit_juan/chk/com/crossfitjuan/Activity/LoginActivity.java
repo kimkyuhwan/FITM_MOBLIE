@@ -302,7 +302,7 @@ public class LoginActivity extends AppCompatActivity {
         } catch (JSONException jsonex) {
             jsonex.printStackTrace();
         }
-        Log.e("FITM_LOGIN", user_data.getDataForLog() + "#" + String.valueOf(result_code));
+        Log.e("FITM_LOGIN", user_data.toString() + "#" + String.valueOf(result_code));
         if (result_code == 1100 && isRegistered == 1) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                    /* intent.putExtra("access_key", user_data.getUser_access_key());
@@ -324,7 +324,7 @@ public class LoginActivity extends AppCompatActivity {
             user_data.setUser_finish_date(var_finish_date);
             user_data.setRemain_break_day(var_remain_break_day);
             User.getInstance().setUser(user_data);
-            Log.e("DEBUGYU", user_data.getDataForLog());
+            Log.e("DEBUGYU", user_data.toString());
             startActivity(intent);
             finish();
         } else if (result_code == 1101 || (result_code == 1100)) {
