@@ -83,7 +83,11 @@ public class UserInfoItemViewAdapter extends BaseAdapter {
         return convertView;
     }
 
-
+    public void changebodyText(int idx,String body,String hint){
+        listViewItemList.get(idx).setBody(body);
+        listViewItemList.get(idx).setHint(hint);
+        notifyDataSetChanged();
+    }
 
     public UserInfoData getMarketItem(int position){
         return listViewItemList.get(position);
