@@ -16,9 +16,11 @@ public class Classinfo {
     private String _id;
     private int max_participant;
     private Vector<Participant> participants;
-
+    private int participants_size;
+    private int selected_state;
     public Classinfo() {
         participants=new Vector<Participant>();
+        class_num=-1;
     }
 
     public Classinfo(int class_num, String start_time, String finish_time, String _id, int max_participant, Vector<Participant> participants) {
@@ -28,6 +30,7 @@ public class Classinfo {
         this._id = _id;
         this.max_participant = max_participant;
         this.participants = participants;
+        participants_size=participants.size();
     }
 
     void addParticipant (JSONObject participant){
@@ -107,5 +110,23 @@ public class Classinfo {
 
     public void setMax_participant(int max_participant) {
         this.max_participant = max_participant;
+    }
+
+    public int getSelected_state() {
+        return selected_state;
+    }
+
+    public void setSelected_state(int selected_state) {
+        this.selected_state = selected_state;
+    }
+
+    public int getParticipants_size(){
+        return participants_size;
+    }
+    public void addParticipants(){
+        participants_size++;
+    }
+    public void subtractParticipants(){
+        participants_size--;
     }
 }
