@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="[공지사항] 확인하시겠습니까?"
+        android:id="@+id/move_to_notice_dialog_tap"
         android:textSize="12dp"
         android:background="#f2f2f2"
         />
