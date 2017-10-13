@@ -99,6 +99,7 @@ public class Time_Table {
         JSONArray participants=data.getJSONArray("participant");
         for(int i=0;i<participants.length();i++){
             info.addParticipant(participants.getJSONObject(i));
+            info.addParticipants();
        }
         classes.add(info);
         Log.d("DEBUGYU",info.toString());
