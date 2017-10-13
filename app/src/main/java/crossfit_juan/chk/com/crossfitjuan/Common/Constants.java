@@ -25,6 +25,12 @@ public class Constants {
     public static final int REST_STATE_REMAIN=1;
     public static final int REST_STATE_PENDING=2;
     public static final int REST_STATE_DONE=3;
+    public static final int REST_STATE_FAILED=4;
+
+    // 예약 상태 변수
+    public static final int RESERVATION_SELECT_STATE_NONE = 0;
+    public static final int RESERVATION_SELECT_STATE_SELECTED = 1;
+    public static final int RESERVATION_SELECT_STATE_NOT_SELECTED = 2;
 
 
     // 상수 변수
@@ -36,7 +42,7 @@ public class Constants {
     public static final String PUSH_QNA_ACTIVITY="1";
 
     // 유저 정보 상수 변수
-    public static final int USER_INFO_INDEX_REST_PERIOD=3;
+    public static final int USER_INFO_INDEX_REST_PERIOD=1;
     public static final int USER_INFO_INDEX_LOGOUT=6;
     public static final int USER_INFO_INDEX_SIGNOUT=7;
 
@@ -70,8 +76,8 @@ public class Constants {
     public static final String REQ_SET_REMAIN_DAY="http://52.78.197.131:25478/set_remain_day";
     public static final String REQ_REGISTER_FIREBASE_TOKEN="http://52.78.197.131:25478/udt_device_token";
     public static final String REQ_GET_REMAIN_DAY="http://52.78.197.131:25478/get_remain_day";
-
-
+    public static final String REQ_GET_USER_DATA_STOM="http://52.78.197.131:25478/get_member_data_stom";
+    public static final String REQ_CANCEL_REMAIN_DAY="http://52.78.197.131:25478/cancel_remain_day";
 
     public static final int PICK_FROM_ALBUM_ACTION=0x80;
 
