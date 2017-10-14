@@ -292,9 +292,10 @@ public class UserInfoActivity extends AppCompatActivity {
         AlertDialog alert = alt_bld.create();
         // Title for AlertDialog
         if(state==REST_STATE_DONE)
-            alert.setTitle("[관리자]가 승인하였습니다");
+            alert.setTitle("[관리자] 휴회 신청 승인");
         else if(state==REST_STATE_FAILED)
-            alert.setTitle("[관리자]가 거절하였습니다");
+            alert.setTitle("[관리자] 휴회 신청 거절");
+
         // Icon for AlertDialog
         alert.show();
     }
