@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:scale_base_height="120"
+        app:scale_base_width="540"
+        >
+        <TextView
+            android:gravity="center_horizontal"
+            android:id="@+id/participant_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_width="540"
+            app:scale_textsize="40"
+            android:textColor="#000000"
+            app:scale_height="120"
+            android:text="김규환"
+            app:textview_wrapcontent_direction="bottom"
+            app:textview_wrapcontent_resizesurrounded="true"
+            app:textview_wrapcontent_movesiblings="true"
+            />
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+</LinearLayout>
