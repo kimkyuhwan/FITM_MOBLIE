@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -35,6 +36,7 @@ import crossfit_juan.chk.com.crossfitjuan.DataModel.Participant;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.Time_Table;
 import crossfit_juan.chk.com.crossfitjuan.HttpConnection.CustomThread.ReqHTTPJSONThread;
 import crossfit_juan.chk.com.crossfitjuan.R;
+import crossfit_juan.chk.com.crossfitjuan.tool.ParticipantsViewAdapter;
 import crossfit_juan.chk.com.crossfitjuan.tool.TimetableViewAdapter;
 
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.RESERVATION_SELECT_STATE_NONE;
@@ -72,6 +74,12 @@ public class ReservationActivity extends AppCompatActivity {
         toDate = getToDate();
         adapter = new TimetableViewAdapter(this,toDate);
         timetableList.setAdapter(adapter);
+        timetableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ViewParticipantsList(i);
+            }
+        });
 
         try {
             getMyTodayWod();
@@ -79,7 +87,28 @@ public class ReservationActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
+    }
+    public void ViewParticipantsList(int idx){
+        Log.d("DEBUGYU","VIEW PARTICIPATNS");
+        final Dialog dR = new Dialog(this);
+        dR.setContentView(R.layout.view_participants_dialog);
+        TextView dRtime = (TextView) dR.findViewById(R.id.participant_dialog_time);
+        ListView dRlist = (ListView) dR.findViewById(R.id.participant_dialog_list);
+        Button dRCancelBtn = (Button) dR.findViewById(R.id.participant_dialog_cancel_Btn);
+        dRtime.setText(adapter.getClassInfo(idx).getStart_time()+"~"+adapter.getClassInfo(idx).getFinish_time());
+        ParticipantsViewAdapter participantsViewAdapter=new ParticipantsViewAdapter();
+        for(int i=0;i<adapter.getClassInfo(idx).getParticipants().size();i++){
+            participantsViewAdapter.addItem(adapter.getClassInfo(idx).getParticipants().get(i));
+            Log.d("DEBUGYU","VIEW PARTICIPATNS"+i+" : "+adapter.getClassInfo(idx).getParticipants().get(i).toString());
+        }
+        dRlist.setAdapter(participantsViewAdapter);
+        dRCancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dR.dismiss();
+            }
+        });
+        dR.show();
     }
 
     public String getToDate() {
