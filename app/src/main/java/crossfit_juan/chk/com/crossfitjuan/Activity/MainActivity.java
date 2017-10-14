@@ -26,6 +26,8 @@ import android.widget.Toast;
 
 import com.ssomai.android.scalablelayout.ScalableLayout;
 
+import org.json.JSONException;
+
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
@@ -185,8 +187,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SetProfileImage();
         User.setHereActivityContext(this);
         User.setHereActivity("Main");
-        NotificationManager NotiManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        NotiManager.cancelAll();
+        try {
+            User.LoadStomUserInfo();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
     @OnClick({R.id.menu_btn, R.id.btn_tutorial, R.id.main_scalable1, R.id.btn_reserve, R.id.main_scalable2, R.id.btn_market, R.id.main_scalable3})
     public void onViewClicked(View view) {
