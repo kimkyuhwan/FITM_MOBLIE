@@ -44,7 +44,7 @@
             app:scale_width="32"
             app:scale_height="32"
             app:scale_top="24"
-            app:scale_left="270"
+            app:scale_left="280"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -63,8 +63,8 @@
             android:id="@+id/timetable_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/checked"
-            app:scale_left="460"
+            android:background="@drawable/right_arrow"
+            app:scale_left="470"
             app:scale_top="16"
             app:scale_width="48"
             app:scale_height="48"
