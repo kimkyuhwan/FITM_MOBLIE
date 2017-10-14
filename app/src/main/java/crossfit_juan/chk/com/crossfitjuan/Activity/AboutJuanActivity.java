@@ -3,15 +3,21 @@ package crossfit_juan.chk.com.crossfitjuan.Activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,6 +31,7 @@ import butterknife.ButterKnife;
 import crossfit_juan.chk.com.crossfitjuan.R;
 
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CROSSFITJUAN_ADDRESS_GOOGLE;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.REQUEST_PERMISSION_ACCESS_STORAGE;
 
 public class AboutJuanActivity extends AppCompatActivity {
 
@@ -35,7 +42,6 @@ public class AboutJuanActivity extends AppCompatActivity {
     LinearLayout aboutJuanScrollLinear;
     @BindView(R.id.aboutJuan_scroll)
     ScrollView aboutJuanScroll;
-
 
 
     @Override
@@ -59,7 +65,7 @@ public class AboutJuanActivity extends AppCompatActivity {
         crossfitImgview.setLayoutParams(lp);
         crossfitImgview.setScaleType(ImageView.ScaleType.FIT_XY); // 레이아웃 크기에 이미지를 맞춘다
 
-        SupportMapFragment mapFragment=(SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.crossfit_googlemap);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.crossfit_googlemap);
 
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -77,7 +83,7 @@ public class AboutJuanActivity extends AppCompatActivity {
                         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                                 Uri.parse(CROSSFITJUAN_ADDRESS_GOOGLE));
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.addCategory(Intent.CATEGORY_LAUNCHER );
+                        intent.addCategory(Intent.CATEGORY_LAUNCHER);
                         intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
                         startActivity(intent);
                     }
@@ -85,6 +91,25 @@ public class AboutJuanActivity extends AppCompatActivity {
 
             }
         });
+        Button callBtn = new Button(this);
+        callBtn.setText("연락하기");
+        callBtn.setTextSize(16);
+        callBtn.setGravity(Gravity.CENTER_HORIZONTAL);
+        callBtn.setBackgroundColor(Color.argb(0xff,0,0,0));
+        callBtn.setTextColor(Color.argb(0xff,0xff,0xff,0xff));
+        callBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calling();
+            }
+        });
+        aboutJuanScrollLinear.addView(callBtn);
+    }
+
+    public void calling() {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:0324299997"));
+        startActivity(intent);
     }
 
     @Override
