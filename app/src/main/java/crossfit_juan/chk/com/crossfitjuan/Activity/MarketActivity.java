@@ -166,7 +166,7 @@ public class MarketActivity extends AppCompatActivity {
                         Log.d("DEBUGYU", "isExist");
                         adapter.getMarketItem(j).setLike(item_isLike);
                         adapter.getMarketItem(j).setLike_cnt(item_like_cnt);
-
+                        adapter.getMarketItem(j).setRemained_num_of_item(item_remained);
                         Log.d("DEBUGYU", "setLike Count : " + item_like_cnt);
                         break;
                     }
