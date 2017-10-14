@@ -11,6 +11,15 @@ public class Participant {
 
     public Participant() {}
 
+    @Override
+    public String toString() {
+        return "Participant{" +
+                "comment='" + comment + '\'' +
+                ", access_key='" + access_key + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public Participant(String comment, String access_key, String name) {
         this.comment = comment;
         this.access_key = access_key;
