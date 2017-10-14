@@ -1,14 +1,18 @@
 package crossfit_juan.chk.com.crossfitjuan.tool;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,10 +41,14 @@ public class TimetableViewAdapter extends BaseAdapter {
 
     Context context;
     String Date;
+    Participant me;
     // ListViewAdapter의 생성자
     public TimetableViewAdapter(Context context,String Date) {
         this.context=context;
         this.Date=Date;
+        me=new Participant();
+        this.me.setName(User.getInstance().getData().getUser_name());
+        this.me.setAccess_key(User.getInstance().getData().getUser_access_key());
     }
 
     // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
@@ -71,18 +79,29 @@ public class TimetableViewAdapter extends BaseAdapter {
 
         // 아이템 내 각 위젯에 데이터 반영
         timeTextView.setText(pp.getStart_time()+"~"+pp.getFinish_time());
+        timeTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewParticipantsList(pos);
+            }
+        });
         participantsTextView.setText(pp.getParticipants_size()+" / "+pp.getMax_participant());
 
+        participantsTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewParticipantsList(pos);
+            }
+        });
         if(pp.getMax_participant() == pp.getParticipants().size()){
-            layout.setBackgroundColor(Color.argb(0xff,0x44,0x88,0xff));
             if(pp.getSelected_state()!=RESERVATION_SELECT_STATE_SELECTED)
             pp.setSelected_state(RESERVATION_SELECT_STATE_NOT_SELECTED);
         }
-
+        layout.setBackgroundColor(Color.argb(0xff,0xff,0xff,0xff));
         switch (pp.getSelected_state()){
             case RESERVATION_SELECT_STATE_NONE:
                 imageButton.setVisibility(View.VISIBLE);
-                imageButton.setBackgroundResource(R.drawable.checked);
+                imageButton.setBackgroundResource(R.drawable.right_arrow);
                 imageButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -92,6 +111,7 @@ public class TimetableViewAdapter extends BaseAdapter {
                 });
                 break;
             case RESERVATION_SELECT_STATE_SELECTED:
+                layout.setBackgroundColor(Color.argb(0x66,0x44,0x88,0xff));
                 imageButton.setVisibility(View.VISIBLE);
                 imageButton.setBackgroundResource(R.drawable.delete);
                 imageButton.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +128,29 @@ public class TimetableViewAdapter extends BaseAdapter {
                 break;
         }
         return convertView;
+    }
+
+    public void ViewParticipantsList(int idx){
+        Log.d("DEBUGYU","VIEW PARTICIPATNS");
+        final Dialog dR = new Dialog(context);
+        dR.setContentView(R.layout.view_participants_dialog);
+        TextView dRtime = (TextView) dR.findViewById(R.id.participant_dialog_time);
+        ListView dRlist = (ListView) dR.findViewById(R.id.participant_dialog_list);
+        Button dRCancelBtn = (Button) dR.findViewById(R.id.participant_dialog_cancel_Btn);
+        dRtime.setText(listViewItemList.get(idx).getStart_time()+"~"+listViewItemList.get(idx).getFinish_time());
+        ParticipantsViewAdapter adapter=new ParticipantsViewAdapter();
+        for(int i=0;i<listViewItemList.get(idx).getParticipants().size();i++){
+            adapter.addItem(listViewItemList.get(idx).getParticipants().get(i));
+            Log.d("DEBUGYU","VIEW PARTICIPATNS"+i+" : "+listViewItemList.get(idx).getParticipants().get(i).toString());
+        }
+        dRlist.setAdapter(adapter);
+        dRCancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dR.dismiss();
+            }
+        });
+        dR.show();
     }
 
     public void RegisterReservation(int idx) {
@@ -146,6 +189,7 @@ public class TimetableViewAdapter extends BaseAdapter {
                     listViewItemList.get(i).setSelected_state(RESERVATION_SELECT_STATE_NOT_SELECTED);
                 else{
                     listViewItemList.get(i).setSelected_state(RESERVATION_SELECT_STATE_SELECTED);
+                    listViewItemList.get(idx).getParticipants().add(me);
                     listViewItemList.get(i).addParticipants();
                 }
             }
@@ -199,13 +243,21 @@ public class TimetableViewAdapter extends BaseAdapter {
                     listViewItemList.get(i).subtractParticipants();
                 }
             }
+            for(int i=0;i<listViewItemList.get(idx).getParticipants().size();i++) {
+                if(listViewItemList.get(idx).getParticipants().get(i).getName().equals(me.getName())){
+                    listViewItemList.get(idx).getParticipants().remove(i);
+                }
+            }
+
             notifyDataSetChanged();
         } else if (result_code == 2170) {
             Toast.makeText(context, "잘못된 요청입니다", Toast.LENGTH_LONG).show();
         }
     }
 
-
+    public Classinfo getClassInfo(int idx){
+        return listViewItemList.get(idx);
+    }
     // 지정한 위치(position)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴. : 필수 구현
     @Override
     public long getItemId(int position) {
