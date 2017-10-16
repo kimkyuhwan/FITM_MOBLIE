@@ -5,7 +5,6 @@ package crossfit_juan.chk.com.crossfitjuan.DataModel;
  */
 
 public class Participant {
-    private String comment;
     private String access_key;
     private String name;
 
@@ -14,24 +13,14 @@ public class Participant {
     @Override
     public String toString() {
         return "Participant{" +
-                "comment='" + comment + '\'' +
                 ", access_key='" + access_key + '\'' +
                 ", name='" + name + '\'' +
                 '}';
     }
 
-    public Participant(String comment, String access_key, String name) {
-        this.comment = comment;
+    public Participant(String access_key, String name) {
         this.access_key = access_key;
         this.name = name;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
     public String getAccess_key() {
