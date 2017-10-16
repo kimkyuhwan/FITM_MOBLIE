@@ -13,6 +13,8 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
+import com.amazonaws.services.s3.model.DeleteVersionRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import java.io.File;
@@ -66,6 +68,17 @@ public class AWSService {
         InstanceReload();
     }
 
+    public void DeleteProfile(){
+        deleteFileThread A=new deleteFileThread();
+        A.start();
+        try {
+            A.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        InstanceReload();
+    }
+
 
     private class uploadFileThread extends Thread{
 
@@ -87,6 +100,25 @@ public class AWSService {
                 putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead); // file permission
                 amazonS3.putObject(putObjectRequest); // upload file
 
+            } catch (AmazonServiceException ase) {
+                ase.printStackTrace();
+            } finally {
+                amazonS3 = null;
+            }
+        }
+    }
+    private class deleteFileThread extends Thread{
+
+        deleteFileThread(){}
+        public void run() {
+            deleteProFile();
+        }
+
+    }
+    public void deleteProFile() {
+        if (amazonS3 != null) {
+            try {
+                amazonS3.deleteObject(new DeleteObjectRequest(BUCKET_NAME /*sub directory*/, User.getInstance().getData().getUser_email()+".png"));
             } catch (AmazonServiceException ase) {
                 ase.printStackTrace();
             } finally {
