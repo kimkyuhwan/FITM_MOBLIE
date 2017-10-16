@@ -33,7 +33,7 @@ public class MyFirebaseInstanceIdService extends FirebaseInstanceIdService {
  //       sendRegistrationToServer(refreshedToken);
     }
     public void RegistrationTokenToServer(){
-        if(User.getInstance()==null) return;
+        if(User.getInstance()==null || User.getInstance().getData()==null) return;
         String token = FirebaseInstanceId.getInstance().getToken();
         String access_key = User.getInstance().getData().getUser_access_key();
         if(token==null || access_key==null){
