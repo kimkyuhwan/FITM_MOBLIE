@@ -33,11 +33,14 @@ import crossfit_juan.chk.com.crossfitjuan.Activity.MainActivity;
 import crossfit_juan.chk.com.crossfitjuan.Activity.NoticeActivity;
 import crossfit_juan.chk.com.crossfitjuan.Activity.QnaActivity;
 import crossfit_juan.chk.com.crossfitjuan.Activity.ReservationActivity;
+import crossfit_juan.chk.com.crossfitjuan.Activity.UserInfoActivity;
 import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.R;
 
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_NOTICE_ACTIVITY;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_QNA_ACTIVITY;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_REST_ACCEPT;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_REST_REJECT;
 
 /**
  * Created by gyuhwan on 2017. 10. 3..
@@ -60,6 +63,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
         else if(type.equals(PUSH_QNA_ACTIVITY) ){
             getQnADialog(body);
+        }
+        else if(type.equals(PUSH_REST_ACCEPT) || type.equals(PUSH_REST_REJECT)){
+            getUserInfoDialog(title,body);
         }
         else{
             Log.d("DEBUGYU","잘못된 타입의 메시지");
@@ -141,6 +147,47 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     }
                 });
                 dR.show();
+            }
+        });
+    }
+
+    void getUserInfoDialog(final String title, final String body) {
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (User.getHereActivity().equals("UserInfo")) {
+                        Toast.makeText(User.getHereActivityContext(),"휴회 신청 결과가 나왔습니다",Toast.LENGTH_SHORT).show();
+                        ((UserInfoActivity) (User.getHereActivityContext())).LoadUserInfo();
+                } else {
+
+                    final Dialog dR = new Dialog(User.getHereActivityContext());
+
+                    dR.setContentView(R.layout.move_to_notice_dialog);
+                    TextView dRtitle = (TextView)dR.findViewById(R.id.move_to_notice_dialog_tap);
+                    TextView dRBody = (TextView) dR.findViewById(R.id.move_to_notice_dialog_title);
+                    Button dROkBtn = (Button) dR.findViewById(R.id.move_to_notice_dialog_check_Btn);
+                    Button dRCancelBtn = (Button) dR.findViewById(R.id.move_to_notice_dialog_close_Btn);
+                    dRtitle.setText(title);
+                    dRBody.setText(body);
+                    dRCancelBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dR.dismiss();
+                        }
+                    });
+                    dROkBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getApplicationContext(), UserInfoActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            startActivity(intent);
+                            dR.dismiss();
+                        }
+                    });
+                    dR.show();
+                }
             }
         });
     }
