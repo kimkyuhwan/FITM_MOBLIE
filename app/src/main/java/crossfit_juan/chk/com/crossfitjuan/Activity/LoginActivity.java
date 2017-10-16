@@ -11,8 +11,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.nhn.android.naverlogin.OAuthLogin;
@@ -47,8 +46,11 @@ public class LoginActivity extends AppCompatActivity {
     ViewPager loginViewPager;
 
     LoginViewPagerAdapter adapter;
-    GestureDetector mGestureDetector;
+    //GestureDetector mGestureDetector;
+    @BindView(R.id.login_imageCircle)
+    ImageView loginImageCircle;
 
+    int imgCircleArray[] = {R.drawable.circle01,R.drawable.circle02,R.drawable.circle03,R.drawable.circle04};
 
 
     private OAuthLogin mOAuthLoginModule;
@@ -169,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
         my_handler = new HttpHandler();
         Initalize_OAuthLogin();
         if (mOAuthLoginModule.getState(context).toString().equals("NEED_LOGIN") || mOAuthLoginModule.getState(context).toString().equals("NEED_REFRESH_TOKEN")) {
-            mOAuthLoginModule.startOauthLoginActivity(LoginActivity.this, my_login_handler);
+            // mOAuthLoginModule.startOauthLoginActivity(LoginActivity.this, my_login_handler);
         } else {
             //mOAuthLoginModule.logout(context);
             login();
@@ -188,45 +190,29 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         initAdapter();
-        initGestureDetector();
 
-    }
+        loginViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-    void initAdapter(){
-        adapter=new LoginViewPagerAdapter(getLayoutInflater());
-        loginViewPager.setAdapter(adapter);
-    }
-    void initGestureDetector(){
-        mGestureDetector=new GestureDetector(this,new GestureDetector.SimpleOnGestureListener(){
-            public boolean onFling(MotionEvent e1, MotionEvent e2,
-                                   float velocityX, float velocityY) {
-                if(Math.abs(velocityX) > 1000 && Math.abs(velocityY) < 500){
-                    if(velocityX < 0){
-                        ShiftViewPager(-1);
-                    } else if(velocityX > 0){
-                        ShiftViewPager(1);
-                    }
-                }
-                return false;
+            }
+
+            @Override
+            public void onPageSelected(final int position) {
+                loginImageCircle.setImageResource(imgCircleArray[position]);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
+
     }
 
-    public void ShiftViewPager(int value){
-        int next_position;
-        next_position=loginViewPager.getCurrentItem()+value;
-        if(next_position>=0 && next_position<adapter.getCount()) {
-            loginViewPager.setCurrentItem(next_position, true);
-        }
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-
-        if(mGestureDetector.onTouchEvent(ev)){
-            return true;
-        }
-        return super.dispatchTouchEvent(ev);
+    void initAdapter() {
+        adapter = new LoginViewPagerAdapter(getLayoutInflater());
+        loginViewPager.setAdapter(adapter);
     }
 
     public void login() {
@@ -261,7 +247,7 @@ public class LoginActivity extends AppCompatActivity {
         String var_start_date = "";
         String var_finish_date = "";
         int var_certification = 0;
-        int var_remain_break_day=0;
+        int var_remain_break_day = 0;
         try {
             result_data = new JSONObject(result);
             result_code = result_data.getInt("code");
@@ -281,7 +267,7 @@ public class LoginActivity extends AppCompatActivity {
             var_start_date = response.getString("start_date");
             var_finish_date = response.getString("finish_date");
             var_certification = response.getInt("certification");
-            var_remain_break_day=response.getInt("remain_break_day");
+            var_remain_break_day = response.getInt("remain_break_day");
             if (var_locker_num.equals("null")) {
                 var_locker_num = "-1";
             }
