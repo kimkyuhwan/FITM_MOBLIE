@@ -19,12 +19,25 @@ public class User {
     private static UserData data;
     private static Context hereActivityContext;
     private static String hereActivity;
-    private User(){}
+    private User(){data=new UserData();}
     public static User getInstance(){
         return Me;
     }
     public void setUser(UserData data){
-        User.data =data;
+        this.getData().setUser_access_key(data.getUser_access_key());
+        this.getData().setUser_email(data.getUser_email());
+        this.getData().setUser_name(data.getUser_name());
+        this.getData().setUser_gender(data.getUser_gender());
+        this.getData().setUser_phone_number(data.getUser_phone_number());
+        this.getData().setUser_birtyday(data.getUser_birtyday());
+        this.getData().setUser_locker_num(data.getUser_locker_num());
+        this.getData().setUser_lock_start(data.getUser_lock_start());
+        this.getData().setUser_lock_finish(data.getUser_lock_finish());
+        this.getData().setUser_start_date(data.getUser_start_date());
+        this.getData().setUser_finish_date(data.getUser_finish_date());
+        this.getData().setCertification(data.getCertification());
+        this.getData().setRemain_break_day(data.getRemain_break_day());
+        this.getData().setRest_state(data.getRest_state());
     }
 
     public UserData getData() {
@@ -48,6 +61,7 @@ public class User {
     }
 
     public static void LoadStomUserInfo() throws JSONException {
+      //  if(User.getInstance().getData()==null || User.getInstance().getData().getUser_email().equals("")) return;
         JSONObject send_data = new JSONObject();
         send_data.put("id_email", User.getInstance().getData().getUser_email());
         ReqHTTPJSONThread thread = new ReqHTTPJSONThread(Constants.REQ_GET_USER_DATA_STOM, send_data);
