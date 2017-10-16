@@ -38,6 +38,7 @@
         android:layout_weight="12"
         android:transcriptMode="normal"
         android:listSelector="@android:color/transparent"
+        android:layout_marginBottom="5dp"
         >
     </ListView>
 
