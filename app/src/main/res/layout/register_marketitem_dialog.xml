@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:text="구매 신청"
+        android:id="@+id/market_dialog_tap"
         />
     <TextView
         android:layout_gravity="center"
