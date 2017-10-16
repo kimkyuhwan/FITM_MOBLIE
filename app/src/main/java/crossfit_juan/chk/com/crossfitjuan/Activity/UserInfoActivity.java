@@ -456,12 +456,32 @@ public class UserInfoActivity extends AppCompatActivity {
                 end_dRRegisterBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.d("DEBUGYU",StartDate.toString()+"~"+EndDate.toString());
-                        try {
-                            RegisterRest(StartDate,EndDate,"테스트");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+
+                        final Dialog dRComment = new Dialog(UserInfoActivity.this);
+                        dRComment.setContentView(R.layout.register_marketitem_dialog);
+                        TextView CommentTitle=(TextView)dRComment.findViewById(R.id.market_dialog_tap);
+                        final EditText CommentEditText = (EditText) dRComment.findViewById(R.id.market_dialog_comment);
+                        Button CommentRegisterBtn=(Button)dRComment.findViewById(R.id.market_dialog_comment_register_Btn);
+                        Button CommentCancelBtn=(Button)dRComment.findViewById(R.id.market_dialog_comment_cancel_Btn);
+                        CommentTitle.setText("휴회 사유에 대해서 입력해주세요");
+                        CommentRegisterBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                try {
+                                    RegisterRest(StartDate,EndDate,CommentEditText.getText().toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                dRComment.dismiss();
+                            }
+                        });
+                        CommentCancelBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dRComment.dismiss();
+                            }
+                        });
+                        dRComment.show();
                         enddR.dismiss();
                     }
                 });
