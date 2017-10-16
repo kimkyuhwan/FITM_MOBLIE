@@ -10,7 +10,7 @@
     <com.ssomai.android.scalablelayout.ScalableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:scale_base_height="720"
+        app:scale_base_height="740"
         app:scale_base_width="540"
         >
     <ImageView
@@ -24,17 +24,31 @@
         android:src="@drawable/login_image01"
         />
     <TextView
-        android:id="@+id/viewpager_childitext"
+        android:id="@+id/viewpager_childtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:scale_left="20"
         app:scale_top="540"
         app:scale_width="500"
-        app:scale_height="180"
+        app:scale_height="30"
         app:scale_textsize="24"
         android:textColor="#ffffff"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
         android:text="안녕하세요 크로스핏 주안입니다"
         />
+        <TextView
+            android:id="@+id/viewpager_childbody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_left="20"
+            app:scale_top="590"
+            app:scale_width="500"
+            app:scale_height="140"
+            app:scale_textsize="20"
+            android:textColor="#ffffff"
+            android:text="안녕하세요 크로스핏 주안입니다"
+            />
 
 
     </com.ssomai.android.scalablelayout.ScalableLayout>
