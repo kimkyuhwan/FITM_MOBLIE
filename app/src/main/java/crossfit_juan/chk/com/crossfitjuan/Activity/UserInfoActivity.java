@@ -102,11 +102,6 @@ public class UserInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
         ButterKnife.bind(this);
-        userInfoName.setText(User.getInstance().getData().getUser_name());
-
-        setListViewClickListener();
-        Initalize_OAuthLogin();
-
     }
 
     public void initAdapter(){
@@ -174,7 +169,7 @@ public class UserInfoActivity extends AppCompatActivity {
                         if(User.getInstance().getData().getCertification()>=CERTIFICATION_REST) {
                             switch (User.getInstance().getData().getRest_state()){
                                 case REST_STATE_NONE:
-                                    Toast.makeText(getApplicationContext(),"잔여 일수가 부족합니다",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"휴회 기능은 최소 7일 이상 최대 30일까지 사용 하실 수 있습니다.",Toast.LENGTH_SHORT).show();
                                     break;
                                 case REST_STATE_REMAIN:
                                     rest();
@@ -205,7 +200,7 @@ public class UserInfoActivity extends AppCompatActivity {
     }
 
     void setRestState(){
-        if(User.getInstance().getData().getRemain_break_day()==0){
+        if(User.getInstance().getData().getRemain_break_day()<7){
             User.getInstance().getData().setRest_state(REST_STATE_NONE);
         }
         else{
@@ -424,7 +419,7 @@ public class UserInfoActivity extends AppCompatActivity {
         start_dRRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                long start_date=StartDate.getTime();
+
                 Log.d("DEBUGYU","StartDate:"+StartDate.toString());
                 Calendar a=Calendar.getInstance();
                 a.setTime(StartDate);
@@ -434,6 +429,9 @@ public class UserInfoActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                a.setTime(StartDate);
+                a.add(Calendar.DATE,6);
+                long start_date=a.getTime().getTime();
 
                 Log.d("DEBUGYU","EndDate:"+EndDate.toString());
                 long end_date=EndDate.getTime();
@@ -653,17 +651,25 @@ public class UserInfoActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+        LoadUserInfo();
+    }
+
+    public void LoadUserInfo(){
         try {
             User.LoadStomUserInfo();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        userInfoName.setText(User.getInstance().getData().getUser_name());
         SetProfileImage();
         User.setHereActivityContext(this);
         User.setHereActivity("UserInfo");
         setRestState();
+        setListViewClickListener();
         initAdapter();
+        Initalize_OAuthLogin();
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK) {
