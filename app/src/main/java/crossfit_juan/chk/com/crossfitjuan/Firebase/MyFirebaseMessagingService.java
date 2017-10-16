@@ -41,6 +41,7 @@ import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_NOTICE_AC
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_QNA_ACTIVITY;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_REST_ACCEPT;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_REST_REJECT;
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_TODAY_WOD;
 
 /**
  * Created by gyuhwan on 2017. 10. 3..
@@ -63,6 +64,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
         else if(type.equals(PUSH_QNA_ACTIVITY) ){
             getQnADialog(body);
+        }
+        else if(type.equals(PUSH_TODAY_WOD)){
+            getTodayWODDialog(title,body);
         }
         else if(type.equals(PUSH_REST_ACCEPT) || type.equals(PUSH_REST_REJECT)){
             getUserInfoDialog(title,body);
@@ -114,6 +118,51 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             }
         });
 
+    }
+
+    void getTodayWODDialog(final String title, final String body) {
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (User.getHereActivity().equals("Reservation")) {
+                    Toast.makeText(User.getHereActivityContext(),"오늘의 일정이 업로드되었습니다",Toast.LENGTH_SHORT).show();
+                    try {
+                        ((ReservationActivity) (User.getHereActivityContext())).getMyTodayWod();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+
+                    final Dialog dR = new Dialog(User.getHereActivityContext());
+
+                    dR.setContentView(R.layout.move_to_notice_dialog);
+                    TextView dRtitle = (TextView)dR.findViewById(R.id.move_to_notice_dialog_tap);
+                    TextView dRBody = (TextView) dR.findViewById(R.id.move_to_notice_dialog_title);
+                    Button dROkBtn = (Button) dR.findViewById(R.id.move_to_notice_dialog_check_Btn);
+                    Button dRCancelBtn = (Button) dR.findViewById(R.id.move_to_notice_dialog_close_Btn);
+                    dRtitle.setText(title);
+                    dRBody.setText(body);
+                    dRCancelBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dR.dismiss();
+                        }
+                    });
+                    dROkBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getApplicationContext(), ReservationActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            startActivity(intent);
+                            dR.dismiss();
+                        }
+                    });
+                    dR.show();
+                }
+            }
+        });
     }
 
     void getQnADialog(final String contents) {
