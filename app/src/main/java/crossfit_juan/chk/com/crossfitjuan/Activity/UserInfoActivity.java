@@ -463,7 +463,35 @@ public class UserInfoActivity extends AppCompatActivity {
                         final EditText CommentEditText = (EditText) dRComment.findViewById(R.id.market_dialog_comment);
                         Button CommentRegisterBtn=(Button)dRComment.findViewById(R.id.market_dialog_comment_register_Btn);
                         Button CommentCancelBtn=(Button)dRComment.findViewById(R.id.market_dialog_comment_cancel_Btn);
+                        final ImageButton commentClearBtn=(ImageButton)dRComment.findViewById(R.id.market_dialog_comment_clear_Btn);
                         CommentTitle.setText("휴회 사유에 대해서 입력해주세요");
+                        CommentEditText.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                                // do nothing
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                if(s.length()==0){
+                                    commentClearBtn.setVisibility(View.INVISIBLE);
+                                }
+                                else{
+                                    commentClearBtn.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable s) {
+                                // do nothing
+                            }
+                        });
+                        commentClearBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                CommentEditText.setText("");
+                            }
+                        });
                         CommentRegisterBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
