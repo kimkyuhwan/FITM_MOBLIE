@@ -71,21 +71,6 @@ public class ReservationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
         ButterKnife.bind(this);
-        toDate = getToDate();
-        adapter = new TimetableViewAdapter(this,toDate);
-        timetableList.setAdapter(adapter);
-        timetableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ViewParticipantsList(i);
-            }
-        });
-
-        try {
-            getMyTodayWod();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
     }
     public void ViewParticipantsList(int idx){
@@ -192,6 +177,15 @@ public class ReservationActivity extends AppCompatActivity {
     }
 
     public void getMyTodayWod() throws JSONException {
+        toDate = getToDate();
+        adapter = new TimetableViewAdapter(this,toDate);
+        timetableList.setAdapter(adapter);
+        timetableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ViewParticipantsList(i);
+            }
+        });
         JSONObject send_data = new JSONObject();
         try {
             send_data.put("access_key", User.getInstance().getData().getUser_access_key());
@@ -241,121 +235,16 @@ public class ReservationActivity extends AppCompatActivity {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
-/*
-    @OnClick({R.id.select_schedule_Btn, R.id.schedule_Register_Btn})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.select_schedule_Btn:
-                if (isPossibleToReserve) {
-                    // 시간 선택 기능
-                    final Dialog d = new Dialog(ReservationActivity.this);
-                    d.setContentView(R.layout.time_select_dialog);
-                    Button cancelBtn = (Button) d.findViewById(R.id.dialog_cancel_btn);
-                    Button doneBtn = (Button) d.findViewById(R.id.dialog_done_btn);
-                    cancelBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            d.dismiss();
-                        }
-                    });
 
-
-                    final NumberPicker np = (NumberPicker) d.findViewById(R.id.schedule_picker);
-                    String A[] = new String[timetable.getNum_of_classes()];
-                    for (int i = 0; i < A.length; i++) {
-                        A[i] = timetable.getClasses().get(i).getStart_time() + " ~ " + timetable.getClasses().get(i).getFinish_time();
-                    }
-                    np.setMinValue(0);
-                    np.setMaxValue(A.length - 1);
-                    np.setDisplayedValues(A);
-                    np.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-                    doneBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            selectedSchedule = np.getValue();
-                            selectScheduleBtn.setText(timetable.getClasses().get(np.getValue()).getStart_time() + " ~ " + timetable.getClasses().get(np.getValue()).getFinish_time());
-                            try {
-                                getTodayWod();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            d.dismiss();
-                        }
-                    });
-                    Window window = d.getWindow();
-                    window.setGravity(Gravity.BOTTOM);
-                    d.show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "오늘은 예약이 불가능합니다", Toast.LENGTH_LONG).show();
-                }
-                break;
-            case R.id.schedule_Register_Btn:
-                if (isReserved) {
-                    CancelReservation();
-                } else if (selectScheduleBtn.getText().toString().equals("클릭!")) {
-                    Toast.makeText(getApplicationContext(), "시간을 선택해주세요", Toast.LENGTH_LONG).show();
-                } else {
-//                    Toast.makeText(getApplicationContext(), "스케줄 등록 기능 준비중", Toast.LENGTH_LONG).show();
-                    final Dialog dR = new Dialog(ReservationActivity.this);
-                    dR.setContentView(R.layout.register_reservation_dialog);
-                    TextView dRTime = (TextView) dR.findViewById(R.id.dialog_time);
-                    final EditText dRcomment = (EditText) dR.findViewById(R.id.dialog_comment);
-                    final ImageButton dRcommentClearBtn = (ImageButton) dR.findViewById(R.id.dialog_comment_clear_Btn);
-                    Button dRRegisterBtn = (Button) dR.findViewById(R.id.dialog_comment_register_Btn);
-                    Button dRCancelBtn = (Button) dR.findViewById(R.id.dialog_comment_cancel_Btn);
-                    dRTime.setText(selectScheduleBtn.getText().toString());
-                    dRcomment.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                            // do nothing
-                        }
-
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-                            if (s.length() == 0) {
-                                dRcommentClearBtn.setVisibility(View.INVISIBLE);
-                            } else {
-                                dRcommentClearBtn.setVisibility(View.VISIBLE);
-                            }
-                        }
-
-                        @Override
-                        public void afterTextChanged(Editable s) {
-                            // do nothing
-                        }
-                    });
-                    dRcommentClearBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dRcomment.setText("");
-                        }
-                    });
-                    dRRegisterBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String tx = dRcomment.getText().toString();
-                            RegisterReservation(tx);
-                            Log.d("DEBUGYU", tx);
-                            dR.dismiss();
-                        }
-                    });
-                    dRCancelBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dR.dismiss();
-                        }
-                    });
-                    dR.show();
-                }
-
-                break;
-        }
-    }
-*/
     @Override
     public void onResume() {
         super.onResume();
         User.setHereActivityContext(this);
         User.setHereActivity("Reservation");
+        try {
+            getMyTodayWod();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
