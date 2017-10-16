@@ -116,7 +116,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
         String locker_num="";
         int lock_num=User.getInstance().getData().getUser_locker_num();
-        if(lock_num!=-1){
+        if(lock_num>0){
             locker_num=String.valueOf(lock_num);
             locker_num+=" ("+User.getInstance().getData().getUser_start_date()+"~"+User.getInstance().getData().getUser_start_date()+")";
         }
@@ -433,6 +433,9 @@ public class UserInfoActivity extends AppCompatActivity {
                 a.add(Calendar.DATE, User.getInstance().getData().getRemain_break_day()-1);
                 try {
                     EndDate=least(new SimpleDateFormat("yyyy/MM/dd").parse(EndDate_String),a.getTime());
+                    a.setTime(StartDate);
+                    a.add(Calendar.DATE,29);
+                    EndDate=least(EndDate,a.getTime());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
