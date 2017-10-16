@@ -39,7 +39,8 @@ public class Constants {
     public static final String CROSSFITJUAN_ADDRESS_GOOGLE="https://www.google.co.kr/maps/place/%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C+%EB%82%A8%EA%B5%AC+%EC%A3%BC%EC%95%88%EB%A1%9C+100";
     public static final int REQUEST_PERMISSION_ACCESS_STORAGE =0x80;
     public static final String PUSH_NOTICE_ACTIVITY="0";
-    public static final String PUSH_QNA_ACTIVITY="1";
+    public static final String PUSH_TODAY_WOD="1";
+    public static final String PUSH_QNA_ACTIVITY="2";
     public static final String PUSH_REST_ACCEPT="3";
     public static final String PUSH_REST_REJECT="4";
 
