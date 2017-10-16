@@ -37,7 +37,6 @@ public class Classinfo {
         Participant p=new Participant();
         try {
             p.setAccess_key(participant.getString("access_key"));
-            p.setComment(participant.getString("comments"));
             p.setName(participant.getString("name"));
         } catch (JSONException e) {
             e.printStackTrace();
