@@ -88,16 +88,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        MyFirebaseInstanceIdService tokenRegisterService = new MyFirebaseInstanceIdService();
-        tokenRegisterService.RegistrationTokenToServer();
-        View navHeaderView = navView.getHeaderView(0);
-        navView.setNavigationItemSelectedListener(this);
-
-        TextView tname = (TextView) navHeaderView.findViewById(R.id.nav_name);
-        TextView temail = (TextView) navHeaderView.findViewById(R.id.nav_email);
-        tProfileImg = (CircleImageView) navHeaderView.findViewById(R.id.profile_image);
-        tname.setText(User.getInstance().getData().getUser_name());
-        temail.setText(User.getInstance().getData().getUser_email());
     }
 
     void SetProfileImage() {
@@ -199,6 +189,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        MyFirebaseInstanceIdService tokenRegisterService = new MyFirebaseInstanceIdService();
+        tokenRegisterService.RegistrationTokenToServer();
+        View navHeaderView = navView.getHeaderView(0);
+        navView.setNavigationItemSelectedListener(this);
+
+        TextView tname = (TextView) navHeaderView.findViewById(R.id.nav_name);
+        TextView temail = (TextView) navHeaderView.findViewById(R.id.nav_email);
+        tProfileImg = (CircleImageView) navHeaderView.findViewById(R.id.profile_image);
+        tname.setText(User.getInstance().getData().getUser_name());
+        temail.setText(User.getInstance().getData().getUser_email());
     }
     @OnClick({R.id.menu_btn, R.id.btn_tutorial, R.id.main_scalable1, R.id.btn_reserve, R.id.main_scalable2, R.id.btn_market, R.id.main_scalable3})
     public void onViewClicked(View view) {
