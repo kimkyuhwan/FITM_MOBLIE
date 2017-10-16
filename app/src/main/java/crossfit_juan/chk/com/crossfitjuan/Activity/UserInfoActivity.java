@@ -380,11 +380,18 @@ public class UserInfoActivity extends AppCompatActivity {
 
                         @Override
                         public void run() {  // 화면에 그려줄 작업
+                            Log.d("DEBUGYU", "함?"+resized.toString());
                             userInfoProfileImage.setImageBitmap(resized);
                         }
                     });
                     //    tProfileImg.setImageBitmap(resized); //비트맵 객체로 보여주기
                 } catch (Exception e) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            userInfoProfileImage.setImageResource(R.drawable.default_profile);
+                        }
+                    });
                     e.printStackTrace();
                 }
 

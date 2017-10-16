@@ -118,6 +118,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     });
                     //    tProfileImg.setImageBitmap(resized); //비트맵 객체로 보여주기
                 } catch (Exception e) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tProfileImg.setImageResource(R.drawable.default_profile);
+                        }
+                    });
                     e.printStackTrace();
                 }
 
