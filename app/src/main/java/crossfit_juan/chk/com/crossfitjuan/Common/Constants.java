@@ -40,6 +40,9 @@ public class Constants {
     public static final int REQUEST_PERMISSION_ACCESS_STORAGE =0x80;
     public static final String PUSH_NOTICE_ACTIVITY="0";
     public static final String PUSH_QNA_ACTIVITY="1";
+    public static final String PUSH_REST_ACCEPT="3";
+    public static final String PUSH_REST_REJECT="4";
+
 
     // 유저 정보 상수 변수
     public static final int USER_INFO_INDEX_REST_PERIOD=1;
