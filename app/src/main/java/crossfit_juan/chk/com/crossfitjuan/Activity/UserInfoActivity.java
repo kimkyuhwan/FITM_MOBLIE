@@ -506,6 +506,7 @@ public class UserInfoActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 try {
+                                    Log.d("DEBUGYU",StartDate.toString()+"~"+EndDate.toString()+", "+CommentEditText.getText().toString());
                                     RegisterRest(StartDate,EndDate,CommentEditText.getText().toString());
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -572,6 +573,7 @@ public class UserInfoActivity extends AppCompatActivity {
         // JSONObject response=result_data.getJSONObject(  "response");
         if(result_code==9999){
             Log.d("DEBUGYU","신청되었습니다");
+            Toast.makeText(getApplicationContext(),"신청되었습니다.",Toast.LENGTH_LONG).show();
             User.getInstance().getData().setRest_state(REST_STATE_PENDING);
             rest_period=dateFormat2.format(StartDate)+"~"+dateFormat2.format(EndDate);
             rest_comments=body;
@@ -582,9 +584,11 @@ public class UserInfoActivity extends AppCompatActivity {
         }
         else if(result_code==6666){
             Log.d("DEBUGYU","이미 신청한 상태입니다");
+            Toast.makeText(getApplicationContext(),"이미 신청한 상태입니다.",Toast.LENGTH_LONG).show();
         }
         else{
             Log.d("DEBUGYU","신청에 실패했습니다");
+            Toast.makeText(getApplicationContext(),"신청에 실패했습니다.",Toast.LENGTH_LONG).show();
         }
     }
 
