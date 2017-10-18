@@ -211,6 +211,7 @@ public class QnaActivity extends AppCompatActivity {
         try {
             obj.put("access_key", User.getInstance().getData().getUser_access_key());
             obj.put("room_name", User.getInstance().getData().getUser_email());
+            obj.put("name",User.getInstance().getData().getUser_name());
             mSocket.emit("join_room", obj);
         } catch (JSONException e) {
             e.printStackTrace();
