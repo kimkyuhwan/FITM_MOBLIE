@@ -15,6 +15,10 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -110,6 +114,13 @@ public class RegisterActivity extends Activity {
         boolean isCorrectPhone = registerPhone00.getText().toString().length() >= 3 && registerPhone01.getText().toString().length() >= 3 && registerPhone02.getText().toString().length() >= 4;
         boolean isCorretName = !registerName.getText().toString().equals("");
         boolean isCorrectBirthday = registerBirthdayYear.getText().toString().length()>=4 && registerBirthdayMonth.getText().toString().length()>=2 && registerBirthdayDay.getText().toString().length()>=2;
+        if(isCorrectBirthday){
+            String date=
+                    registerBirthdayYear.getText().toString()+
+                    registerBirthdayMonth.getText().toString()+
+                    registerBirthdayDay.getText().toString();
+            isCorrectBirthday = checkDate(date,"yyyyMMdd");
+        }
         if (isCorretName) {
             if (isCorrectBirthday) {
                 if (isCorrectPhone) {
@@ -124,6 +135,24 @@ public class RegisterActivity extends Activity {
         } else {
             Toast.makeText(getApplicationContext(), "이름을 입력해주세요.", Toast.LENGTH_LONG).show();
         }
+    }
+    public boolean checkDate(String szDate, String szFormat) {
+
+        boolean bResult = true;
+        SimpleDateFormat oDateFormat = new SimpleDateFormat();
+        Date oDate = new Date();
+
+        oDateFormat.applyPattern(szFormat);
+        oDateFormat.setLenient(false);      // 엄밀하게 검사한다는 옵션 (반드시 있어야 한다)
+
+        try {
+            oDate = oDateFormat.parse(szDate);
+        } catch (ParseException e) {
+            bResult = false;
+        }
+
+        return bResult;
+
     }
 
     public void register() {
