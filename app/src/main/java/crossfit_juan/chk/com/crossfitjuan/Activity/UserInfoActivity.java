@@ -151,7 +151,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 restStr="관리자가 휴회 신청을 보류중입니다";
                 break;
             case REST_STATE_DONE:
-                restStr="관리자가 휴회 신청을 수락했습니다. ("+rest_period+")";
+                restStr="관리자가 휴회 신청을 수락했습니다.";
                 break;
             case REST_STATE_FAILED:
                 restStr="관리자가 휴회 신청을 거절했습니다.";
@@ -277,7 +277,7 @@ public class UserInfoActivity extends AppCompatActivity {
     }
     void restResultDialog(int state){
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
-        alt_bld.setMessage(rest_admin_message).setCancelable(
+        alt_bld.setMessage(rest_admin_message+ "\n날짜 : "+rest_period).setCancelable(
                 false).setNegativeButton("닫기",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
