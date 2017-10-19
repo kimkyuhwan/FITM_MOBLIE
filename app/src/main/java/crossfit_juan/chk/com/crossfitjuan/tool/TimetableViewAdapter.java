@@ -160,6 +160,7 @@ public class TimetableViewAdapter extends BaseAdapter {
             send_data.put("date", Date);
             send_data.put("class_num", idx + 1);
             send_data.put("name", User.getInstance().getData().getUser_name());
+            send_data.put("id_email",User.getInstance().getData().getUser_email());
         } catch (JSONException jsonex) {
             jsonex.printStackTrace();
         }
