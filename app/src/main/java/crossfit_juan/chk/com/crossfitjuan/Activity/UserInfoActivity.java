@@ -151,7 +151,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 restStr="관리자가 휴회 신청을 보류중입니다";
                 break;
             case REST_STATE_DONE:
-                restStr="관리자가 휴회 신청을 수락했습니다.";
+                restStr="관리자가 휴회 신청을 수락했습니다. ("+rest_period+")";
                 break;
             case REST_STATE_FAILED:
                 restStr="관리자가 휴회 신청을 거절했습니다.";
