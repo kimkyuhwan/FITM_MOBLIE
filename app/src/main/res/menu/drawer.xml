@@ -10,6 +10,11 @@
         <item
             android:id="@+id/navigation_item_QnA"
             android:checked="true"
+            android:icon="@drawable/p2"
+            android:title="@string/drawer_p2" />
+        <item
+            android:id="@+id/navigation_market"
+            android:checked="true"
             android:icon="@drawable/p3"
             android:title="@string/drawer_p3" />
         <item
