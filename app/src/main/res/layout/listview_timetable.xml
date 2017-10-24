@@ -29,10 +29,10 @@
             android:layout_height="wrap_content"
             android:text="10:00 ~ 11:00"
             android:textColor="#000000"
-            app:scale_left="70"
+            app:scale_left="78"
             app:scale_top="20"
             app:scale_textsize="26"
-            app:scale_width="160"
+            app:scale_width="180"
             app:scale_height="40"
 
             />
