@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="crossfit_juan.chk.com.crossfitjuan.Activity.CommentActivity">\
+
+
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:scale_base_height="60"
+        app:scale_base_width="540"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="댓글"
+            app:scale_textsize="26"
+            android:textColor="#ffffff"
+            app:scale_width="540"
+            app:scale_height="60"
+            android:gravity="center"
+            android:background="#000000"
+            />
+
+
+
+
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+    <ListView
+        android:listSelector="@android:color/transparent"
+        android:id="@+id/list_comment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+
+
+</LinearLayout>

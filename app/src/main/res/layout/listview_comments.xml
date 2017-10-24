@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:scale_base_height="120"
+        app:scale_base_width="540"
+        >
+        <crossfit_juan.chk.com.crossfitjuan.tool.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/comment_img"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            app:scale_left="25"
+            app:scale_top="15"
+            app:scale_width="60"
+            app:scale_height="60"
+            app:civ_border_width="1dp"
+            app:civ_border_color="#FFe2e2e2"
+            android:background="@drawable/default_profile"
+            />
+
+        <TextView
+            android:id="@+id/comment_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_width="120"
+            app:scale_left="17"
+            app:scale_textsize="28"
+            android:textColor="#000000"
+            app:scale_height="40"
+            android:text="김규환"
+            app:scale_top="75"
+            />
+        <TextView
+            android:id="@+id/comment_text"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_left="110"
+            app:scale_width="415"
+            app:scale_textsize="20"
+            app:scale_height="100"
+            app:scale_top="10"
+            android:text="안녕하세요 오늘 저녁에 먹은 치킨이 아직 소화가 안되네요.. 언제쯤에야 소화가 될런지 모르겠습니다"
+            />
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+</LinearLayout>
