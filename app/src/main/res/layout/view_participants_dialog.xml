@@ -41,7 +41,7 @@
         >
         <Button
             android:layout_weight="1"
-            android:background="#4488ff"
+            android:background="#aaaaaa"
             android:textColor="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,6 +49,17 @@
             android:textSize="14dp"
             android:id="@+id/participant_dialog_cancel_Btn"
             />
+        <Button
+            android:layout_weight="1"
+            android:background="#4488ff"
+            android:textColor="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="예약하기"
+            android:textSize="14dp"
+            android:id="@+id/participant_dialog_reserve_Btn"
+            />
+
 
 
     </LinearLayout>
