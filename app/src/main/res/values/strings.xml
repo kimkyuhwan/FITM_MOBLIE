@@ -1,8 +1,10 @@
 <resources>
+    <string name="app_id">crossfit.juan</string>
+
     <string name="app_name">크로스핏 주안</string>
     <string name="drawer_p1">내 정보</string>
-    <string name="drawer_p2">공지사항</string>
-    <string name="drawer_p3">1:1 문의</string>
+    <string name="drawer_p2">1:1 문의</string>
+    <string name="drawer_p3">공동구매</string>
     <string name="drawer_p4">About 크로스핏 주안</string>
     <string name="drawer_p5">네이버 카페</string>
     <string name="drawer_p6">페이스북</string>
