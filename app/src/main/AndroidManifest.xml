@@ -81,7 +81,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:taskAffinity=""
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -101,7 +101,10 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Activity.CommentActivity"></activity>
+        <activity android:name=".Activity.CommentActivity" />
+        <activity android:name=".Activity.RankingActivity"
+            android:screenOrientation="landscape"
+            />
     </application>
 
 </manifest>

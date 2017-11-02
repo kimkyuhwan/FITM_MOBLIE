@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    >
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:scale_base_height="40"
+        app:scale_base_width="540"
+        >
+
+        <ImageView
+            android:id="@+id/ranking_prev_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_arrow_r"
+            app:scale_width="24"
+            app:scale_height="24"
+            app:scale_top="8"
+            app:scale_left="155"
+            />
+
+        <TextView
+            android:id="@+id/ranking_text_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017.10.31"
+            android:textColor="#434343"
+            android:gravity="center"
+            app:scale_textsize="22"
+            app:scale_width="200"
+            app:scale_height="40"
+            app:scale_top="0"
+            app:scale_left="170"
+            />
+
+        <ImageView
+            android:id="@+id/ranking_next_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_arrow_l"
+            app:scale_width="24"
+            app:scale_height="24"
+            app:scale_top="8"
+            app:scale_left="355"
+            />
+        <ImageView
+            android:id="@+id/ranking_upload_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/photoalbum"
+            app:scale_width="40"
+            app:scale_height="40"
+            app:scale_top="0"
+            app:scale_left="500"
+            />
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/ranking_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+</LinearLayout>
