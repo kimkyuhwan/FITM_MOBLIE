@@ -16,9 +16,13 @@ public class Constants {
     // 권한 접근 상수
     public static final int COMMAND_CERTIFICATION_RESERVATION=0x01;
     public static final int COMMAND_CERTIFICATION_MARKET=0x02;
+    public static final int COMMAND_CERTIFICATION_SHOW_RANK=0x03;
     public static final int CERTIFICATION_RESERVATION=0x02;
     public static final int CERTIFICATION_MARKET=0x01;
     public static final int CERTIFICATION_REST=0x02;
+    public static final int CERTIFICATION_SHOW_RANK=0x01;
+    public static final int CERTIFICATION_ADMIN=0x03;
+
 
     // 휴회 기능 상태 변수
     public static final int REST_STATE_NONE=0;
@@ -83,6 +87,7 @@ public class Constants {
     public static final String REQ_GET_USER_DATA_STOM="http://52.78.197.131:25478/get_member_data_stom";
     public static final String REQ_CANCEL_REMAIN_DAY="http://52.78.197.131:25478/cancel_remain_day";
 
+    public static final String REQ_RES_GET_COMMENTS="http://52.78.197.131:25478/res_get_comments";
     public static final int PICK_FROM_ALBUM_ACTION=0x80;
 
     public static final String PROFILE_PATH="https://s3.ap-northeast-2.amazonaws.com/fitmbucket/";

@@ -7,7 +7,8 @@ package crossfit_juan.chk.com.crossfitjuan.DataModel;
 public class Participant {
     private String access_key;
     private String name;
-
+    private String comment;
+    private String id_email;
     public Participant() {}
 
     @Override
@@ -21,6 +22,11 @@ public class Participant {
     public Participant(String access_key, String name) {
         this.access_key = access_key;
         this.name = name;
+    }
+    public Participant(String name, String id_email,String comment) {
+        this.name = name;
+        this.id_email = id_email;
+        this.comment = comment;
     }
 
     public String getAccess_key() {
@@ -37,5 +43,13 @@ public class Participant {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }
