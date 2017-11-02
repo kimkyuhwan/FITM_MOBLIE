@@ -1,16 +1,23 @@
 package crossfit_juan.chk.com.crossfitjuan.tool;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
+import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.Participant;
 import crossfit_juan.chk.com.crossfitjuan.R;
+
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PROFILE_PATH;
 
 /**
  * Created by erslab-gh on 2017-08-18.
@@ -46,15 +53,46 @@ public class CommentsViewAdapter extends BaseAdapter {
         TextView nameText = (TextView) convertView.findViewById(R.id.comment_name);
         TextView CommentText = (TextView) convertView.findViewById(R.id.comment_text);
         Participant pp = listViewItemList.get(position);
-
+        final CircleImageView circleImageView= (CircleImageView)convertView.findViewById(R.id.comment_img);
         // 아이템 내 각 위젯에 데이터 반영
         if (pp.getName() == null) {
             nameText.setText("test");
         } else {
             nameText.setText(pp.getName());
         }
+        if (pp.getComment() == null) {
+            CommentText.setText("반가워요");
+        } else {
+            CommentText.setText(pp.getComment());
+        }
+        Thread ImageSetThread = new Thread(new Runnable() {
+            @Override
+            public void run() {    // 오래 거릴 작업을 구현한다
+                try {
+                    URL url = new URL(PROFILE_PATH + User.getInstance().getData().getUser_email() + ".png");
+                    InputStream is = url.openStream();
+                    final Bitmap  bm = BitmapFactory.decodeStream(is);
+                    circleImageView.setImageBitmap(bm);
+                    //    tProfileImg.setImageBitmap(resized); //비트맵 객체로 보여주기
+                } catch (Exception e) {
+                     circleImageView.setImageResource(R.drawable.default_profile);
+                    e.printStackTrace();
+                }
 
+            }
+        });
+
+        ImageSetThread.start();
+        try {
+            ImageSetThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return convertView;
+    }
+
+    void setImage(String email){
+
     }
 
     // 지정한 위치(position)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴. : 필수 구현
