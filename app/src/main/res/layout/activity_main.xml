@@ -162,7 +162,7 @@
                     app:scale_textsize="30"
                     android:textColor="#a6a6a6"
 
-                    android:text="공동구매"
+                    android:text="순위보기"
                     />
                 <ImageButton
                     android:id="@+id/btn_market"

@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:scale_base_width="540"
-        app:scale_base_height="400"
+        app:scale_base_height="470"
 
         >
         <TextView
@@ -70,6 +70,32 @@
         app:scale_height="227"
         app:scale_textsize="24"
         />
+
+        <ImageButton
+            android:visibility="invisible"
+            android:id="@+id/commentBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_top="415"
+            app:scale_left="380"
+            app:scale_width="44"
+            app:scale_height="40"
+            android:background="@drawable/comment"
+            />
+        <TextView
+            android:visibility="invisible"
+            android:gravity="center"
+            android:id="@+id/commentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:scale_top="415"
+            app:scale_left="424"
+            app:scale_width="100"
+            app:scale_height="40"
+            app:scale_textsize="18"
+            android:text="댓글(0)"
+            />
+
     </com.ssomai.android.scalablelayout.ScalableLayout>
 
     <ListView
