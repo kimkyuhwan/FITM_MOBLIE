@@ -132,6 +132,9 @@ public class UserInfoActivity extends AppCompatActivity {
         else if(user_certfication==2){
             user_rank+="정회원";
         }
+        else if(user_certfication==3){
+            user_rank+="관리자";
+        }
         adapter.addItem(new UserInfoData("회원등급",user_rank,""));
         adapter.addItem(new UserInfoData("이메일",User.getInstance().getData().getUser_email(),""));
         adapter.addItem(new UserInfoData("휴대폰 번호",User.getInstance().getData().getUser_phone_number(),""));
@@ -569,7 +572,7 @@ public class UserInfoActivity extends AppCompatActivity {
         String result = thread.handler.getMsg();
         JSONObject result_data = new JSONObject(result);
         int result_code = result_data.getInt("code");
-        Log.d("DEBUGYU","Code : "+String.valueOf(result_code));
+        Log.d("DEBUGYU","Code : "+String.valueOf(result_code)+","+result_data.toString());
         // JSONObject response=result_data.getJSONObject(  "response");
         if(result_code==9999){
             Log.d("DEBUGYU","신청되었습니다");
