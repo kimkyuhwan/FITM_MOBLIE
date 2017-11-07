@@ -112,6 +112,10 @@ public class UserInfoActivity extends AppCompatActivity {
         }
         adapter.addItem(new UserInfoData("등록기간",period,"등록되지 않은 사용자 입니다"));
         setRestTextView();
+        int user_certfication=User.getInstance().getData().getCertification();
+        if(user_certfication==3){
+            restStr="관리자는 휴회 기능을 사용할 수 없습니다.";
+        }
         adapter.addItem(new UserInfoData("휴회신청",restStr,alertStr));
 
         String locker_num="";
@@ -121,7 +125,6 @@ public class UserInfoActivity extends AppCompatActivity {
             locker_num+=" ("+User.getInstance().getData().getUser_start_date()+"~"+User.getInstance().getData().getUser_start_date()+")";
         }
         adapter.addItem(new UserInfoData("락커 번호",locker_num,"락커를 등록해 주세요"));
-        int user_certfication=User.getInstance().getData().getCertification();
         String user_rank="JUAN Crossfit ";
         if(user_certfication==0){
             user_rank+="손님";
@@ -169,7 +172,10 @@ public class UserInfoActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int idx, long l) {
                 switch (idx){
                     case USER_INFO_INDEX_REST_PERIOD:
-                        if(User.getInstance().getData().getCertification()>=CERTIFICATION_REST) {
+                        if(User.getInstance().getData().getCertification()==3) {
+
+                        }
+                        else if(User.getInstance().getData().getCertification()>=CERTIFICATION_REST) {
                             switch (User.getInstance().getData().getRest_state()){
                                 case REST_STATE_NONE:
                                     Toast.makeText(getApplicationContext(),"휴회 기능은 최소 7일 이상 최대 30일까지 사용 하실 수 있습니다.",Toast.LENGTH_SHORT).show();
@@ -187,7 +193,7 @@ public class UserInfoActivity extends AppCompatActivity {
                             }
                         }
                         else{
-                            Toast.makeText(getApplicationContext(),"휴회 기능은 정회원부터 가능합니다",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "휴회 기능은 정회원부터 가능합니다", Toast.LENGTH_SHORT).show();
                         }
                         break;
                     case USER_INFO_INDEX_LOGOUT:
