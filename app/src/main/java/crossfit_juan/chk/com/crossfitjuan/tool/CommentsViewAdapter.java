@@ -52,7 +52,7 @@ public class CommentsViewAdapter extends BaseAdapter {
 
         TextView nameText = (TextView) convertView.findViewById(R.id.comment_name);
         TextView CommentText = (TextView) convertView.findViewById(R.id.comment_text);
-        Participant pp = listViewItemList.get(position);
+        final Participant pp = listViewItemList.get(position);
         final CircleImageView circleImageView= (CircleImageView)convertView.findViewById(R.id.comment_img);
         // 아이템 내 각 위젯에 데이터 반영
         if (pp.getName() == null) {
@@ -69,7 +69,7 @@ public class CommentsViewAdapter extends BaseAdapter {
             @Override
             public void run() {    // 오래 거릴 작업을 구현한다
                 try {
-                    URL url = new URL(PROFILE_PATH + User.getInstance().getData().getUser_email() + ".png");
+                    URL url = new URL(PROFILE_PATH + pp.getId_email() + ".png");
                     InputStream is = url.openStream();
                     final Bitmap  bm = BitmapFactory.decodeStream(is);
                     circleImageView.setImageBitmap(bm);

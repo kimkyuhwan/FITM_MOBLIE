@@ -242,6 +242,8 @@ public class ReservationActivity extends AppCompatActivity {
             isPossibleToReserve = true;
             commentText.setVisibility(View.VISIBLE);
             commentBtn.setVisibility(View.VISIBLE);
+            getComments();
+            commentText.setText("댓글("+count+")");
             Log.e("DEBUGYU", "success" + timetable.toString());
         } else if (result_code == 2170) { // 실패 시
             Log.e("DEBUGYU", "fail");
@@ -308,7 +310,6 @@ public class ReservationActivity extends AppCompatActivity {
             cinfo.setFinish_time(response.getString("finish_time"));
             adapter.setReserved(true);
             selectedSchedule = cinfo.getClass_num() - 1;
-            getComments();
             Log.e("DEBUGYU", "success" + timetable.toString());
         } else if (result_code == 2170) { // 실패 시
             Log.e("DEBUGYU", "fail");

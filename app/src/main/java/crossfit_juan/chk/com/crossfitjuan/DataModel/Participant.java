@@ -52,4 +52,12 @@ public class Participant {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public String getId_email() {
+        return id_email;
+    }
+
+    public void setId_email(String id_email) {
+        this.id_email = id_email;
+    }
 }
