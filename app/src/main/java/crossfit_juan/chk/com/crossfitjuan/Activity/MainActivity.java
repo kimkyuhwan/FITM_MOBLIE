@@ -257,6 +257,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     it = new Intent(MainActivity.this, RankingActivity.class);
                     startActivity(it);
                 }
+                else{
+                    Toast.makeText(getApplicationContext(),"순위보기는 준회원부터 가능합니다",Toast.LENGTH_LONG).show();
+                }
                 break;
         }
     }

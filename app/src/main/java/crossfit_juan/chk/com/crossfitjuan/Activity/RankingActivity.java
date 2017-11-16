@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -56,7 +55,9 @@ public class RankingActivity extends AppCompatActivity {
     @BindView(R.id.ranking_image)
     PhotoView rankingImage;
 
-    Calendar calendar=Calendar.getInstance();
+    Calendar calendar = Calendar.getInstance();
+    @BindView(R.id.ranking_image_delete_btn)
+    ImageView rankingImageDeleteBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +78,11 @@ public class RankingActivity extends AppCompatActivity {
     void setAdminBtn() {
         if (User.getInstance().getData().getCertification() >= CERTIFICATION_ADMIN) {
             rankingUploadBtn.setVisibility(View.VISIBLE);
+            rankingImageDeleteBtn.setVisibility(View.VISIBLE);
+
         } else {
             rankingUploadBtn.setVisibility(View.INVISIBLE);
+            rankingImageDeleteBtn.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -89,10 +93,10 @@ public class RankingActivity extends AppCompatActivity {
                 try {
                     URL url = new URL(PROFILE_PATH + new SimpleDateFormat("yyyyMMdd").format(date) + "_ranking.png");
                     InputStream is = url.openStream();
-                  //  Matrix rotateMatrix = new Matrix();
-                  //  rotateMatrix.postRotate(270);
+                    //  Matrix rotateMatrix = new Matrix();
+                    //  rotateMatrix.postRotate(270);
                     bm = BitmapFactory.decodeStream(is);
-                  //  final Bitmap sideInversionImg = Bitmap.createBitmap(bm, 0, 0,
+                    //  final Bitmap sideInversionImg = Bitmap.createBitmap(bm, 0, 0,
                     //        bm.getWidth(), bm.getHeight(), rotateMatrix, false);
                     runOnUiThread(new Runnable() {
 
@@ -142,7 +146,7 @@ public class RankingActivity extends AppCompatActivity {
             case PICK_FROM_ALBUM_ACTION:
                 ImageCaptureUrl = data.getData();
                 String realpath = getImagePath(ImageCaptureUrl);
-                AWSService.getInstance().upload_rank(new File(realpath),new SimpleDateFormat("yyyyMMdd").format(calendar.getTime()));
+                AWSService.getInstance().upload_rank(new File(realpath), new SimpleDateFormat("yyyyMMdd").format(calendar.getTime()));
                 setRankImage(calendar.getTime());
                 break;
         }
@@ -171,20 +175,26 @@ public class RankingActivity extends AppCompatActivity {
                 break;
         }
     }
+    void DeleteCurrentDateFile(){
+        Date date=calendar.getTime();
+        String filename=new SimpleDateFormat("yyyyMMdd").format(date) + "_ranking";
+        AWSService.getInstance().DeleteAmazonS3File(filename);
+
+    }
 
 
-    @OnClick({R.id.ranking_prev_btn, R.id.ranking_next_btn, R.id.ranking_upload_btn})
+    @OnClick({R.id.ranking_prev_btn, R.id.ranking_next_btn, R.id.ranking_upload_btn,R.id.ranking_image_delete_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ranking_prev_btn:
-                calendar.add(Calendar.DATE,-1);
+                calendar.add(Calendar.DATE, -1);
                 rankingTextDate.setText(new SimpleDateFormat("yyyy.MM.dd").format(calendar.getTime()));
                 setRankImage(calendar.getTime());
                 break;
             case R.id.ranking_next_btn:
-                Date today=new Date();
-                SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy.MM.dd");
-                if(!dateFormat.format(calendar.getTime()).equals(dateFormat.format(today))) {
+                Date today = new Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+                if (!dateFormat.format(calendar.getTime()).equals(dateFormat.format(today))) {
                     calendar.add(Calendar.DATE, 1);
                     rankingTextDate.setText(new SimpleDateFormat("yyyy.MM.dd").format(calendar.getTime()));
                     setRankImage(calendar.getTime());
@@ -198,6 +208,10 @@ public class RankingActivity extends AppCompatActivity {
                     TakeRankingImagetoAlbum();
                 }
                 break;
+            case R.id.ranking_image_delete_btn:
+                DeleteCurrentDateFile();
+                break;
         }
     }
+
 }

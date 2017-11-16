@@ -84,8 +84,8 @@ public class AWSService {
         InstanceReload();
     }
 
-    public void DeleteProfile(){
-        deleteFileThread A=new deleteFileThread();
+    public void DeleteAmazonS3File(String filename){
+        deleteFileThread A=new deleteFileThread(filename);
         A.start();
         try {
             A.join();
@@ -161,16 +161,17 @@ public class AWSService {
     }
     private class deleteFileThread extends Thread{
 
-        deleteFileThread(){}
+        private String filename="";
+        deleteFileThread(String filename){this.filename=filename;}
         public void run() {
-            deleteProFile();
+            deleteProFile(filename);
         }
 
     }
-    public void deleteProFile() {
+    public void deleteProFile(String filename) {
         if (amazonS3 != null) {
             try {
-                amazonS3.deleteObject(new DeleteObjectRequest(BUCKET_NAME /*sub directory*/, User.getInstance().getData().getUser_email()+".png"));
+                amazonS3.deleteObject(new DeleteObjectRequest(BUCKET_NAME /*sub directory*/, filename+".png"));
             } catch (AmazonServiceException ase) {
                 ase.printStackTrace();
             } finally {
@@ -178,6 +179,7 @@ public class AWSService {
             }
         }
     }
+
     public static File createThumbnail(Bitmap bitmap, String strFilePath,
                                        String filename,int Size) {
 

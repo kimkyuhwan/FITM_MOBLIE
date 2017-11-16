@@ -686,7 +686,7 @@ public class UserInfoActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "아이디가 삭제되었습니다", Toast.LENGTH_LONG).show();
             ChatDBHelper dbHelper = new ChatDBHelper(getApplicationContext(), DB_FILE_NAME, null, 1);
             dbHelper.DeleteDataBase();
-            AWSService.getInstance().DeleteProfile();
+            AWSService.getInstance().DeleteAmazonS3File(User.getInstance().getData().getUser_email());
             logout();
 
         } else if (result_code == 8888) {
