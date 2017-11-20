@@ -38,7 +38,6 @@
             android:layout_marginRight="5dp"
             android:layout_width="14dp"
             android:layout_height="14dp"
-            android:visibility="invisible"
             android:layout_toRightOf="@id/market_dialog_comment"
             android:layout_centerVertical="true"
             android:id="@+id/market_dialog_comment_clear_Btn"
