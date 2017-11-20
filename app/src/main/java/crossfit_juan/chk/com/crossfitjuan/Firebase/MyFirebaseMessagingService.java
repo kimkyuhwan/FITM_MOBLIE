@@ -60,6 +60,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String title=remoteMessage.getData().get("title");
         String body=remoteMessage.getData().get("body");
         if(User.getHereActivity()==null || User.getHereActivityContext()==null || User.getHereActivity().equals("")) return;
+        if(type==null) return;
         if(type.equals(PUSH_NOTICE_ACTIVITY)) {
             getNoticeDialog(body);
         }
