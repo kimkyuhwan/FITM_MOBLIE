@@ -91,6 +91,8 @@ public class RankingActivity extends AppCompatActivity {
             @Override
             public void run() {    // 오래 거릴 작업을 구현한다
                 try {
+                    rankingImage.setZoomable(true);
+                    rankingImage.setScale(1);
                     URL url = new URL(PROFILE_PATH + new SimpleDateFormat("yyyyMMdd").format(date) + "_ranking.png");
                     InputStream is = url.openStream();
                     //  Matrix rotateMatrix = new Matrix();
@@ -110,6 +112,8 @@ public class RankingActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            rankingImage.setZoomable(false);
+                            rankingImage.setScale(1);
                             rankingImage.setImageResource(R.drawable.no_rank);
                         }
                     });
@@ -210,6 +214,7 @@ public class RankingActivity extends AppCompatActivity {
                 break;
             case R.id.ranking_image_delete_btn:
                 DeleteCurrentDateFile();
+                setRankImage(calendar.getTime());
                 break;
         }
     }
