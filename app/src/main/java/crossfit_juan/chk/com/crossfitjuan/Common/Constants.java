@@ -47,6 +47,7 @@ public class Constants {
     public static final String PUSH_QNA_ACTIVITY="2";
     public static final String PUSH_REST_ACCEPT="3";
     public static final String PUSH_REST_REJECT="4";
+    public static final String PUSH_ADVERTISE="5";
 
 
     // 유저 정보 상수 변수

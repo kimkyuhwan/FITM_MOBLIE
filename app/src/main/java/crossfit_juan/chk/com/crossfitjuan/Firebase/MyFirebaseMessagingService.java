@@ -1,10 +1,12 @@
 package crossfit_juan.chk.com.crossfitjuan.Firebase;
 
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -37,6 +39,7 @@ import crossfit_juan.chk.com.crossfitjuan.Activity.UserInfoActivity;
 import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.R;
 
+import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_ADVERTISE;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_NOTICE_ACTIVITY;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_QNA_ACTIVITY;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PUSH_REST_ACCEPT;
@@ -72,6 +75,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
         else if(type.equals(PUSH_REST_ACCEPT) || type.equals(PUSH_REST_REJECT)){
             getUserInfoDialog(title,body);
+        }
+        else if(type.equals(PUSH_ADVERTISE)){
+            getAdvertiseDialog(title,body);
         }
         else{
             Log.d("DEBUGYU","잘못된 타입의 메시지");
@@ -243,4 +249,25 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         });
     }
 
+    void getAdvertiseDialog(final String title,final String body) {
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                AlertDialog.Builder alt_bld = new AlertDialog.Builder(User.getHereActivityContext());
+                alt_bld.setMessage(body).setCancelable(
+                        false).setPositiveButton("닫기",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+
+                            }
+                        });
+                AlertDialog alert = alt_bld.create();
+                alert.setTitle(title);
+                alert.show();
+            }
+        });
+    }
 }

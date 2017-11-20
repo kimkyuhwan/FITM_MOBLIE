@@ -73,6 +73,8 @@ public class RankingActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         setAdminBtn();
+        User.setHereActivityContext(this);
+        User.setHereActivity("Ranking");
     }
 
     void setAdminBtn() {
