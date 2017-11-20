@@ -146,7 +146,7 @@ public class AWSService {
         if (amazonS3 != null) {
             try {
                 Bitmap smallImg=BitmapFactory.decodeFile(file.getAbsolutePath());
-                File file2=createThumbnail(smallImg,file.getParent(),User.getInstance().getData().getUser_email()+".png",480);
+                File file2=createThumbnail(smallImg,file.getParent(),User.getInstance().getData().getUser_email()+".png",1080);
                 PutObjectRequest putObjectRequest =
                         new PutObjectRequest(BUCKET_NAME /*sub directory*/, date+"_ranking.png", file2);
                 putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead); // file permission
