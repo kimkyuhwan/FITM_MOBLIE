@@ -65,6 +65,14 @@ public class CommentsViewAdapter extends BaseAdapter {
         } else {
             CommentText.setText(pp.getComment());
         }
+        if(pp.getGender().equals("M")){
+            circleImageView.setImageResource(R.drawable.default_profile_man);
+        }
+        else{
+            circleImageView.setImageResource(R.drawable.default_profile_women);
+        }
+        // TODO 댓글 유저 이미지 사진
+        /*
         Thread ImageSetThread = new Thread(new Runnable() {
             @Override
             public void run() {    // 오래 거릴 작업을 구현한다
@@ -75,7 +83,6 @@ public class CommentsViewAdapter extends BaseAdapter {
                     circleImageView.setImageBitmap(bm);
                     //    tProfileImg.setImageBitmap(resized); //비트맵 객체로 보여주기
                 } catch (Exception e) {
-                     circleImageView.setImageResource(R.drawable.default_profile_man);
                     e.printStackTrace();
                 }
 
@@ -87,7 +94,7 @@ public class CommentsViewAdapter extends BaseAdapter {
             ImageSetThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         return convertView;
     }
 

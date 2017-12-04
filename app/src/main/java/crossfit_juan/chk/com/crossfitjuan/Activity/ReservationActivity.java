@@ -360,6 +360,7 @@ public class ReservationActivity extends AppCompatActivity {
             send_data.put("name", User.getInstance().getData().getUser_name());
             send_data.put("id_email", User.getInstance().getData().getUser_email());
             send_data.put("comments",comment);
+            send_data.put("user_gender",User.getInstance().getData().getUser_gender());
         } catch (JSONException jsonex) {
             jsonex.printStackTrace();
         }

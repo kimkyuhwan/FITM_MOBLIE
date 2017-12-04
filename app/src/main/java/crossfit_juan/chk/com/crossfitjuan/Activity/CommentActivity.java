@@ -71,10 +71,11 @@ public class CommentActivity extends AppCompatActivity {
                 String hereEmail = here.getString("id_email");
                 String hereName = here.getString("name");
                 String hereComments = here.getString("comments");
+                String hereGender = here.getString("user_gender");
                 if(hereComments==null)
-                    adapter.addItem(new Participant(hereName,hereEmail,"반가워요"));
+                    adapter.addItem(new Participant(hereName,hereEmail,"반가워요",hereGender));
                 else
-                    adapter.addItem(new Participant(hereName,hereEmail,hereComments));
+                    adapter.addItem(new Participant(hereName,hereEmail,hereComments,hereGender));
             }
             listComment.setAdapter(adapter);
             // ReadPreviousChatData();

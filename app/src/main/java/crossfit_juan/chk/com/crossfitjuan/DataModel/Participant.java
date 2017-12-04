@@ -9,6 +9,7 @@ public class Participant {
     private String name;
     private String comment;
     private String id_email;
+    private String gender;
     public Participant() {}
 
     @Override
@@ -23,11 +24,14 @@ public class Participant {
         this.access_key = access_key;
         this.name = name;
     }
-    public Participant(String name, String id_email,String comment) {
+    public Participant(String name, String id_email,String comment,String gender) {
         this.name = name;
         this.id_email = id_email;
         this.comment = comment;
+        this.gender=gender;
     }
+
+
 
     public String getAccess_key() {
         return access_key;
@@ -59,5 +63,13 @@ public class Participant {
 
     public void setId_email(String id_email) {
         this.id_email = id_email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
