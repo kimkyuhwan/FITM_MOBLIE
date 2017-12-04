@@ -376,6 +376,17 @@ public class UserInfoActivity extends AppCompatActivity {
     }
 
     void SetProfileImage() {
+        String gender=User.getInstance().getData().getUser_gender();
+        switch (gender){
+            case "M":
+                userInfoProfileImage.setImageResource(R.drawable.default_profile_man);
+                break;
+            default:
+                userInfoProfileImage.setImageResource(R.drawable.default_profile_women);
+                break;
+        }
+        // TODO 프로필 이미지 수정.
+        /*
         Thread ImageSetThread = new Thread(new Runnable() {
             @Override
             public void run() {    // 오래 거릴 작업을 구현한다
@@ -407,6 +418,7 @@ public class UserInfoActivity extends AppCompatActivity {
             }
         });
         ImageSetThread.start();
+        */
     }
 
     void rest(){

@@ -75,7 +75,7 @@ public class CommentsViewAdapter extends BaseAdapter {
                     circleImageView.setImageBitmap(bm);
                     //    tProfileImg.setImageBitmap(resized); //비트맵 객체로 보여주기
                 } catch (Exception e) {
-                     circleImageView.setImageResource(R.drawable.default_profile);
+                     circleImageView.setImageResource(R.drawable.default_profile_man);
                     e.printStackTrace();
                 }
 

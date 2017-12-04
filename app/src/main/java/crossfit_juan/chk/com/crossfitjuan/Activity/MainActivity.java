@@ -109,6 +109,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     void SetProfileImage() {
+
+        // TODO 프로필 이미지 S3 => 로컬 서버
+        String gender=User.getInstance().getData().getUser_gender();
+        switch (gender){
+            case "M":
+                tProfileImg.setImageResource(R.drawable.default_profile_man);
+                break;
+            default:
+                tProfileImg.setImageResource(R.drawable.default_profile_women);
+                break;
+        }
+        /*
         Thread ImageSetThread = new Thread(new Runnable() {
             @Override
             public void run() {    // 오래 거릴 작업을 구현한다
@@ -140,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         ImageSetThread.start();
-
+        */
     }
 
     @Override
@@ -152,10 +164,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(it);
             drawer.closeDrawer(GravityCompat.END);
         } else if (id == R.id.navigation_item_QnA) {
-            Intent it = new Intent(MainActivity.this, QnaActivity.class);
+            // TODO 1:1문의 기능
+            Toast.makeText(getApplicationContext(),"추후 지원 예정입니다",Toast.LENGTH_LONG).show();
+          /*  Intent it = new Intent(MainActivity.this, QnaActivity.class);
             startActivity(it);
-            drawer.closeDrawer(GravityCompat.END);
+            drawer.closeDrawer(GravityCompat.END);*/
         } else if (id == R.id.navigation_market) {
+            // TODO 공동구매 기능
+            Toast.makeText(getApplicationContext(),"추후 지원 예정입니다",Toast.LENGTH_LONG).show();
+            /*
             if(checkthePermission(COMMAND_CERTIFICATION_MARKET)) {
                 it = new Intent(MainActivity.this, MarketActivity.class);
                 startActivity(it);
@@ -163,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             else{
                 Toast.makeText(getApplicationContext(),"공동구매는 준회원부터 가능합니다",Toast.LENGTH_LONG).show();
             }
-            drawer.closeDrawer(GravityCompat.END);
+            drawer.closeDrawer(GravityCompat.END);*/
         }
         else if (id == R.id.navigation_item_About) {
             Intent it = new Intent(MainActivity.this, AboutJuanActivity.class);
@@ -209,6 +226,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onResume() {
         super.onResume();
+        View navHeaderView = navView.getHeaderView(0);
+        navView.setNavigationItemSelectedListener(this);
+
+        TextView tname = (TextView) navHeaderView.findViewById(R.id.nav_name);
+        TextView temail = (TextView) navHeaderView.findViewById(R.id.nav_email);
+        tProfileImg = (CircleImageView) navHeaderView.findViewById(R.id.profile_image);
+        tname.setText(User.getInstance().getData().getUser_name());
+        temail.setText(User.getInstance().getData().getUser_email());
+
         SetProfileImage();
         User.setHereActivityContext(this);
         User.setHereActivity("Main");
@@ -219,14 +245,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         MyFirebaseInstanceIdService tokenRegisterService = new MyFirebaseInstanceIdService();
         tokenRegisterService.RegistrationTokenToServer();
-        View navHeaderView = navView.getHeaderView(0);
-        navView.setNavigationItemSelectedListener(this);
 
-        TextView tname = (TextView) navHeaderView.findViewById(R.id.nav_name);
-        TextView temail = (TextView) navHeaderView.findViewById(R.id.nav_email);
-        tProfileImg = (CircleImageView) navHeaderView.findViewById(R.id.profile_image);
-        tname.setText(User.getInstance().getData().getUser_name());
-        temail.setText(User.getInstance().getData().getUser_email());
     }
     @OnClick({R.id.menu_btn, R.id.btn_tutorial, R.id.main_scalable1, R.id.btn_reserve, R.id.main_scalable2, R.id.btn_market, R.id.main_scalable3})
     public void onViewClicked(View view) {
@@ -253,13 +272,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.btn_market:
             case R.id.main_scalable3:
+                // TODO 순위보기 기능
+                Toast.makeText(getApplicationContext(),"추후 지원 예정입니다",Toast.LENGTH_LONG).show();
+                /*
                 if(checkthePermission(COMMAND_CERTIFICATION_SHOW_RANK)) {
                     it = new Intent(MainActivity.this, RankingActivity.class);
                     startActivity(it);
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"순위보기는 준회원부터 가능합니다",Toast.LENGTH_LONG).show();
-                }
+                }*/
                 break;
         }
     }

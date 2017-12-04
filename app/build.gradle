@@ -7,8 +7,8 @@ android {
         applicationId "crossfit_juan.chk.com.crossfitjuan"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 26
-        versionName "1.38"
+        versionCode 27
+        versionName "1.39"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

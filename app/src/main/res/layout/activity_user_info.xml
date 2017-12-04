@@ -34,7 +34,7 @@
             android:id="@+id/user_info_profile_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/default_profile"
+            android:background="@drawable/default_profile_man"
             app:scale_width="160"
             app:scale_height="160"
             app:scale_left="190"
@@ -55,6 +55,7 @@
             app:scale_width="50"
             app:scale_left="302"
             app:scale_top="202"
+            android:visibility="invisible"
     />
         <TextView
             android:id="@+id/user_info_name"

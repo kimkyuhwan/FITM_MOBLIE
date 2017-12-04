@@ -271,7 +271,7 @@ public class ReservationActivity extends AppCompatActivity {
         timetableList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (adapter.isReserved())
+                if (adapter.isReserved() || adapter.isFullClass(i))
                     ViewParticipantsCancelList(i);
                 else
                     ViewParticipantsList(i);
@@ -401,7 +401,15 @@ public class ReservationActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         } else if (result_code == 1270) {
             Toast.makeText(this, "잘못된 요청입니다", Toast.LENGTH_LONG).show();
-        } else {
+        }else if (result_code == 1280) {
+            Toast.makeText(this, "정원이 초과되었습니다.", Toast.LENGTH_LONG).show();
+            try {
+                getMyTodayWod();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
             Log.d("DEBUGYU", "CODE " + result_code);
         }
     }
