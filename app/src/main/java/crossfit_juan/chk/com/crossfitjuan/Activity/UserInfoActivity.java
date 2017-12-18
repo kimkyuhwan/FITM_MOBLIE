@@ -141,6 +141,14 @@ public class UserInfoActivity extends AppCompatActivity {
         adapter.addItem(new UserInfoData("회원등급",user_rank,""));
         adapter.addItem(new UserInfoData("이메일",User.getInstance().getData().getUser_email(),""));
         adapter.addItem(new UserInfoData("휴대폰 번호",User.getInstance().getData().getUser_phone_number(),""));
+        String date="";
+        try {
+            Date birth=new SimpleDateFormat("yyyyMMdd").parse(User.getInstance().getData().getUser_birtyday());
+            date=new SimpleDateFormat("yyyy년 MM월 dd일").format(birth);;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        adapter.addItem(new UserInfoData("생년월일",date,""));
         adapter.addItem(new UserInfoData("로그아웃","","로그아웃 시 회원정보는 삭제되지 않습니다"));
         adapter.addItem(new UserInfoData("회원탈퇴","","회원 정보와 함께 기존의 대화내용이 모두 지워집니다"));
         userInfoList.setAdapter(adapter);

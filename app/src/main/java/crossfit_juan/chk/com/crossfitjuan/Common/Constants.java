@@ -52,8 +52,8 @@ public class Constants {
 
     // 유저 정보 상수 변수
     public static final int USER_INFO_INDEX_REST_PERIOD=1;
-    public static final int USER_INFO_INDEX_LOGOUT=6;
-    public static final int USER_INFO_INDEX_SIGNOUT=7;
+    public static final int USER_INFO_INDEX_LOGOUT=7;
+    public static final int USER_INFO_INDEX_SIGNOUT=8;
 
     // 커뮤니티 주소
     public static final String CROSSFITJUAN_NAVER_CAFE_URL="http://cafe.naver.com/cfja";
