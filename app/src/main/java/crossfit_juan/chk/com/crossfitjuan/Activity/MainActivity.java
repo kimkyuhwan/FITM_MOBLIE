@@ -1,30 +1,21 @@
 package crossfit_juan.chk.com.crossfitjuan.Activity;
 
-import android.Manifest;
-import android.app.NotificationManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.text.util.Linkify;
-import android.util.Log;
-import android.view.Menu;
+
+import androidx.annotation.NonNull;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -35,41 +26,25 @@ import com.ssomai.android.scalablelayout.ScalableLayout;
 
 import org.json.JSONException;
 
-import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.Firebase.MyFirebaseInstanceIdService;
-import crossfit_juan.chk.com.crossfitjuan.Firebase.MyFirebaseMessagingService;
 import crossfit_juan.chk.com.crossfitjuan.R;
-import crossfit_juan.chk.com.crossfitjuan.tool.AWSService;
 import crossfit_juan.chk.com.crossfitjuan.tool.CircleImageView;
 import crossfit_juan.chk.com.crossfitjuan.tool.NaverCafe;
 
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.APP_ID;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CAFE_URL;
-import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CERTIFICATION_ADMIN;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CERTIFICATION_MARKET;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CERTIFICATION_RESERVATION;
-import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CERTIFICATION_REST;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CERTIFICATION_SHOW_RANK;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.COMMAND_CERTIFICATION_MARKET;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.COMMAND_CERTIFICATION_RESERVATION;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.COMMAND_CERTIFICATION_SHOW_RANK;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CROSSFITJUAN_FACEBOOK_URL;
 import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CROSSFITJUAN_INSTAGRAM_URL;
-import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CROSSFITJUAN_NAVER_CAFE_CALL_URL;
-import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.CROSSFITJUAN_NAVER_CAFE_URL;
-import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PICK_FROM_ALBUM_ACTION;
-import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PROFILE_PATH;
-import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.REQUEST_PERMISSION_ACCESS_STORAGE;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Intent it;

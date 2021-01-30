@@ -1,11 +1,10 @@
 package crossfit_juan.chk.com.crossfitjuan.tool;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
+
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +17,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 
-import crossfit_juan.chk.com.crossfitjuan.Common.User;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.MarketItem;
-import crossfit_juan.chk.com.crossfitjuan.DataModel.Participant;
 import crossfit_juan.chk.com.crossfitjuan.R;
-
-import static crossfit_juan.chk.com.crossfitjuan.Common.Constants.PROFILE_PATH;
 
 /**
  * Created by erslab-gh on 2017-09-22.

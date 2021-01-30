@@ -1,25 +1,16 @@
 package crossfit_juan.chk.com.crossfitjuan.Firebase;
 
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v4.app.NotificationCompat;
-import android.text.Editable;
-import android.text.TextWatcher;
+import androidx.core.app.NotificationCompat;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,10 +19,6 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import org.json.JSONException;
 
-import java.util.List;
-
-import crossfit_juan.chk.com.crossfitjuan.Activity.LoginActivity;
-import crossfit_juan.chk.com.crossfitjuan.Activity.MainActivity;
 import crossfit_juan.chk.com.crossfitjuan.Activity.NoticeActivity;
 import crossfit_juan.chk.com.crossfitjuan.Activity.QnaActivity;
 import crossfit_juan.chk.com.crossfitjuan.Activity.ReservationActivity;

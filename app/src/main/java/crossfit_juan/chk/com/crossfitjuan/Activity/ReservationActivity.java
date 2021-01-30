@@ -3,7 +3,7 @@ package crossfit_juan.chk.com.crossfitjuan.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -33,7 +33,6 @@ import crossfit_juan.chk.com.crossfitjuan.DataModel.Participant;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.Time_Table;
 import crossfit_juan.chk.com.crossfitjuan.HttpConnection.CustomThread.ReqHTTPJSONThread;
 import crossfit_juan.chk.com.crossfitjuan.R;
-import crossfit_juan.chk.com.crossfitjuan.tool.CommentsViewAdapter;
 import crossfit_juan.chk.com.crossfitjuan.tool.ParticipantsViewAdapter;
 import crossfit_juan.chk.com.crossfitjuan.tool.TimetableViewAdapter;
 

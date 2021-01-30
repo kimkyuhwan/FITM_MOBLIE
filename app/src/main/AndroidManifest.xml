@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="crossfit_juan.chk.com.crossfitjuan"
-    android:sharedUserId="@string/app_id">
+    android:sharedUserId="@string/app_id"
+
+    >
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -15,7 +18,10 @@
         android:process="@string/app_id"
         android:roundIcon="@drawable/juan_icon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:appComponentFactory"
+        android:appComponentFactory="whateverString"
+        >
         <activity
             android:name=".Activity.LoginActivity"
             android:launchMode="singleTop"

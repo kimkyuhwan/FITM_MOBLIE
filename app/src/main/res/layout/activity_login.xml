@@ -14,22 +14,22 @@
         app:scale_base_width="540"
         app:scale_base_height="740"
         >
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/login_viewPager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:scale_width="540"
             app:scale_height="720">
-        </android.support.v4.view.ViewPager>
+        </androidx.viewpager.widget.ViewPager>
         <ImageView
             android:id="@+id/login_imageCircle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            app:scale_top="720"
-            app:scale_height="20"
-            app:scale_width="120"
-            app:scale_left="210"
+            android:scale_top="720"
+            android:scale_height="20"
+            android:scale_width="120"
+            android:scale_left="210"
             android:background="@drawable/circle01"
             />
     </com.ssomai.android.scalablelayout.ScalableLayout>

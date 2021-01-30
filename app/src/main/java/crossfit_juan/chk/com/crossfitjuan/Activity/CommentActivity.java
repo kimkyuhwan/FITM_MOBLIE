@@ -1,7 +1,7 @@
 package crossfit_juan.chk.com.crossfitjuan.Activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -15,8 +15,6 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import crossfit_juan.chk.com.crossfitjuan.Common.Constants;
-import crossfit_juan.chk.com.crossfitjuan.Common.User;
-import crossfit_juan.chk.com.crossfitjuan.DataModel.ChatData;
 import crossfit_juan.chk.com.crossfitjuan.DataModel.Participant;
 import crossfit_juan.chk.com.crossfitjuan.HttpConnection.CustomThread.ReqHTTPJSONThread;
 import crossfit_juan.chk.com.crossfitjuan.R;
