@@ -32,10 +32,10 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/menu_btn"
                     android:background="@drawable/menu_btn"
-                    android:scale_width="36"
-                    android:scale_height="36"
-                    android:scale_top="10"
-                    android:scale_left="480"
+                    app:scale_width="36"
+                    app:scale_height="36"
+                    app:scale_top="10"
+                    app:scale_left="480"
                     />
 
             </com.ssomai.android.scalablelayout.ScalableLayout>
@@ -55,9 +55,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:scale_left="30"
-                        android:scale_width="130"
-                        android:scale_height="110"
+                        app:scale_left="30"
+                        app:scale_width="130"
+                        app:scale_height="110"
                         android:background="@drawable/img1"
                         />
                     <TextView
@@ -65,20 +65,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
-                        android:scale_left="350"
-                        android:scale_top="32"
-                        android:scale_height="40"
-                        android:scale_width="120"
-                        android:scale_textsize="30"
+                        app:scale_left="350"
+                        app:scale_top="32"
+                        app:scale_height="40"
+                        app:scale_width="120"
+                        app:scale_textsize="30"
                         android:textColor="#a6a6a6"
                         android:text="공지사항"
 
                         />
                     <ImageButton
-                        android:scale_top="35"
-                        android:scale_left="480"
-                        android:scale_width="40"
-                        android:scale_height="40"
+                        app:scale_top="35"
+                        app:scale_left="480"
+                        app:scale_width="40"
+                        app:scale_height="40"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/btn"
@@ -102,10 +102,10 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scale_top="35"
-                    android:scale_left="20"
-                    android:scale_width="40"
-                    android:scale_height="40"
+                    app:scale_top="35"
+                    app:scale_left="20"
+                    app:scale_width="40"
+                    app:scale_height="40"
                     android:background="@drawable/btn"
                     android:id="@+id/btn_reserve"
                     />
@@ -114,16 +114,16 @@
                     android:layout_height="wrap_content"
                     android:textColor="#a6a6a6"
                     android:text="수업예약"
-                    android:scale_left="90"
-                    android:scale_top="32"
-                    android:scale_width="120"
-                    android:scale_textsize="30"
+                    app:scale_left="90"
+                    app:scale_top="32"
+                    app:scale_width="120"
+                    app:scale_textsize="30"
                     />
 
                 <ImageView
-                    android:scale_left="380"
-                    android:scale_width="150"
-                    android:scale_height="110"
+                    app:scale_left="380"
+                    app:scale_width="150"
+                    app:scale_height="110"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/img2"
@@ -148,28 +148,28 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scale_left="20"
-                    android:scale_width="140"
-                    android:scale_height="110"
+                    app:scale_left="20"
+                    app:scale_width="140"
+                    app:scale_height="110"
                     android:background="@drawable/img3"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scale_left="350"
-                    android:scale_top="32"
-                    android:scale_width="120"
-                    android:scale_textsize="30"
+                    app:scale_left="350"
+                    app:scale_top="32"
+                    app:scale_width="120"
+                    app:scale_textsize="30"
                     android:textColor="#a6a6a6"
 
                     android:text="순위보기"
                     />
                 <ImageButton
                     android:id="@+id/btn_market"
-                    android:scale_top="35"
-                    android:scale_left="480"
-                    android:scale_width="40"
-                    android:scale_height="40"
+                    app:scale_top="35"
+                    app:scale_left="480"
+                    app:scale_width="40"
+                    app:scale_height="40"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn"

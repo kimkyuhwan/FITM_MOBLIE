@@ -26,10 +26,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:scale_top="720"
-            android:scale_height="20"
-            android:scale_width="120"
-            android:scale_left="210"
+            app:scale_top="720"
+            app:scale_height="20"
+            app:scale_width="120"
+            app:scale_left="210"
             android:background="@drawable/circle01"
             />
     </com.ssomai.android.scalablelayout.ScalableLayout>

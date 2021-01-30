@@ -180,11 +180,13 @@ public class LoginActivity extends AppCompatActivity {
         mOAuthLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mOAuthLoginModule.getState(context).toString().equals("NEED_LOGIN") || mOAuthLoginModule.getState(context).toString().equals("NEED_REFRESH_TOKEN")) {
-                    mOAuthLoginModule.startOauthLoginActivity(LoginActivity.this, my_login_handler);
-                } else {
-                    login();
-                }
+//                if (mOAuthLoginModule.getState(context).toString().equals("NEED_LOGIN") || mOAuthLoginModule.getState(context).toString().equals("NEED_REFRESH_TOKEN")) {
+//                    mOAuthLoginModule.startOauthLoginActivity(LoginActivity.this, my_login_handler);
+//                } else {
+//                    login();
+//                }
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
         initAdapter();
